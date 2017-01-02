@@ -1,0 +1,79 @@
+	<div id="index-header">
+		<div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12" id="header-buttons-row">
+						<button class="btn btn-default darkred-style">Looking for a job</button>
+						<div id="right-side">
+							<button class="btn btn-default skyblue-style">Book a Table</button>
+							<button class="btn btn-default">Log in</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<a class="btn btn-default darkred-style" id="main-logo" href="/">ZOMATO</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<p id="propaganda">Find the best restaurants, cafés, and bars in Sydney</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12" id="search-row">
+						<div class="search-input">
+							<input type="text" class="form-control search-input" placeholder="Search for restaurants or cusines." />
+						</div>
+						<button type="button" class="btn btn-default search-input darkred-style">search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" ng-controller="BodyController as body" id="index-page">
+		<div class="row">
+			<div class="col-xs-12">
+			<h2>Collections</h2>
+			<p>Explore curated lists of top restaurants, cafes, pubs, and bars in and around Sydney, based on trends</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 rest-cate-row" ng-repeat="row in body.recommendation">
+				<div class="rest-box" ng-repeat="item in row">
+					<div class="thumb-box" ng-style="item.style" ng-click="body.goto(item.id)" >
+					</div>
+					<div class="brief" ng-click="body.goto(item.id)" >
+						<h5>{{item.type}}</h5>
+						<p>{{item.desc}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+			<h2>Quick Searches</h2>
+			<p>Discover restaurants by type of meal {{body.quickSearches.length}}</p>
+			<div id="quick-search">
+				<div class="search-item" ng-repeat="i in body.quickSearches">
+					<div class="search-item-box clickable">
+						<img ng-src="{{i.imgUrl}}"/>
+						<p>{{i.type}}</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+			<h2>Popular localities in and around Sydney</h2>
+			<p>Explore restaurants, bars, and cafés by locality</p>
+			<div id="statistic">
+				<div class="stat-box" ng-repeat="row in body.statistics">
+					<div class="stat-item" ng-repeat="i in row">{{i.district}} ({{i.count}})</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div ng-include="'static/html/footer.html'"></div>

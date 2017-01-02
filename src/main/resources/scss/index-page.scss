@@ -1,0 +1,164 @@
+#index-header {
+  width: 100%;
+  background-image: url("../img/pizza.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 370px;
+  .row {
+    margin-bottom: 30px;
+  }
+  >div:first-child {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+  }
+  #header-buttons-row {
+    padding: 0 30px 0 30px;
+  }
+  #main-logo {
+    height: 110px;
+    width: 110px;
+    line-height: 110px;
+    text-align: center;
+    margin: auto;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  #header-buttons-row {
+    padding-top: 20px;
+    .btn {
+      padding: .6em 1.5em;
+    }
+    #right-side {
+      display: inline-block;
+      float: right;
+      .btn {
+        padding: .6em 1em;
+      }
+    }
+  }
+
+  #propaganda {
+    text-align: center;
+    color: white;
+    margin: auto;
+    font-size: 28px;
+  }
+
+  #search-row {
+    margin: auto;
+    text-align: center;
+    .search-input {
+      display: inline-block;
+      vertical-align: top;
+      height: 40px;
+    }
+    button[class*="dropdown-toggle"] {
+      min-width: 180px;
+    }
+    input[class*="search-input"] {
+      min-width: 180px;
+      max-width: 500px;
+      width: 500px;
+    }
+    >button:last-child {
+      padding-left: 1.5em;
+      padding-right: 1.5em;;
+    }
+  }
+}
+#index-page {
+  .rest-cate-row {
+    @include flex;
+    margin-bottom: 20px;
+  }
+  .rest-box {
+    @include flex;
+  }
+  .rest-box:hover {
+    cursor: pointer;
+  }
+  .thumb-box, .brief {
+    display: inline-block;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2)
+  }
+  .thumb-box {
+    width: 40%;
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+    border-radius: 4px 0 0 4px;
+  }
+  .brief {
+    width: 60%;
+    background-color: white;
+    padding-left: 3%;
+    h5 {
+      font-weight: 600;
+    }
+    p {
+      width:  95%;
+    }
+    border-radius: 0 4px 4px 0;
+  }
+  #quick-search {
+    @include flex;
+    .search-item {
+      @include flex;
+      width: 12.5%;
+    }
+    .search-item-box {
+      text-align: center;
+      margin: auto;
+    }
+    img {
+      width: 48px;
+      height: 48px;
+    }
+    p, img, .search-item  {
+      margin: auto;
+    }
+  }
+
+  @media only screen and (min-width : 768px) {
+    .rest-box:first-child {
+      margin: auto auto auto 0;
+    }
+    .rest-box:last-child {
+      margin: auto 0 auto auto;
+    }
+    .rest-box:nth-of-child(2) {
+      margin: auto 0 auto auto;
+    }
+    .col-xs-12 {
+      padding: 0;
+    }
+    .rest-box {
+      width: 32%;
+    }
+    #quick-search {
+      height: 142px;
+      background-color: white;
+      margin-top: 5px;
+      border-radius: 4px;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+    }
+    #statistic {
+      height: 320px;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+      @include flex;
+      .stat-box {
+        width: 32%;
+        padding: 15px 0 0 30px;
+      }
+      .stat-item {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<ng-include src="'static/html/header.html'"></ng-include>
+<div id="rest-info-body" class="container-fluid"
+	ng-controller="RestaurantInfoController as vm">
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="rest-info-col">
+				<div>
+					<div id="bg-img" ng-style="vm.restaurant.bgImg"></div>
+					<div id="rest-brief">
+						<div class="left">
+							<div id="rest-name">{{vm.restaurant.name}}</div>
+							<div>
+								<span>{{vm.restaurant.district}}</span>&nbsp;&#8226;&nbsp;<span
+									ng-repeat="k in vm.restaurant.keywords">{{k}}&nbsp;</span>
+							</div>
+						</div>
+						<div class="right">
+							<div id="rate">
+								<span>{{vm.restaurant.rate || "-"}}</span><span>/5</span>
+							</div>
+						</div>
+					</div>
+					<div id="book-table">
+						<div>
+							<button class="btn btn-default skyblue-style">Book a
+								table</button>
+						</div>
+					</div>
+				</div>
+				<div id="details">
+					<div class="details-col">
+						<div class="details-row">
+							<div class="detail-name">Phone number</div>
+							<div class="detail-value">{{vm.restaurant.phone || "Not available"}}</div>
+						</div>
+						<div class="details-row">
+							<div class="detail-name">Cuisines</div>
+							<div class="detail-value">
+								<span ng-repeat="item in vm.restaurant.cuisines">{{item}}{{$last || ","}}</span>
+							</div>
+						</div>
+						<div class="details-row">
+							<div class="detail-name">Cost</div>
+							<div class="detail-value">{{vm.restaurant.approxPrice || "Not available"}}</div>
+						</div>
+					</div>
+					<div class="details-col">
+						<div class="details-row">
+							<div class="detail-name">Opening hours</div>
+							<div class="detail-value">Closed</div>
+						</div>
+						<div class="details-row">
+							<div class="detail-name">Address</div>
+							<div class="detail-value">{{vm.restaurant.address || "Not available"}}</div>
+						</div>
+					</div>
+					<div class="details-col">
+						<div class="details-row">
+							<div class="detail-name">Highlights</div>
+							<div class="detail-value">
+								<p ng-repeat="item in vm.restaurant.highlights" class="highlight"><i class="fa fa-check" aria-hidden="true"></i> {{item}}</p>
+							</div>
+						</div>
+						<div class="details-row" ng-if="vm.restaurant.knownFor">
+							<div class="detail-name">Known for</div>
+							<div class="detail-value">{{vm.restaurant.knownFor}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="random-restaurants"></div>
+		</div>
+	</div>
+</div>
+<div ng-include="'static/html/footer.html'"></div>

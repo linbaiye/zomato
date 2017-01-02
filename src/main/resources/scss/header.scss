@@ -1,0 +1,40 @@
+#embeddable-header {
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  .col-xs-12 {
+    @include flex;
+    div[class="input-group"] {
+      width: 60%;
+      margin: auto 0 auto 5%;
+      span {
+        background-color: white;
+        border-right: 0;
+        font-size: 13px;
+        opacity: .7;
+        padding-right: 0;
+      }
+      input {
+        @include noshadow;
+        border-left: 0;
+      }
+    }
+    button:first-child {
+      height: 60px;
+      font-weight: 600;
+    }
+    button:nth-of-type(2) {
+      margin: auto auto auto 0;
+    }
+    button:nth-of-type(3) {
+      margin: auto auto auto 5%;
+    }
+    button:last-child {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: auto 0 auto 5%;
+      border: 1px solid #e0e0e0;
+    }
+  }
+}

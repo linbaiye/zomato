@@ -1,0 +1,66 @@
+
+.container-fluid {
+  max-width: 1160px;
+}
+html, body {
+  background: #F3F3F3;
+}
+
+@mixin noshadow {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-appearance: none;
+}
+
+@mixin button-style {
+  background-image: none;
+  background-color: white;
+  border: none;
+  text-shadow: none;
+  @include noshadow;
+}
+
+@mixin flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin skyblue-style {
+  background-color: #33aedc;
+  color: white;
+}
+
+@mixin darkred-style {
+  background-color: #cb202d;
+  color: white;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.btn {
+  @include button-style;
+}
+.darkred-style, .darkred-style:hover, .darkred-style:focus, .darkred-style:active:focus {
+  outline: none;
+  @include darkred-style;
+}
+.skyblue-style, .skyblue-style:hover, .skyblue-style:focus, .skyblue-style:active:focus {
+  outline: none;
+  @include skyblue-style;
+}
+
+* {
+	font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+
+@import "index-page.scss";
+@import "restaurant.scss";
+@import "header.scss";
+@import "footer.scss";
