@@ -6,20 +6,23 @@ import java.util.Map;
 import java.util.Random;
 
 import org.nalby.zomato.dao.RestaurantDao;
-import org.nalby.zomato.exception.BadParameterException;
+import org.nalby.zomato.model.FeaturedCollection;
 import org.nalby.zomato.model.Restaurant;
 import org.nalby.zomato.response.ErrorCode;
+import org.nalby.zomato.response.Response;
 import org.nalby.zomato.response.ResponseWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private RestaurantDao restaurantDao;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
 	public List<Map<String, String>> getRecommendationUrls() {
@@ -55,15 +58,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
-	public List<Map<String, String>> getCollectins(String type) {
-		List<String> array = null;
-		if ("mainpage".equals(type)) {
-			array = Arrays.asList(new String[]{"Trending this week", "Newly opened", "Function venues", "Lunar New Year"});
-		} else if (!"all".equals(type)){
-			throw new BadParameterException("Unrecognizable parameter " +type);
-		}
-		return restaurantDao.getCollections(array);
+	@Transactional
+	public Response getAllCollections() {
+		return new Response(ErrorCode.EOK, restaurantDao.getCollections(null));
+	}
+
+	@Transactional
+	public Response getMainPageCollections() {
+		List<FeaturedCollection> list = restaurantDao.getCollections(
+				Arrays.asList("Trending this week", "Newly opened", "Function venues", "Lunar New Year"));
+		return new Response(ErrorCode.EOK, list);
 	}
 
 }

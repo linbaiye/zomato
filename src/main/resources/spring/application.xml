@@ -18,15 +18,24 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
 		p:url="${mysql.url}" p:driverClassName="${mysql.driver}" p:username="${mysql.username}"
 		p:password="${mysql.password}"/>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath:mybatis/*.xml" />
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-  		<constructor-arg index="0" ref="sqlSessionFactory" />
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="annotatedClasses">
+			<list>
+				<value>org.nalby.zomato.model.FeaturedCollection</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
 	</bean>
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource"/>
-	<tx:annotation-driven transaction-manager="txManager"/>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<context:annotation-config/>
-	<context:component-scan base-package="org.nalby.zomato.service, org.nalby.zomato.dao"/>
+	<context:component-scan base-package="org.nalby.zomato.service, org.nalby.zomato.dao, org.nalby.zomato.exception"/>
 </beans>

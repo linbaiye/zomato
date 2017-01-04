@@ -3,6 +3,8 @@ package org.nalby.zomato.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.nalby.zomato.exception.BadParameterException;
+import org.nalby.zomato.response.Response;
 import org.nalby.zomato.response.ResponseWrapper;
 import org.nalby.zomato.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,6 @@ public class ZomatoController {
 	@Autowired
 	private RestaurantService restaurantService;
 
-	@RequestMapping(value = "/api/v1/collection/{type}", method = RequestMethod.GET)
-	public List<Map<String, String>> recommendation() {
-		return restaurantService.getRecommendationUrls();
-	}
-	
 	@RequestMapping(value = "/api/v1/restaurant_statistic", method = RequestMethod.GET)
 	public List<Map<String, Object>> restauranStatistics() {
 		return restaurantService.getRestaurantNumberOfPlaces();
@@ -32,8 +29,13 @@ public class ZomatoController {
 		return restaurantService.getRestaurant(id);
 	}
 	
-	/*@RequestMapping(value = "/api/v1/restaurants/{type}", method = RequestMethod.GET)
-	public ResponseWrapper getRestaurantsByType(@PathVariable("type") String type) {
-		return restaurantService.getRecommendationUrls();
-	}*/
+	@RequestMapping(value = "/api/v1/collection/{type}", method = RequestMethod.GET)
+	public Response getFeatruedCollections(@PathVariable("type") String type) {
+		if ("main_page".equals(type)) {
+			return restaurantService.getMainPageCollections();
+		} else if ("all".equals(type)) {
+			return restaurantService.getAllCollections();
+		}
+		throw new BadParameterException("Unknown collection type:" + type);
+	}
 }
