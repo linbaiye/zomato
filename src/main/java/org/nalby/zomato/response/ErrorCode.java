@@ -1,5 +1,5 @@
 package org.nalby.zomato.response;
 
 public enum ErrorCode {
-	EOK, ENOREST, EBADPARAM
+	EOK, ENOREST, EBADPARAM, EINTERNAL
 }

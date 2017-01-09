@@ -22,5 +22,13 @@ public class ZomatoExceptionHandler {
 		LOGGER.error("Got an exception:", exception);
 		return new Response(ErrorCode.EBADPARAM, exception.getMessage());
 	}
+	
+	@ExceptionHandler(Exception.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public Response defaultExceptionHandler(Exception exception) {
+		LOGGER.error("Got an exception:", exception);
+		return new Response(ErrorCode.EINTERNAL, exception.getMessage());
+	}
 
 }

@@ -2,37 +2,31 @@
  * 
  */
 
-function BodyController($http, $location, baseUrl) {
+function BodyController($http, $location, baseUrl, broker) {
 	var vm = this;
-	function initRecommendation(response) {
-		var data = response.data;
-		var recommendation = [[], []];
-		var i = 0, j = 0;
-		var desc = {
-			dessert: "Desserts you should try",
-			dining: "Have delicious dinner after a day's work",
-			cafe: "Who does not like cafe",
-			pub: "Go for a drink with your friends",
-			fast: "Fast food for a busy day",
-			magic: "Buy yourself a lottery if you find this excellent"
+	
+	function shortenDescription(description) {
+		if (description.length > 65) {
+			return description.substr(0, 62) + "...";
 		}
-		var type = {
-			dessert: "Dessert Parlour",
-			pub: "Beer and wine",
-			cafe: "Café",
-			fast: "Fast Food",
-			dining: "Casual Dining",
-			magic: "Magical recommendation"
-		};
-		for (var k = 0; k < data.length; k++) {
-			recommendation[i][j] = {id: data[k]['id'], "type": type[data[k]['name']], "style":{'background-image': 'url(' + data[k]['url'] + ')'}, "desc": desc[data[k]['name']]};
-			if (++j == 3) {
-				++i;
-				j = 0;
-			}
-		}
-		vm.recommendation = recommendation;
+		return description;
 	}
+	
+	function initFeaturedCollections(response) {
+		var data = response.data;
+		if (data.error !== "EOK") {
+			return;
+		}
+		var collectionMap = {};
+		for (var i = 0; i < data.data.length; i++) {
+			data.data[i]['shortDesc'] = shortenDescription(data.data[i]['description']);
+			collectionMap[data.data[i]["type"]] = data.data[i];
+		}
+		vm.collections = collectionMap;
+		vm.imgUrl = 'https://b.zmtcdn.com/data/collections/6190ad66dfd037c7c4070fc428bfdad5_1481519457.jpg?fit=around%7C300%3A250&crop=300%3A250%3B%2A%2C%2A';
+		console.log(vm.collections);
+	}
+
 	function initQuickSearch() {
 		vm.quickSearches = [
 			{imgUrl: "https://b.zmtcdn.com/images/search_tokens/app_icons/category_8.png?output-format=webp", type:"Breakfast"},
@@ -61,10 +55,20 @@ function BodyController($http, $location, baseUrl) {
 		vm.statistics = array;
 	}
 
+	vm.gotoCollection = function(featuredId) {
+		console.log(featuredId);
+		for (k in vm.collections) {
+			if (vm.collections[k]['featuredId'] === featuredId) {
+				broker.putSingleMessage("collection", vm.collections[k]);
+				break;
+			}
+		}
+		$location.path("collection/");
+	}
 	vm.goto = function(path) {
 		$location.path("restaurant/" + path);
 	}
-	$http.get(baseUrl + "/api/v1/recommendation").then(initRecommendation, function(response) {	});
+	$http.get(baseUrl + "/api/v1/collection/main_page").then(initFeaturedCollections, function(response) {	});
 	initQuickSearch();
-	$http.get(baseUrl + "/api/v1/restaurant_statistic").then(initStatistic, function(response){ console.log(response); });
+	//$http.get(baseUrl + "/api/v1/restaurant_statistic").then(initStatistic, function(response){ console.log(response); });
 }

@@ -71,39 +71,6 @@
   }
 }
 #index-page {
-  .rest-cate-row {
-    @include flex;
-    margin-bottom: 20px;
-  }
-  .rest-box {
-    @include flex;
-  }
-  .rest-box:hover {
-    cursor: pointer;
-  }
-  .thumb-box, .brief {
-    display: inline-block;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2)
-  }
-  .thumb-box {
-    width: 40%;
-    background-size: cover;
-    background-position: center;
-    height: 120px;
-    border-radius: 4px 0 0 4px;
-  }
-  .brief {
-    width: 60%;
-    background-color: white;
-    padding-left: 3%;
-    h5 {
-      font-weight: 600;
-    }
-    p {
-      width:  95%;
-    }
-    border-radius: 0 4px 4px 0;
-  }
   #quick-search {
     @include flex;
     .search-item {
@@ -122,34 +89,89 @@
       margin: auto;
     }
   }
-
-  @media only screen and (min-width : 768px) {
-    .rest-box:first-child {
-      margin: auto auto auto 0;
+  #book-form {
+    .dropdown {
+      width: 100%;
+      .dropdown-toggle {
+        border: 1px solid #e7e7e7;
+        color: black;
+        width: 100%;
+        height: 40px;
+        background-color: white;
+      }
+      .dropdown-toggle:hover,  .dropdown-toggle:active{
+        background-color: white;
+      }
+      .dropdown-caret, .dropdown-text {
+        display: inline-block;
+        width: 50%;
+        margin-bottom: 0;
+      }
+      .dropdown-caret {
+        text-align: right;
+      }
+      .dropdown-text {
+        text-align: left;
+      }
+      .dropdown-menu {
+        width: 100%;
+      }
     }
-    .rest-box:last-child {
-      margin: auto 0 auto auto;
+  }
+  .featured-card {
+    display: inline-block;
+    background-color: white;
+    height: 120px;
+    margin-bottom: 20px;
+    border-radius: $default-radius;
+    .featured-thumb-img {
+      border-radius: $default-radius 0 0 $default-radius;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .rest-box:nth-of-child(2) {
-      margin: auto 0 auto auto;
+    .featured-text {
+      padding-top: 10px;
+      color: black;
+      .featured-title {
+        font-weight: 600;
+        font-size: 15px;
+      }
     }
-    .col-xs-12 {
-      padding: 0;
+  }
+  .featured-card:last-child {
+    float: right;
+  }
+  #all-collections-href {
+    line-height: 44px;
+    background-color: white;
+    color: $default-red;
+    margin: 0 -15px 0 -15px;
+    text-align: center;
+    border-radius: $default-radius;
+    @include block-href;
+  }
+  @media screen and (max-width : 767px) {
+    .featured-card {
+      width: 100%;
     }
-    .rest-box {
-      width: 32%;
+  }
+  @media screen and (min-width : 768px) {
+    .featured-card {
+      width: 49%;
     }
     #quick-search {
       height: 142px;
       background-color: white;
       margin-top: 5px;
-      border-radius: 4px;
+      border-radius: $default-radius;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
     }
     #statistic {
       height: 320px;
       background-color: white;
-      border-radius: 4px;
+      border-radius: $default-radius;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
       @include flex;
       .stat-box {

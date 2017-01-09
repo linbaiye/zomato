@@ -1,79 +1,142 @@
-	<div id="index-header">
-		<div>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12" id="header-buttons-row">
-						<button class="btn btn-default darkred-style">Looking for a job</button>
-						<div id="right-side">
-							<button class="btn btn-default skyblue-style">Book a Table</button>
-							<button class="btn btn-default">Log in</button>
-						</div>
+
+<div id="index-header">
+	<div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12" id="header-buttons-row">
+					<button style="display:none" class="btn btn-default darkred-style">Looking for
+						a job</button>
+					<div id="right-side">
+						<button class="btn btn-default skyblue-style">Book a
+							Table</button>
+						<button class="btn btn-default">Log in</button>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<a class="btn btn-default darkred-style" id="main-logo" href="/">ZOMATO</a>
-					</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<a class="btn btn-default darkred-style" id="main-logo" href="/">ZOMATO</a>
 				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<p id="propaganda">Find the best restaurants, cafés, and bars in Sydney</p>
-					</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<p id="propaganda">Find the best restaurants, cafés, and bars
+						in Sydney</p>
 				</div>
-				<div class="row">
-					<div class="col-xs-12" id="search-row">
-						<div class="search-input">
-							<input type="text" class="form-control search-input" placeholder="Search for restaurants or cusines." />
-						</div>
-						<button type="button" class="btn btn-default search-input darkred-style">search</button>
+			</div>
+			<div class="row">
+				<div class="col-xs-12" id="search-row">
+					<div class="search-input">
+						<input type="text" class="form-control search-input"
+							placeholder="Search for restaurants or cusines." />
 					</div>
+					<button type="button"
+						class="btn btn-default search-input darkred-style">search</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid" ng-controller="BodyController as body" id="index-page">
-		<div class="row">
-			<div class="col-xs-12">
+</div>
+<div class="container-fluid" ng-controller="BodyController as vm"
+	id="index-page">
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
 			<h2>Collections</h2>
-			<p>Explore curated lists of top restaurants, cafes, pubs, and bars in and around Sydney, based on trends</p>
+			<p>Explore curated lists of top restaurants, cafes, pubs, and
+				bars in and around Sydney, based on trends</p>
+			<div id="featured-collection col-xs-12">
+				<div class="featured-card" ng-click="vm.gotoCollection(vm.collections['Trending this week'].featuredId)">
+					<div class="featured-thumb-img col-xs-5"
+						ng-style="{'background-image': 'url(' + vm.collections['Trending this week'].thumbUrl + ')'}">
+					</div>
+					<div class="featured-text col-xs-7">
+						<p class="featured-title" ng-bind="vm.collections['Trending this week'].type"></p>
+						<p class="featured-desc">{{vm.collections['Trending this week'].shortDesc}}</p>
+					</div>
+				</div>
+				<a class="featured-card" ng-click="gotoCollection(vm.collections['Newly opened'].featuredId)">
+					<div class="featured-thumb-img col-xs-5"
+						ng-style="{'background-image': 'url(' + vm.collections['Newly opened'].thumbUrl + ')'}">
+					</div>
+					<div class="featured-text col-xs-7">
+						<p class="featured-title" ng-bind="vm.collections['Newly opened'].type"></p>
+						<p class="featured-desc">{{vm.collections['Newly opened'].shortDesc}}</p>
+					</div>
+				</a>
+			</div>
+			<div id="featured-collection col-xs-12">
+				<div class="featured-card" ng-click="gotoCollection(vm.collections['Function venues'].featuredId)">
+					<div class="featured-thumb-img col-xs-5"
+						ng-style="{'background-image': 'url(' + vm.collections['Function venues'].thumbUrl + ')'}">
+					</div>
+					<div class="featured-text col-xs-7">
+						<p class="featured-title" ng-bind="vm.collections['Function venues'].type"></p>
+						<p class="featured-desc">{{vm.collections['Function venues'].shortDesc}}</p>
+					</div>
+				</div>
+				<div class="featured-card" ng-click="gotoCollection(vm.collections['Lunar New Year'].featuredId)">
+					<div class="featured-thumb-img col-xs-5"
+						ng-style="{'background-image': 'url(' + vm.collections['Lunar New Year'].thumbUrl + ')'}">
+					</div>
+					<div class="featured-text col-xs-7">
+						<p class="featured-title" ng-bind="vm.collections['Lunar New Year'].type"></p>
+						<p class="featured-desc">{{vm.collections['Lunar New Year'].shortDesc}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<a id="all-collections-href" href="#">All collections in Sydney</a>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<h2>Book a Table</h2>
+			<p>Book tables at the best restaurants in Sydney</p>
+			<div id="book-form">
+				<h4>Select date</h4>
+				<div class="btn-group" uib-dropdown is-open="status.isopen">
+					<button id="single-button" type="button" class="btn btn-primary"
+						uib-dropdown-toggle ng-disabled="disabled">
+						<p class="dropdown-text">Button dropdown</p> 
+						<p class="dropdown-caret"><span class="caret"></span></p>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+						aria-labelledby="single-button">
+						<li role="menuitem"><a href="#">Action</a></li>
+						<li role="menuitem"><a href="#">Another action</a></li>
+						<li role="menuitem"><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li role="menuitem"><a href="#">Separated link</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 rest-cate-row" ng-repeat="row in body.recommendation">
-				<div class="rest-box" ng-repeat="item in row">
-					<div class="thumb-box" ng-style="item.style" ng-click="body.goto(item.id)" >
-					</div>
-					<div class="brief" ng-click="body.goto(item.id)" >
-						<h5>{{item.type}}</h5>
-						<p>{{item.desc}}</p>
+			<div class="col-xs-12">
+				<h2>Quick Searches</h2>
+				<p>Discover restaurants by type of meal
+					{{body.quickSearches.length}}</p>
+				<div id="quick-search">
+					<div class="search-item" ng-repeat="i in body.quickSearches">
+						<div class="search-item-box clickable">
+							<img ng-src="{{i.imgUrl}}" />
+							<p>{{i.type}}</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-			<h2>Quick Searches</h2>
-			<p>Discover restaurants by type of meal {{body.quickSearches.length}}</p>
-			<div id="quick-search">
-				<div class="search-item" ng-repeat="i in body.quickSearches">
-					<div class="search-item-box clickable">
-						<img ng-src="{{i.imgUrl}}"/>
-						<p>{{i.type}}</p>
+				<h2>Popular localities in and around Sydney</h2>
+				<p>Explore restaurants, bars, and cafés by locality</p>
+				<div id="statistic">
+					<div class="stat-box" ng-repeat="row in body.statistics">
+						<div class="stat-item" ng-repeat="i in row">{{i.district}}
+							({{i.count}})</div>
 					</div>
 				</div>
-			</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-			<h2>Popular localities in and around Sydney</h2>
-			<p>Explore restaurants, bars, and cafés by locality</p>
-			<div id="statistic">
-				<div class="stat-box" ng-repeat="row in body.statistics">
-					<div class="stat-item" ng-repeat="i in row">{{i.district}} ({{i.count}})</div>
-				</div>
-			</div>
 			</div>
 		</div>
 	</div>
-	<div ng-include="'static/html/footer.html'"></div>
+</div>
+<div ng-include="'static/html/footer.html'"></div>

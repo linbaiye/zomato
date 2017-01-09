@@ -23,6 +23,9 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>org.nalby.zomato.model.FeaturedCollection</value>
+				<value>org.nalby.zomato.model.Restaurant</value>
+				<value>org.nalby.zomato.model.Address</value>
+				<value>org.nalby.zomato.model.Category</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

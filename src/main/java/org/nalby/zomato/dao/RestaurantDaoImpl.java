@@ -1,7 +1,6 @@
 package org.nalby.zomato.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,25 +20,10 @@ public class RestaurantDaoImpl implements RestaurantDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Map<String, Long> getCategoryCountMap() {
-		return null;
-	}
-
-	public List<Map<String, String>> getUrlMapList(Map<String, Long> offsets) {
-		return null;
-	}
-
-	public List<Map<String, Object>> getRestaurantStatistic() {
-		return null;
-	}
-
 	public Restaurant getRestaurant(int id) {
-		return null;
-	}
-
-	public List<Restaurant> getSpecifiedNumberRestaurantByType(String type, int number, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery("Restaurant.findById");
+		return (Restaurant)query.setParameter("id", id).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -48,11 +32,22 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		List<FeaturedCollection> list = null;
 		if (typeList == null) {
 			list = session.getNamedQuery("FeaturedCollection.findAll").list();
+			LOGGER.info("Listed all collections.");
 		} else {
 			Query query = session.getNamedQuery("FeaturedCollection.findByTypes");
 			list = query.setParameterList("types", typeList).list();
+			LOGGER.info("Listed main page collections.");
 		}
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Restaurant> getListByCategory(int categoryId, int offset, int limit) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery("Restaurant.findByCategory");
+		query.setParameter("categoryId", categoryId);
+		query.setMaxResults(limit).setFirstResult(offset);
+		return query.list();
 	}
 
 }

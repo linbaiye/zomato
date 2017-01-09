@@ -21,7 +21,9 @@
 	<div ng-view></div>
 	<script src="${resourceUrl}/js/src/app/restaurant/RestaurantInfoController.js"></script>
 	<script src="${resourceUrl}/js/src/app/restaurant/HeaderController.js"></script>
+	<script src="${resourceUrl}/js/src/app/collection/CollectionController.js"></script>
 	<script src="${resourceUrl}/js/src/app/index/BodyController.js"></script>
+	<script src="${resourceUrl}/js/src/app/global/BrokerService.js"></script>
 	<script src="${resourceUrl}/js/src/app/app.js"></script>
 </body>
 </html>

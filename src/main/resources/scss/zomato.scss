@@ -2,6 +2,9 @@
 .container-fluid {
   max-width: 1160px;
 }
+$default-red: #cb202d;
+$default-radius: 3px;
+
 html, body {
   background: #F3F3F3;
 }
@@ -42,6 +45,11 @@ html, body {
 
 .clickable:hover {
   cursor: pointer;
+}
+
+@mixin block-href {
+  text-decoration: none;
+  display: block;
 }
 
 .btn {
