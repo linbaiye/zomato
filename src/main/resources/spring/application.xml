@@ -27,6 +27,7 @@
 				<value>org.nalby.zomato.model.FeaturedRestaurants</value>
 				<value>org.nalby.zomato.model.Restaurant</value>
 				<value>org.nalby.zomato.model.FeaturedRestaurant</value>
+				<value>org.nalby.zomato.model.RestaurantStats</value>
 				<value>org.nalby.zomato.model.Address</value>
 				<value>org.nalby.zomato.model.Category</value>
 				<value>org.nalby.zomato.model.Cuisine</value>

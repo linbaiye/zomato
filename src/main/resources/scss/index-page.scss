@@ -13,22 +13,7 @@
     background-color: rgba(0,0,0,.4);
   }
   #header-buttons-row {
-    padding: 0 30px 0 30px;
-  }
-  #main-logo {
-    height: 110px;
-    width: 110px;
-    line-height: 110px;
-    text-align: center;
-    margin: auto;
-    text-decoration: none;
-    display: block;
-    font-weight: 600;
-    font-size: 20px;
-  }
-
-  #header-buttons-row {
-    padding-top: 20px;
+    padding: 20px 30px 0 30px;
     .btn {
       padding: .6em 1.5em;
     }
@@ -40,33 +25,39 @@
       }
     }
   }
-
+  @media screen and (max-width : 767px) {
+    #home-href {
+      display: none;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    #home-href {
+      text-align: center;
+    }
+    #home-href a {
+      border-radius: $default-radius;
+      width: 110px;
+      line-height: 110px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
   #propaganda {
     text-align: center;
     color: white;
     margin: auto;
     font-size: 28px;
   }
-
   #search-row {
-    margin: auto;
-    text-align: center;
-    .search-input {
-      display: inline-block;
-      vertical-align: top;
-      height: 40px;
+    .col-xs-12 {
+      padding: 0;
+      margin-bottom: 10px;
     }
-    button[class*="dropdown-toggle"] {
-      min-width: 180px;
-    }
-    input[class*="search-input"] {
-      min-width: 180px;
-      max-width: 500px;
-      width: 500px;
-    }
-    >button:last-child {
-      padding-left: 1.5em;
-      padding-right: 1.5em;;
+    button, input {
+      width: 100%;
     }
   }
 }
@@ -104,11 +95,22 @@
       margin: auto;
     }
   }
+  #statistic {
+    background-color: white;
+    border-radius: $default-radius;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+    padding: 20px 10px;
+  }
   #book-form {
-    .dropdown {
+    background-color: white;
+    padding: 15px 15px 32px 15px;
+    border-radius: $default-radius;
+    .dropdown, .btn-group {
       width: 100%;
       .dropdown-toggle {
         border: 1px solid #e7e7e7;
+        border-radius: $default-radius;
+        @include noshadow;
         color: black;
         width: 100%;
         height: 40px;
@@ -131,6 +133,10 @@
       .dropdown-menu {
         width: 100%;
       }
+    }
+    #book-button {
+      width: 100%;
+      margin-top: 20px;
     }
   }
   .featured-card {
@@ -173,20 +179,6 @@
   @media screen and (min-width : 768px) {
     .featured-card {
       width: 49%;
-    }
-    #statistic {
-      height: 320px;
-      background-color: white;
-      border-radius: $default-radius;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
-      @include flex;
-      .stat-box {
-        width: 32%;
-        padding: 15px 0 0 30px;
-      }
-      .stat-item {
-        margin-bottom: 10px;
-      }
     }
   }
 }

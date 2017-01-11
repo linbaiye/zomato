@@ -32,6 +32,9 @@ html, body {
   background-color: #33aedc;
   color: white; }
 
+.default-input-height {
+  height: 40px; }
+
 .grey-text, #collection-body .restaurant-address, #collection-body .restaurant-cuisine {
   color: #89959B; }
 
@@ -51,19 +54,7 @@ html, body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4); }
   #index-header #header-buttons-row {
-    padding: 0 30px 0 30px; }
-  #index-header #main-logo {
-    height: 110px;
-    width: 110px;
-    line-height: 110px;
-    text-align: center;
-    margin: auto;
-    text-decoration: none;
-    display: block;
-    font-weight: 600;
-    font-size: 20px; }
-  #index-header #header-buttons-row {
-    padding-top: 20px; }
+    padding: 20px 30px 0 30px; }
     #index-header #header-buttons-row .btn {
       padding: .6em 1.5em; }
     #index-header #header-buttons-row #right-side {
@@ -71,27 +62,31 @@ html, body {
       float: right; }
       #index-header #header-buttons-row #right-side .btn {
         padding: .6em 1em; }
+  @media screen and (max-width: 767px) {
+    #index-header #home-href {
+      display: none; } }
+  @media screen and (min-width: 768px) {
+    #index-header #home-href {
+      text-align: center; }
+    #index-header #home-href a {
+      border-radius: 3px;
+      width: 110px;
+      line-height: 110px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 20px; } }
   #index-header #propaganda {
     text-align: center;
     color: white;
     margin: auto;
     font-size: 28px; }
-  #index-header #search-row {
-    margin: auto;
-    text-align: center; }
-    #index-header #search-row .search-input {
-      display: inline-block;
-      vertical-align: top;
-      height: 40px; }
-    #index-header #search-row button[class*="dropdown-toggle"] {
-      min-width: 180px; }
-    #index-header #search-row input[class*="search-input"] {
-      min-width: 180px;
-      max-width: 500px;
-      width: 500px; }
-    #index-header #search-row > button:last-child {
-      padding-left: 1.5em;
-      padding-right: 1.5em; }
+  #index-header #search-row .col-xs-12 {
+    padding: 0;
+    margin-bottom: 10px; }
+  #index-header #search-row button, #index-header #search-row input {
+    width: 100%; }
 
 #index-page #quick-search {
   background-color: white;
@@ -128,26 +123,43 @@ html, body {
     height: 48px; }
   #index-page #quick-search p, #index-page #quick-search img, #index-page #quick-search .search-item {
     margin: auto; }
-#index-page #book-form .dropdown {
-  width: 100%; }
-  #index-page #book-form .dropdown .dropdown-toggle {
-    border: 1px solid #e7e7e7;
-    color: black;
-    width: 100%;
-    height: 40px;
-    background-color: white; }
-  #index-page #book-form .dropdown .dropdown-toggle:hover, #index-page #book-form .dropdown .dropdown-toggle:active {
-    background-color: white; }
-  #index-page #book-form .dropdown .dropdown-caret, #index-page #book-form .dropdown .dropdown-text {
-    display: inline-block;
-    width: 50%;
-    margin-bottom: 0; }
-  #index-page #book-form .dropdown .dropdown-caret {
-    text-align: right; }
-  #index-page #book-form .dropdown .dropdown-text {
-    text-align: left; }
-  #index-page #book-form .dropdown .dropdown-menu {
+#index-page #statistic {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px 10px; }
+#index-page #book-form {
+  background-color: white;
+  padding: 15px 15px 32px 15px;
+  border-radius: 3px; }
+  #index-page #book-form .dropdown, #index-page #book-form .btn-group {
     width: 100%; }
+    #index-page #book-form .dropdown .dropdown-toggle, #index-page #book-form .btn-group .dropdown-toggle {
+      border: 1px solid #e7e7e7;
+      border-radius: 3px;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-appearance: none;
+      color: black;
+      width: 100%;
+      height: 40px;
+      background-color: white; }
+    #index-page #book-form .dropdown .dropdown-toggle:hover, #index-page #book-form .dropdown .dropdown-toggle:active, #index-page #book-form .btn-group .dropdown-toggle:hover, #index-page #book-form .btn-group .dropdown-toggle:active {
+      background-color: white; }
+    #index-page #book-form .dropdown .dropdown-caret, #index-page #book-form .dropdown .dropdown-text, #index-page #book-form .btn-group .dropdown-caret, #index-page #book-form .btn-group .dropdown-text {
+      display: inline-block;
+      width: 50%;
+      margin-bottom: 0; }
+    #index-page #book-form .dropdown .dropdown-caret, #index-page #book-form .btn-group .dropdown-caret {
+      text-align: right; }
+    #index-page #book-form .dropdown .dropdown-text, #index-page #book-form .btn-group .dropdown-text {
+      text-align: left; }
+    #index-page #book-form .dropdown .dropdown-menu, #index-page #book-form .btn-group .dropdown-menu {
+      width: 100%; }
+  #index-page #book-form #book-button {
+    width: 100%;
+    margin-top: 20px; }
 #index-page .featured-card {
   display: inline-block;
   background-color: white;
@@ -179,23 +191,7 @@ html, body {
     width: 100%; } }
 @media screen and (min-width: 768px) {
   #index-page .featured-card {
-    width: 49%; }
-  #index-page #statistic {
-    height: 320px;
-    background-color: white;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between; }
-    #index-page #statistic .stat-box {
-      width: 32%;
-      padding: 15px 0 0 30px; }
-    #index-page #statistic .stat-item {
-      margin-bottom: 10px; } }
+    width: 49%; } }
 
 #rest-info-body {
   margin-top: 20px; }

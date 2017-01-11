@@ -3,11 +3,13 @@ package org.nalby.zomato.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.nalby.zomato.model.FeaturedCollection;
 import org.nalby.zomato.model.FeaturedRestaurants;
 import org.nalby.zomato.model.Restaurant;
+import org.nalby.zomato.model.RestaurantStats;
 import org.nalby.zomato.util.QueryName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +60,14 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		Query query = session.getNamedQuery(QueryName.FIND_FEATURED_RESTAURANTS_BY_ID);
 		query.setParameter("id", collection);
 		return (FeaturedRestaurants) query.uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RestaurantStats> getRestauratStats() {
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(QueryName.RESTAURANT_STATS_SQL);
+		query.addEntity(RestaurantStats.class);
+		return query.list();
 	}
 
 }

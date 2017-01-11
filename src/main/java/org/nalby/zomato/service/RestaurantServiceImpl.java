@@ -57,4 +57,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return new Response(ErrorCode.EOK, restaurantDao.getRestaurantsByCollection(collection));
 	}
 
+	@Transactional
+	public Response getRestauransStats() {
+		return new Response(ErrorCode.EOK, restaurantDao.getRestauratStats());
+	}
+
 }

@@ -15,4 +15,6 @@ public interface RestaurantService {
 
 	public Response getRestauransByCollection(int collection);
 	
+	public Response getRestauransStats();
+	
 }

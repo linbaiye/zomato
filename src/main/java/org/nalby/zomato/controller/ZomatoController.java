@@ -1,9 +1,5 @@
 package org.nalby.zomato.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.hibernate.validator.cfg.context.GroupConversionTargetContext;
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
@@ -32,6 +28,11 @@ public class ZomatoController {
 	@RequestMapping(value = "/api/v1/restaurant/collection/{collectionId}", method = RequestMethod.GET)
 	public Response getRestaurantsByCollection(@PathVariable int collectionId) {
 		return restaurantService.getRestauransByCollection(collectionId);
+	}
+
+	@RequestMapping(value = "/api/v1/restaurant/stats", method = RequestMethod.GET)
+	public Response getRestaurantStats() {
+		return restaurantService.getRestauransStats();
 	}
 	
 	@RequestMapping(value = "/api/v1/collection/{type}", method = RequestMethod.GET)

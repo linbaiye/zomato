@@ -14,24 +14,24 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
-					<a class="btn btn-default darkred-style" id="main-logo" href="/">ZOMATO</a>
+				<div class="col-sm-12" id="home-href">
+					<a class="darkred-style" href="/">ZOMATO</a>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<p id="propaganda">Find the best restaurants, cafés, and bars
-						in Sydney</p>
+					<p id="propaganda">Find the best restaurants, cafés, and bars in Sydney</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12" id="search-row">
-					<div class="search-input">
-						<input type="text" class="form-control search-input"
-							placeholder="Search for restaurants or cusines." />
+					<div class="col-xs-12 col-sm-7 col-sm-offset-2">
+						<input type="text" class="form-control default-input-height" placeholder="Search for restaurants or cusines." />
 					</div>
-					<button type="button"
-						class="btn btn-default search-input darkred-style">search</button>
+					<div class="col-xs-12 col-sm-1">
+						<button type="button"
+							class="btn btn-default darkred-style default-input-height">search</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -42,9 +42,9 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-8">
 			<h2>Collections</h2>
-			<p>Explore curated lists of top restaurants, cafes, pubs, and
+			<p class="grey-text">Explore curated lists of top restaurants, cafes, pubs, and
 				bars in and around Sydney, based on trends</p>
-			<div id="featured-collection col-xs-12">
+			<div id="featured-collection">
 				<div class="featured-card clickable"
 					ng-click="vm.gotoCollection(vm.collections['Cocktail bars'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="featured-collection col-xs-12">
+			<div id="featured-collection">
 				<div class="featured-card clickable"
 					ng-click="vm.gotoCollection(vm.collections['Function venues'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
@@ -98,25 +98,52 @@
 		</div>
 		<div class="col-xs-12 col-md-4">
 			<h2>Book a Table</h2>
-			<p>Book tables at the best restaurants in Sydney</p>
+			<p class="grey-text">Book tables at the best restaurants in Sydney</p>
 			<div id="book-form">
-				<h4>Select date</h4>
-				<div class="btn-group" uib-dropdown is-open="status.isopen">
-					<button id="single-button" type="button" class="btn btn-primary"
+				<div class="btn-group" uib-dropdown>
+					<h5>Select date</h5>
+					<button id="date-button" type="button" class="btn btn-primary"
 						uib-dropdown-toggle ng-disabled="disabled">
-						<p class="dropdown-text">Button dropdown</p>
+						<p class="dropdown-text">Today, 11 Jan</p>
 						<p class="dropdown-caret">
 							<span class="caret"></span>
 						</p>
 					</button>
 					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
-						aria-labelledby="single-button">
+						aria-labelledby="date-button">
 						<li role="menuitem"><a href="#">Action</a></li>
-						<li role="menuitem"><a href="#">Another action</a></li>
-						<li role="menuitem"><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li role="menuitem"><a href="#">Separated link</a></li>
 					</ul>
+				</div>
+				<div class="btn-group" uib-dropdown>
+					<h5>Number of guests</h5>
+					<button id="guest-number-button" type="button" class="btn btn-primary"
+						uib-dropdown-toggle ng-disabled="disabled">
+						<p class="dropdown-text">2 guests</p>
+						<p class="dropdown-caret">
+							<span class="caret"></span>
+						</p>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+						aria-labelledby="guest-number-button">
+						<li role="menuitem"><a href="#">Action</a></li>
+					</ul>
+				</div>
+				<div class="btn-group" uib-dropdown>
+					<h5>Time</h5>
+					<button id="time-button" type="button" class="btn btn-primary"
+						uib-dropdown-toggle ng-disabled="disabled">
+						<p class="dropdown-text">Dinner</p>
+						<p class="dropdown-caret">
+							<span class="caret"></span>
+						</p>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+						aria-labelledby="time-button">
+						<li role="menuitem"><a href="#">Action</a></li>
+					</ul>
+				</div>
+				<div class="btn-group">
+					<button id="book-button" class="btn btn-default skyblue-style">Book a Table</button>
 				</div>
 			</div>
 		</div>
@@ -124,7 +151,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>Quick Searches</h2>
-			<p>Discover restaurants by type of meal
+			<p class="grey-text">Discover restaurants by type of meal
 				{{vm.quickSearches.length}}</p>
 			<div id="quick-search">
 				<div class="search-item col-sm-3 col-xs-6" ng-repeat="i in vm.quickSearches">
@@ -139,11 +166,12 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>Popular localities in and around Sydney</h2>
-			<p>Explore restaurants, bars, and cafés by locality</p>
-			<div id="statistic">
-				<div class="stat-box" ng-repeat="row in body.statistics">
-					<div class="stat-item" ng-repeat="i in row">{{i.district}}
-						({{i.count}})</div>
+			<p class="grey-text">Explore restaurants, bars, and cafés by locality</p>
+		</div>
+		<div class="col-xs-12">
+			<div class="col-xs-12" id="statistic">
+				<div class="col-sm-4 col-xs-6" ng-repeat="row in vm.stats">
+					<p>{{row.district}} <span class="grey-text">({{row.number}} places)</span></p>
 				</div>
 			</div>
 		</div>
