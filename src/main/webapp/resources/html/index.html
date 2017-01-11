@@ -53,13 +53,13 @@
 				</div>
 			</div>
 			<div class="col-xs-12">
-				<a id="all-collections-href" class="grey-border" href="#">All collections in Sydney</a>
+				<div id="all-collections-href" class="clickable" ng-click="vm.gotoCollection('all')">All collections in Sydney</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-4">
 			<h2>Book a Table</h2>
 			<p class="grey-text">Book tables at the best restaurants in Sydney</p>
-			<div id="book-form" class="grey-border">
+			<div id="book-form">
 				<div class="btn-group" uib-dropdown>
 					<h5>Select date</h5>
 					<button id="date-button" type="button" class="btn btn-primary"
