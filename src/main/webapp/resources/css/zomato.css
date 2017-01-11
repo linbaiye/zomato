@@ -7,6 +7,11 @@ html, body {
 .clickable:hover {
   cursor: pointer; }
 
+.center-bgimg, #index-page .featured-card .featured-thumb-img, #collection-body #featured-image, #collection-body .restaurant-bgimg {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
 .btn {
   background-image: none;
   background-color: white;
@@ -26,6 +31,9 @@ html, body {
   outline: none;
   background-color: #33aedc;
   color: white; }
+
+.grey-text, #collection-body .restaurant-address, #collection-body .restaurant-cuisine {
+  color: #89959B; }
 
 * {
   font-family: 'Source Sans Pro', Arial, sans-serif; }
@@ -86,12 +94,19 @@ html, body {
       padding-right: 1.5em; }
 
 #index-page #quick-search {
+  background-color: white;
+  margin-top: 5px;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  padding: 40px 10px 30px 10px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center; }
   #index-page #quick-search .search-item {
     display: -webkit-box;
     display: -moz-box;
@@ -99,7 +114,12 @@ html, body {
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
-    width: 12.5%; }
+    align-items: center; }
+    #index-page #quick-search .search-item p {
+      margin-bottom: 20px; }
+  @media screen and (min-width: 970px) {
+    #index-page #quick-search .search-item {
+      width: 12.5%; } }
   #index-page #quick-search .search-item-box {
     text-align: center;
     margin: auto; }
@@ -136,10 +156,7 @@ html, body {
   border-radius: 3px; }
   #index-page .featured-card .featured-thumb-img {
     border-radius: 3px 0 0 3px;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat; }
+    height: 100%; }
   #index-page .featured-card .featured-text {
     padding-top: 10px;
     color: black; }
@@ -163,12 +180,6 @@ html, body {
 @media screen and (min-width: 768px) {
   #index-page .featured-card {
     width: 49%; }
-  #index-page #quick-search {
-    height: 142px;
-    background-color: white;
-    margin-top: 5px;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
   #index-page #statistic {
     height: 320px;
     background-color: white;
@@ -334,5 +345,35 @@ html, body {
     #footer #info p {
       color: #ADB0B6;
       margin: auto auto auto 0; }
+
+#collection-body {
+  margin-top: 20px; }
+  #collection-body .row {
+    margin-bottom: 20px; }
+  #collection-body #featured-image {
+    height: 300px;
+    border-radius: 3px 3px 0 0; }
+  #collection-body #featured-text {
+    background-color: white;
+    padding: 20px 0 20px 10px;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+  #collection-body #featured-type, #collection-body .restaurant-name {
+    font-size: 18px;
+    font-weight: 600; }
+  #collection-body #restraurant-list {
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px; }
+  #collection-body .restaurant-item {
+    padding: 5px 5px 10px 5px; }
+  #collection-body .restaurant-bgimg {
+    height: 150px;
+    border-radius: 3px; }
+  #collection-body .restaurant-text {
+    padding-top: 10px; }
+  #collection-body .restaurant-name, #collection-body .restaurant-address, #collection-body .restaurant-cuisine {
+    margin: 0; }
 
 /*# sourceMappingURL=zomato.css.map */

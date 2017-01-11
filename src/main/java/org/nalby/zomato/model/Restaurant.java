@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "restaurants")
 @NamedQueries({
 	@NamedQuery(name = "Restaurant.findById", query = "SELECT r FROM Restaurant r WHERE r.id = :id"),
-	@NamedQuery(name = "Restaurant.findByCategory", query = "SELECT r FROM Restaurant r LEFT JOIN r.categorieList c WHERE c.id = :categoryId")
+	@NamedQuery(name = "Restaurant.findByCategory", query = "SELECT r FROM Restaurant r LEFT JOIN r.categoryList c WHERE c.id = :categoryId")
 })
 public class Restaurant {
 	@Id @Column(name = "restaurant_id")
@@ -50,11 +50,22 @@ public class Restaurant {
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "restaurant_categories", joinColumns = @JoinColumn(name = "restaurant_id"),
 		inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<Category> categorieList = new LinkedList<Category>();
+	private List<Category> categoryList = new LinkedList<Category>();
 
-	public List<Category> getCategorieList() {
-		return categorieList;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "restaurant_cuisines", joinColumns = @JoinColumn(name = "restaurant_id"),
+			inverseJoinColumns = @JoinColumn(name = "cuisine_id"))
+	private List<Cuisine> cuisineList = new LinkedList<Cuisine>();
+	
+
+	public List<Cuisine> getCuisineList() {
+		return cuisineList;
 	}
+
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+
 	public Address getAddress() {
 		return address;
 	}

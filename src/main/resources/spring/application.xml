@@ -22,10 +22,14 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="annotatedClasses">
 			<list>
+				<value>org.nalby.zomato.model.AbstractFeatured</value>
 				<value>org.nalby.zomato.model.FeaturedCollection</value>
+				<value>org.nalby.zomato.model.FeaturedRestaurants</value>
 				<value>org.nalby.zomato.model.Restaurant</value>
+				<value>org.nalby.zomato.model.FeaturedRestaurant</value>
 				<value>org.nalby.zomato.model.Address</value>
 				<value>org.nalby.zomato.model.Category</value>
+				<value>org.nalby.zomato.model.Cuisine</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

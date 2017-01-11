@@ -13,12 +13,37 @@
 		.when("/restaurant/:id", {
 			templateUrl: "static/html/restaurant.html"
 		})
-		.when("/collection/", {
+		.when("/collection/:id", {
 			templateUrl: "static/html/collection.html"
 		})
 	})
 	.controller("BodyController", BodyController)
 	.controller("RestaurantInfoController", RestaurantInfoController)
 	.controller("HeaderController", HeaderController)
-	.controller("CollectionController", CollectionController);
+	.controller("CollectionController", CollectionController)
+	.filter("joinDistrictAndCity", function() {
+		return function(address) {
+			var token = address.split(",");
+			if (token[token.length - 1].trim() == "NSW" && token.length >= 2) {
+				token.splice(token.length - 1, 1);
+			}
+			if (token.length > 2) {
+				return token[token.length - 2].trim() + ", " + token[token.length - 1];
+			}
+			return token.join(",");
+		}
+	}).filter("joinCuisine", function() {
+		return function(list) {
+			if (!(list instanceof Array)) {
+				return list;
+			}
+			var token = [];
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].name) {
+					token.push(list[i].name);
+				}
+			}
+			return token.join(", ");
+		}
+	});
 }());

@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ZomatoController {
-
+	
 	@Autowired
 	private RestaurantService restaurantService;
-
 	
 	@RequestMapping(value = "/api/v1/restaurant/{id}", method = RequestMethod.GET)
 	public Response getRestaurant(@PathVariable("id") int id) {
@@ -28,6 +27,11 @@ public class ZomatoController {
 	@RequestMapping(value = "/api/v1/restaurant/category/{categoryId}/{page}", method = RequestMethod.GET)
 	public Response getRestaurants(@PathVariable("categoryId") int categoryId, @PathVariable("page")int page) {
 		return restaurantService.getRestauransByCategory(categoryId, page);
+	}
+
+	@RequestMapping(value = "/api/v1/restaurant/collection/{collectionId}", method = RequestMethod.GET)
+	public Response getRestaurantsByCollection(@PathVariable int collectionId) {
+		return restaurantService.getRestauransByCollection(collectionId);
 	}
 	
 	@RequestMapping(value = "/api/v1/collection/{type}", method = RequestMethod.GET)
@@ -39,4 +43,5 @@ public class ZomatoController {
 		}
 		throw new BadParameterException("Unknown collection type:" + type);
 	}
+	
 }

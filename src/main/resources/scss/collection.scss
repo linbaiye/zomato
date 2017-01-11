@@ -1,0 +1,44 @@
+#collection-body {
+  .row {
+    margin-bottom: 20px;
+  }
+  margin-top: 20px;
+  #featured-image {
+    @extend  .center-bgimg;
+    height: 300px;
+    border-radius: $default-radius $default-radius 0 0;
+  }
+  #featured-text {
+    background-color: white;
+    padding: 20px 0 20px 10px;
+    border-radius: 0 0 $default-radius $default-radius;
+    @include stereoscopic;
+  }
+  #featured-type, .restaurant-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  #restraurant-list {
+    padding: 10px;
+    background-color: white;
+    @include stereoscopic;
+    border-radius: $default-radius;
+  }
+  .restaurant-item {
+    padding: 5px 5px 10px 5px;
+  }
+  .restaurant-bgimg {
+    height: 150px;
+    @extend .center-bgimg;
+    border-radius: 3px;
+  }
+  .restaurant-text {
+    padding-top: 10px;
+  }
+  .restaurant-name, .restaurant-address, .restaurant-cuisine {
+    margin: 0;
+  }
+  .restaurant-address, .restaurant-cuisine {
+    @extend .grey-text;
+  }
+}

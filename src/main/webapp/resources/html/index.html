@@ -4,8 +4,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12" id="header-buttons-row">
-					<button style="display:none" class="btn btn-default darkred-style">Looking for
-						a job</button>
+					<button style="display: none" class="btn btn-default darkred-style">Looking
+						for a job</button>
 					<div id="right-side">
 						<button class="btn btn-default skyblue-style">Book a
 							Table</button>
@@ -45,41 +45,49 @@
 			<p>Explore curated lists of top restaurants, cafes, pubs, and
 				bars in and around Sydney, based on trends</p>
 			<div id="featured-collection col-xs-12">
-				<div class="featured-card" ng-click="vm.gotoCollection(vm.collections['Trending this week'].featuredId)">
+				<div class="featured-card clickable"
+					ng-click="vm.gotoCollection(vm.collections['Cocktail bars'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
-						ng-style="{'background-image': 'url(' + vm.collections['Trending this week'].thumbUrl + ')'}">
+						ng-style="{'background-image': 'url(' + vm.collections['Cocktail bars'].thumbUrl + ')'}">
 					</div>
 					<div class="featured-text col-xs-7">
-						<p class="featured-title" ng-bind="vm.collections['Trending this week'].type"></p>
-						<p class="featured-desc">{{vm.collections['Trending this week'].shortDesc}}</p>
+						<p class="featured-title"
+							ng-bind="vm.collections['Cocktail bars'].type"></p>
+						<p class="featured-desc">{{vm.collections['Cocktail bars'].shortDesc}}</p>
 					</div>
 				</div>
-				<a class="featured-card" ng-click="gotoCollection(vm.collections['Newly opened'].featuredId)">
+				<div class="clickable featured-card"
+					ng-click="vm.gotoCollection(vm.collections['Newly opened'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
 						ng-style="{'background-image': 'url(' + vm.collections['Newly opened'].thumbUrl + ')'}">
 					</div>
 					<div class="featured-text col-xs-7">
-						<p class="featured-title" ng-bind="vm.collections['Newly opened'].type"></p>
+						<p class="featured-title"
+							ng-bind="vm.collections['Newly opened'].type"></p>
 						<p class="featured-desc">{{vm.collections['Newly opened'].shortDesc}}</p>
 					</div>
-				</a>
+				</div>
 			</div>
 			<div id="featured-collection col-xs-12">
-				<div class="featured-card" ng-click="gotoCollection(vm.collections['Function venues'].featuredId)">
+				<div class="featured-card clickable"
+					ng-click="vm.gotoCollection(vm.collections['Function venues'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
 						ng-style="{'background-image': 'url(' + vm.collections['Function venues'].thumbUrl + ')'}">
 					</div>
 					<div class="featured-text col-xs-7">
-						<p class="featured-title" ng-bind="vm.collections['Function venues'].type"></p>
+						<p class="featured-title"
+							ng-bind="vm.collections['Function venues'].type"></p>
 						<p class="featured-desc">{{vm.collections['Function venues'].shortDesc}}</p>
 					</div>
 				</div>
-				<div class="featured-card" ng-click="gotoCollection(vm.collections['Lunar New Year'].featuredId)">
+				<div class="featured-card clickable"
+					ng-click="vm.gotoCollection(vm.collections['Lunar New Year'].featuredId)">
 					<div class="featured-thumb-img col-xs-5"
 						ng-style="{'background-image': 'url(' + vm.collections['Lunar New Year'].thumbUrl + ')'}">
 					</div>
 					<div class="featured-text col-xs-7">
-						<p class="featured-title" ng-bind="vm.collections['Lunar New Year'].type"></p>
+						<p class="featured-title"
+							ng-bind="vm.collections['Lunar New Year'].type"></p>
 						<p class="featured-desc">{{vm.collections['Lunar New Year'].shortDesc}}</p>
 					</div>
 				</div>
@@ -96,8 +104,10 @@
 				<div class="btn-group" uib-dropdown is-open="status.isopen">
 					<button id="single-button" type="button" class="btn btn-primary"
 						uib-dropdown-toggle ng-disabled="disabled">
-						<p class="dropdown-text">Button dropdown</p> 
-						<p class="dropdown-caret"><span class="caret"></span></p>
+						<p class="dropdown-text">Button dropdown</p>
+						<p class="dropdown-caret">
+							<span class="caret"></span>
+						</p>
 					</button>
 					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
 						aria-labelledby="single-button">
@@ -110,30 +120,30 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<h2>Quick Searches</h2>
-				<p>Discover restaurants by type of meal
-					{{body.quickSearches.length}}</p>
-				<div id="quick-search">
-					<div class="search-item" ng-repeat="i in body.quickSearches">
-						<div class="search-item-box clickable">
-							<img ng-src="{{i.imgUrl}}" />
-							<p>{{i.type}}</p>
-						</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Quick Searches</h2>
+			<p>Discover restaurants by type of meal
+				{{vm.quickSearches.length}}</p>
+			<div id="quick-search">
+				<div class="search-item col-sm-3 col-xs-6" ng-repeat="i in vm.quickSearches">
+					<div class="search-item-box colclickable">
+						<img ng-src="{{i.imgUrl}}" />
+						<p>{{i.type}}</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<h2>Popular localities in and around Sydney</h2>
-				<p>Explore restaurants, bars, and cafés by locality</p>
-				<div id="statistic">
-					<div class="stat-box" ng-repeat="row in body.statistics">
-						<div class="stat-item" ng-repeat="i in row">{{i.district}}
-							({{i.count}})</div>
-					</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Popular localities in and around Sydney</h2>
+			<p>Explore restaurants, bars, and cafés by locality</p>
+			<div id="statistic">
+				<div class="stat-box" ng-repeat="row in body.statistics">
+					<div class="stat-item" ng-repeat="i in row">{{i.district}}
+						({{i.count}})</div>
 				</div>
 			</div>
 		</div>

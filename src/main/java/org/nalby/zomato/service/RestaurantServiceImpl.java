@@ -42,7 +42,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Transactional
 	public Response getMainPageCollections() {
 		List<FeaturedCollection> list = restaurantDao.getCollections(
-				Arrays.asList("Trending this week", "Newly opened", "Function venues", "Lunar New Year"));
+				Arrays.asList("Cocktail bars", "Newly opened", "Function venues", "Lunar New Year"));
 		return new Response(ErrorCode.EOK, list);
 	}
 
@@ -50,6 +50,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Response getRestauransByCategory(int category, int page) {
 		return new Response(ErrorCode.EOK, 
 				restaurantDao.getListByCategory(category, page * RESTAURANT_NUMBER_PER_PAGE, RESTAURANT_NUMBER_PER_PAGE));
+	}
+
+	@Transactional
+	public Response getRestauransByCollection(int collection) {
+		return new Response(ErrorCode.EOK, restaurantDao.getRestaurantsByCollection(collection));
 	}
 
 }

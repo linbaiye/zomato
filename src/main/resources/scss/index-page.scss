@@ -72,10 +72,25 @@
 }
 #index-page {
   #quick-search {
+    background-color: white;
+    margin-top: 5px;
+    border-radius: $default-radius;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+    padding: 40px 10px 30px 10px;;
     @include flex;
+    flex-wrap: wrap;
+    align-items: center;
     .search-item {
       @include flex;
-      width: 12.5%;
+      align-items: center;
+      p {
+        margin-bottom: 20px;
+      }
+    }
+    @media screen and (min-width: 970px) {
+      .search-item {
+        width: 12.5%;
+      }
     }
     .search-item-box {
       text-align: center;
@@ -127,9 +142,7 @@
     .featured-thumb-img {
       border-radius: $default-radius 0 0 $default-radius;
       height: 100%;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      @extend  .center-bgimg;
     }
     .featured-text {
       padding-top: 10px;
@@ -160,13 +173,6 @@
   @media screen and (min-width : 768px) {
     .featured-card {
       width: 49%;
-    }
-    #quick-search {
-      height: 142px;
-      background-color: white;
-      margin-top: 5px;
-      border-radius: $default-radius;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
     }
     #statistic {
       height: 320px;

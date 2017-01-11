@@ -52,6 +52,16 @@ html, body {
   display: block;
 }
 
+.center-bgimg {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@mixin stereoscopic {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+}
+
 .btn {
   @include button-style;
 }
@@ -64,6 +74,10 @@ html, body {
   @include skyblue-style;
 }
 
+.grey-text {
+  color: #89959B;
+}
+
 * {
 	font-family: 'Source Sans Pro', Arial, sans-serif;
 }
@@ -72,3 +86,4 @@ html, body {
 @import "restaurant.scss";
 @import "header.scss";
 @import "footer.scss";
+@import "collection.scss";

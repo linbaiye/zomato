@@ -63,7 +63,7 @@ function BodyController($http, $location, baseUrl, broker) {
 				break;
 			}
 		}
-		$location.path("collection/");
+		$location.path("collection/" + featuredId);
 	}
 	vm.goto = function(path) {
 		$location.path("restaurant/" + path);

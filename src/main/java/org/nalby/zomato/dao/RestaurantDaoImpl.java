@@ -6,7 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.nalby.zomato.model.FeaturedCollection;
+import org.nalby.zomato.model.FeaturedRestaurants;
 import org.nalby.zomato.model.Restaurant;
+import org.nalby.zomato.util.QueryName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,10 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		Session session = sessionFactory.getCurrentSession();
 		List<FeaturedCollection> list = null;
 		if (typeList == null) {
-			list = session.getNamedQuery("FeaturedCollection.findAll").list();
+			list = session.getNamedQuery(QueryName.FIND_ALL_FEATUREDS).list();
 			LOGGER.info("Listed all collections.");
 		} else {
-			Query query = session.getNamedQuery("FeaturedCollection.findByTypes");
+			Query query = session.getNamedQuery(QueryName.FIND_FEATUREDS_IN);
 			list = query.setParameterList("types", typeList).list();
 			LOGGER.info("Listed main page collections.");
 		}
@@ -48,6 +50,14 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		query.setParameter("categoryId", categoryId);
 		query.setMaxResults(limit).setFirstResult(offset);
 		return query.list();
+	}
+
+	
+	public FeaturedRestaurants getRestaurantsByCollection(int collection) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery(QueryName.FIND_FEATURED_RESTAURANTS_BY_ID);
+		query.setParameter("id", collection);
+		return (FeaturedRestaurants) query.uniqueResult();
 	}
 
 }
