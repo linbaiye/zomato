@@ -38,6 +38,9 @@ html, body {
 .grey-text, #collection-body .restaurant-address, #collection-body .restaurant-cuisine {
   color: #89959B; }
 
+.grey-border {
+  border: 1px solid #e7e7e7; }
+
 * {
   font-family: 'Source Sans Pro', Arial, sans-serif; }
 
@@ -162,21 +165,27 @@ html, body {
     margin-top: 20px; }
 #index-page .featured-card {
   display: inline-block;
-  background-color: white;
   height: 120px;
+  padding: 0;
   margin-bottom: 20px;
   border-radius: 3px; }
   #index-page .featured-card .featured-thumb-img {
     border-radius: 3px 0 0 3px;
     height: 100%; }
   #index-page .featured-card .featured-text {
+    border-radius: 0 3px 3px 0;
+    background-color: white;
     padding-top: 10px;
-    color: black; }
+    color: black;
+    height: 100%; }
     #index-page .featured-card .featured-text .featured-title {
       font-weight: 600;
       font-size: 15px; }
-#index-page .featured-card:last-child {
-  float: right; }
+@media (min-width: 768px) {
+  #index-page .even {
+    padding-left: 8px; }
+  #index-page .odd {
+    padding-right: 8px; } }
 #index-page #all-collections-href {
   line-height: 44px;
   background-color: white;
@@ -186,12 +195,6 @@ html, body {
   border-radius: 3px;
   text-decoration: none;
   display: block; }
-@media screen and (max-width: 767px) {
-  #index-page .featured-card {
-    width: 100%; } }
-@media screen and (min-width: 768px) {
-  #index-page .featured-card {
-    width: 49%; } }
 
 #rest-info-body {
   margin-top: 20px; }

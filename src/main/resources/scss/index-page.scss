@@ -66,7 +66,7 @@
     background-color: white;
     margin-top: 5px;
     border-radius: $default-radius;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+    @include stereoscopic;
     padding: 40px 10px 30px 10px;;
     @include flex;
     flex-wrap: wrap;
@@ -98,7 +98,7 @@
   #statistic {
     background-color: white;
     border-radius: $default-radius;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+    @include stereoscopic;
     padding: 20px 10px;
   }
   #book-form {
@@ -141,8 +141,8 @@
   }
   .featured-card {
     display: inline-block;
-    background-color: white;
     height: 120px;
+    padding: 0;
     margin-bottom: 20px;
     border-radius: $default-radius;
     .featured-thumb-img {
@@ -151,16 +151,24 @@
       @extend  .center-bgimg;
     }
     .featured-text {
+      border-radius: 0 $default-radius $default-radius 0;
+      background-color: white;
       padding-top: 10px;
       color: black;
+      height: 100%;
       .featured-title {
         font-weight: 600;
         font-size: 15px;
       }
     }
   }
-  .featured-card:last-child {
-    float: right;
+  @media (min-width: 768px) {
+    .even {
+      padding-left: 8px;
+    }
+    .odd {
+      padding-right: 8px;
+    }
   }
   #all-collections-href {
     line-height: 44px;
@@ -170,15 +178,5 @@
     text-align: center;
     border-radius: $default-radius;
     @include block-href;
-  }
-  @media screen and (max-width : 767px) {
-    .featured-card {
-      width: 100%;
-    }
-  }
-  @media screen and (min-width : 768px) {
-    .featured-card {
-      width: 49%;
-    }
   }
 }

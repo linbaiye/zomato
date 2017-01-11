@@ -22,7 +22,7 @@ function BodyController($http, $location, baseUrl, broker) {
 			data.data[i]['shortDesc'] = shortenDescription(data.data[i]['description']);
 			collectionMap[data.data[i]["type"]] = data.data[i];
 		}
-		vm.collections = collectionMap;
+		vm.collections = data.data;
 		vm.imgUrl = 'https://b.zmtcdn.com/data/collections/6190ad66dfd037c7c4070fc428bfdad5_1481519457.jpg?fit=around%7C300%3A250&crop=300%3A250%3B%2A%2C%2A';
 	}
 

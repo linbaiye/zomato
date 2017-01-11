@@ -7,8 +7,7 @@
 					<button style="display: none" class="btn btn-default darkred-style">Looking
 						for a job</button>
 					<div id="right-side">
-						<button class="btn btn-default skyblue-style">Book a
-							Table</button>
+						<button class="btn btn-default skyblue-style">Book a Table</button>
 						<button class="btn btn-default">Log in</button>
 					</div>
 				</div>
@@ -42,64 +41,25 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-8">
 			<h2>Collections</h2>
-			<p class="grey-text">Explore curated lists of top restaurants, cafes, pubs, and
-				bars in and around Sydney, based on trends</p>
-			<div id="featured-collection">
-				<div class="featured-card clickable"
-					ng-click="vm.gotoCollection(vm.collections['Cocktail bars'].featuredId)">
-					<div class="featured-thumb-img col-xs-5"
-						ng-style="{'background-image': 'url(' + vm.collections['Cocktail bars'].thumbUrl + ')'}">
-					</div>
-					<div class="featured-text col-xs-7">
-						<p class="featured-title"
-							ng-bind="vm.collections['Cocktail bars'].type"></p>
-						<p class="featured-desc">{{vm.collections['Cocktail bars'].shortDesc}}</p>
-					</div>
-				</div>
-				<div class="clickable featured-card"
-					ng-click="vm.gotoCollection(vm.collections['Newly opened'].featuredId)">
-					<div class="featured-thumb-img col-xs-5"
-						ng-style="{'background-image': 'url(' + vm.collections['Newly opened'].thumbUrl + ')'}">
-					</div>
-					<div class="featured-text col-xs-7">
-						<p class="featured-title"
-							ng-bind="vm.collections['Newly opened'].type"></p>
-						<p class="featured-desc">{{vm.collections['Newly opened'].shortDesc}}</p>
-					</div>
-				</div>
-			</div>
-			<div id="featured-collection">
-				<div class="featured-card clickable"
-					ng-click="vm.gotoCollection(vm.collections['Function venues'].featuredId)">
-					<div class="featured-thumb-img col-xs-5"
-						ng-style="{'background-image': 'url(' + vm.collections['Function venues'].thumbUrl + ')'}">
-					</div>
-					<div class="featured-text col-xs-7">
-						<p class="featured-title"
-							ng-bind="vm.collections['Function venues'].type"></p>
-						<p class="featured-desc">{{vm.collections['Function venues'].shortDesc}}</p>
-					</div>
-				</div>
-				<div class="featured-card clickable"
-					ng-click="vm.gotoCollection(vm.collections['Lunar New Year'].featuredId)">
-					<div class="featured-thumb-img col-xs-5"
-						ng-style="{'background-image': 'url(' + vm.collections['Lunar New Year'].thumbUrl + ')'}">
-					</div>
-					<div class="featured-text col-xs-7">
-						<p class="featured-title"
-							ng-bind="vm.collections['Lunar New Year'].type"></p>
-						<p class="featured-desc">{{vm.collections['Lunar New Year'].shortDesc}}</p>
-					</div>
+			<p class="grey-text">Explore curated lists of top restaurants, cafes, pubs, and bars in and around Sydney, based on trends</p>
+			<div ng-repeat="item in vm.collections"
+			 	class="col-sm-6 col-xs-12 featured-card clickable" 
+			 	ng-class-odd="'odd'" ng-class-even="'even'"
+			 	ng-click="vm.gotoCollection(item.featuredId)">
+				<div class="featured-thumb-img col-xs-5" ng-style="{'background-image': 'url(' + item.thumbUrl + ')'}"></div>
+				<div class="featured-text col-xs-7">
+					<p class="featured-title">{{item.type}}</p>
+					<p class="featured-desc">{{item.shortDesc}}</p>
 				</div>
 			</div>
 			<div class="col-xs-12">
-				<a id="all-collections-href" href="#">All collections in Sydney</a>
+				<a id="all-collections-href" class="grey-border" href="#">All collections in Sydney</a>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-4">
 			<h2>Book a Table</h2>
 			<p class="grey-text">Book tables at the best restaurants in Sydney</p>
-			<div id="book-form">
+			<div id="book-form" class="grey-border">
 				<div class="btn-group" uib-dropdown>
 					<h5>Select date</h5>
 					<button id="date-button" type="button" class="btn btn-primary"
