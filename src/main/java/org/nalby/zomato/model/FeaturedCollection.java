@@ -14,5 +14,5 @@ import org.nalby.zomato.util.QueryName;
 	@NamedQuery(name = QueryName.FIND_FEATUREDS_IN, query = "SELECT f FROM FeaturedCollection f WHERE f.type IN :types")
 })
 @Table(name = "featured_types")
-public class FeaturedCollection extends AbstractFeatured{
+public class FeaturedCollection extends AbstractFeature{
 }

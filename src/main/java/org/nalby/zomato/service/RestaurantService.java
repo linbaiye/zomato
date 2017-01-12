@@ -7,9 +7,9 @@ public interface RestaurantService {
 
 	/* Get by id. */
 	public Response getRestaurant(int id);
-	public Response getAllCollections();
+	public Response getAllFeaturedCollections();
 
-	public Response getMainPageCollections();
+	public Response getMainPageFeaturedCollections();
 
 	public Response getRestauransByCategory(int category, int page);
 

@@ -1,19 +1,11 @@
 package org.nalby.zomato.model;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 @MappedSuperclass
-public abstract class AbstractFeatured {
+public abstract class AbstractFeature {
 	@Id @Column(name="featured_type_id")
 	private Integer featuredId;
 	

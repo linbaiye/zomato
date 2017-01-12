@@ -2,6 +2,7 @@ package org.nalby.zomato.model;
 
 import java.util.List;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +21,18 @@ public class FeaturedRestaurant extends BasicRestaurant {
 	
 	@Column(name = "img_url")
 	private String imageUrl;
+	
+	@Transient
+	private Double rate;
+	
+
+	public Double getRate() {
+		return rate;
+	}
+
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
 
 	public String getImageUrl() {
 		return imageUrl;

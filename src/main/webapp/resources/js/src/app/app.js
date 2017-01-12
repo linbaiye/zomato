@@ -1,26 +1,21 @@
-/**
- * 
- */
-
 (function() {
 	angular.module("app", [ "ui.bootstrap", "ngRoute"])
 	.service("broker", BrokerService)
 	.constant("baseUrl", window.location.origin + window.location.pathname)
-	.config(function($routeProvider) {
+	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
 			templateUrl: "static/html/index.html"
 		})
 		.when("/restaurant/:id", {
 			templateUrl: "static/html/restaurant.html"
 		})
-		.when("/collection/:id", {
+		.when("/feature/:id", {
 			templateUrl: "static/html/collection.html"
 		})
-	})
-	.controller("BodyController", BodyController)
-	.controller("RestaurantInfoController", RestaurantInfoController)
+	}])
+	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", BodyController])
+	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
-	.controller("CollectionController", CollectionController)
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");

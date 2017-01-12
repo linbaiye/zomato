@@ -46,20 +46,13 @@ function BodyController($http, $location, baseUrl, broker) {
 		vm.stats = data.data;
 	}
 
-	vm.gotoCollection = function(featuredId) {
-		console.log(featuredId);
-		for (k in vm.collections) {
-			if (vm.collections[k]['featuredId'] === featuredId) {
-				broker.putSingleMessage("collection", vm.collections[k]);
-				break;
-			}
-		}
-		$location.path("collection/" + featuredId);
+	vm.gotoCollection = function(featured) {
+		$location.path("feature/" + featured);
 	}
 	vm.goto = function(path) {
 		$location.path("restaurant/" + path);
 	}
-	$http.get(baseUrl + "/api/v1/collection/main_page").then(initFeaturedCollections, function(response) {	});
+	$http.get(baseUrl + "/api/v1/feature/main_page").then(initFeaturedCollections, function(response) {	});
 	initQuickSearch();
 	$http.get(baseUrl + "/api/v1/restaurant/stats").then(initStatistic, function(response){ console.log(response); });
 }

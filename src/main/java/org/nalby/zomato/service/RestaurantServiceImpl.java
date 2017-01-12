@@ -35,12 +35,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Transactional
-	public Response getAllCollections() {
+	public Response getAllFeaturedCollections() {
 		return new Response(ErrorCode.EOK, restaurantDao.getCollections(null));
 	}
 
 	@Transactional
-	public Response getMainPageCollections() {
+	public Response getMainPageFeaturedCollections() {
 		List<FeaturedCollection> list = restaurantDao.getCollections(
 				Arrays.asList("Cocktail bars", "Newly opened", "Function venues", "Lunar New Year"));
 		return new Response(ErrorCode.EOK, list);

@@ -1,5 +1,6 @@
 package org.nalby.zomato.controller;
 
+
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
@@ -25,9 +26,9 @@ public class ZomatoController {
 		return restaurantService.getRestauransByCategory(categoryId, page);
 	}
 
-	@RequestMapping(value = "/api/v1/restaurant/collection/{collectionId}", method = RequestMethod.GET)
-	public Response getRestaurantsByCollection(@PathVariable int collectionId) {
-		return restaurantService.getRestauransByCollection(collectionId);
+	@RequestMapping(value = "/api/v1/restaurant/feature/{feature}", method = RequestMethod.GET)
+	public Response getRestaurantsByFeature(@PathVariable("feature") Integer featureId) {
+		return restaurantService.getRestauransByCollection(featureId);
 	}
 
 	@RequestMapping(value = "/api/v1/restaurant/stats", method = RequestMethod.GET)
@@ -35,12 +36,12 @@ public class ZomatoController {
 		return restaurantService.getRestauransStats();
 	}
 	
-	@RequestMapping(value = "/api/v1/collection/{type}", method = RequestMethod.GET)
-	public Response getFeatruedCollections(@PathVariable("type") String type) {
+	@RequestMapping(value = "/api/v1/feature/{type}", method = RequestMethod.GET)
+	public Response getFeatures(@PathVariable("type") String type) {
 		if ("main_page".equals(type)) {
-			return restaurantService.getMainPageCollections();
+			return restaurantService.getMainPageFeaturedCollections();
 		} else if ("all".equals(type)) {
-			return restaurantService.getAllCollections();
+			return restaurantService.getAllFeaturedCollections();
 		}
 		throw new BadParameterException("Unknown collection type:" + type);
 	}
