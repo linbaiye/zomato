@@ -1,0 +1,32 @@
+.featured-card {
+  display: inline-block;
+  height: 120px;
+  padding: 0;
+  margin-bottom: 20px;
+  border-radius: $default-radius;
+  .featured-box, .featured-thumb-img, .featured-text {
+    height: 100%;
+    display: inline-block;
+  }
+  .featured-thumb-img {
+    border-radius: $default-radius 0 0 $default-radius;
+    @extend  .center-bgimg;
+  }
+  .featured-text {
+    border-radius: 0 $default-radius $default-radius 0;
+    background-color: white;
+    padding-top: 10px;
+    color: black;
+    text-align: left;
+    .featured-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+  }
+  @media screen and (max-width: $small - 1) {
+    .featured-box {
+      width: 100%;
+    }
+  }
+}
