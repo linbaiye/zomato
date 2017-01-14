@@ -8,6 +8,10 @@
     height: 100%;
     display: inline-block;
   }
+  .featured-box {
+    border-radius: $default-radius;
+    @include stereoscopic;
+  }
   .featured-thumb-img {
     border-radius: $default-radius 0 0 $default-radius;
     @extend  .center-bgimg;
@@ -29,4 +33,35 @@
       width: 100%;
     }
   }
+}
+.nolevel {
+  background-color: #CDCDCD;
+}
+.level1 {
+  background-color: #FF7800;
+}
+.level2 {
+  background-color: #FFBA00;
+}
+.level3 {
+  background-color: #CDD614;
+}
+.level4 {
+  background-color: #9ACD32;
+}
+.level5 {
+  background-color: #5BA829;
+}
+.level6 {
+  background-color: #3F7E00;
+}
+
+.restaurant-rate {
+  width: 40px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: $default-radius;
+  color: white;
+  font-weight: 600;
+  display: inline-block;
 }

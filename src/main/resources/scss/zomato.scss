@@ -4,6 +4,16 @@
 }
 $default-red: #cb202d;
 $default-radius: 3px;
+$medium: 992px;
+$small: 768px;
+
+.nodisplay {
+  display: none;
+}
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 html, body {
   background: #F3F3F3;
@@ -46,6 +56,9 @@ html, body {
 .clickable:hover {
   cursor: pointer;
 }
+.align-right {
+  text-align: right;
+}
 
 @mixin block-href {
   text-decoration: none;
@@ -83,6 +96,9 @@ html, body {
 .grey-border {
   border: 1px solid #e7e7e7;
 }
+.nopadding {
+  padding: 0;
+}
 
 * {
 	font-family: 'Source Sans Pro', Arial, sans-serif;
@@ -93,3 +109,5 @@ html, body {
 @import "header.scss";
 @import "footer.scss";
 @import "collection.scss";
+@import "common.scss";
+@import "search.scss";

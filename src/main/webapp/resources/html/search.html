@@ -1,0 +1,55 @@
+<ng-include src="'static/html/header.html'"></ng-include>
+<div id="search-body" class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2><strong>Dinner in Sydney</strong></h2>
+		</div>
+		<div class="col-md-2" ng-controller="SearchCriteriaController as vm">
+			<div class="col-xs-12 nopadding">
+				<h4><strong>Filters</strong></h4>
+				<hr/>
+				<div class="criterion">
+					<p class="title"><strong>Category</strong></p>
+					<p class="clickable item" ng-repeat="item in vm.categoryList">{{item.name}}</p>
+				</div>
+				<div class="criterion">
+					<p class="title"><strong>Cuisine</strong></p>
+					<p class="clickable item" ng-repeat="item in vm.cusines">{{item.name}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-7">
+			<div class="col-xs-12 nopadding" ng-controller="SearchCriteriaController as vm">
+				<div ng-repeat="item in vm.restaurantList" class="restaurant">
+					<div class="basic-info-box col-xs-12">
+						<div class="basic-info">
+							<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb col-md-3"></div>
+							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
+							<div class="text-info col-md-8">
+								<p class="name">{{item.name}}</p>
+								<p class="district">{{item.address.district}}</p>
+								<p class="address">{{item.address.textAddress}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="info-row-2 col-xs-12">
+						<div class="info-line">
+							<p class="key col-xs-4">CUISINES:</p><p class="value col-xs-8">{{item.cuisineList | joinNameOfList}}</p>
+							<p class="key col-xs-4">COST FOR TWO:</p><p class="value col-xs-8">A${{item.costForTwo}}</p>
+							<div class="{{(!item.featureList || item.featureList.length == 0) ? 'nodisplay':''}}">
+								<p class="key col-xs-4">FEATURED IN:</p><p class="value col-xs-8">{{item.featureList | joinNameOfList}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="info-row-3 col-xs-12">
+						<div class="phone col-xs-6">PHONE</div>
+						<div class="table-book-button col-xs-6">BOOK A TABLE</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+</div>
+<div ng-include="'static/html/footer.html'"></div>

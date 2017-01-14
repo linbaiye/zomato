@@ -11,19 +11,6 @@ public abstract class AbstractFeature {
 	
 	@Column(name="featured_type")
 	private String type;
-	
-	@Column(name="featured_desc")
-	private String description;
-	
-	@Column(name="featured_img_url")
-	private String imageUrl;
-	
-	@Column(name="featured_thumb_img_url")
-	private String thumbUrl;
-	
-	public void setFeaturedId(Integer featuredId) {
-		this.featuredId = featuredId;
-	}
 
 	public Integer getFeaturedId() {
 		return featuredId;
@@ -33,32 +20,4 @@ public abstract class AbstractFeature {
 		return type;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	public void setThumbUrl(String thumbUrl) {
-		this.thumbUrl = thumbUrl;
-	}
-
-	public String getThumbUrl() {
-		return thumbUrl;
-	}
 }

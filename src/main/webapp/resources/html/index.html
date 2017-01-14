@@ -46,10 +46,12 @@
 			 	class="col-sm-6 col-xs-12 featured-card clickable" 
 			 	ng-class-odd="'odd'" ng-class-even="'even'"
 			 	ng-click="vm.gotoCollection(item.featuredId)">
+			 	<div class="featured-box">
 				<div class="featured-thumb-img col-xs-5" ng-style="{'background-image': 'url(' + item.thumbUrl + ')'}"></div>
 				<div class="featured-text col-xs-7">
 					<p class="featured-title">{{item.type}}</p>
-					<p class="featured-desc">{{item.shortDesc}}</p>
+					<p class="featured-desc">{{item.description | shortenDesc}}</p>
+				</div>
 				</div>
 			</div>
 			<div class="col-xs-12">
@@ -115,9 +117,9 @@
 				{{vm.quickSearches.length}}</p>
 			<div id="quick-search">
 				<div class="search-item col-sm-3 col-xs-6" ng-repeat="i in vm.quickSearches">
-					<div class="search-item-box colclickable">
-						<img ng-src="{{i.imgUrl}}" />
-						<p>{{i.type}}</p>
+					<div class="search-item-box clickable" ng-click="vm.gotoCategorySearch(i.id)">
+						<img ng-src="{{i.imageUrl}}" />
+						<p>{{i.name}}</p>
 					</div>
 				</div>
 			</div>

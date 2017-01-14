@@ -19,3 +19,12 @@ function BrokerService() {
 		getSingleMessage: getSingleMessage
 	}
 }
+
+function shortenFunction(maxLength) {
+	return function(description) {
+		if (description && description.length > maxLength) {
+			return description.substr(0, maxLength-3) + "...";
+		}
+		return description;
+	}
+}

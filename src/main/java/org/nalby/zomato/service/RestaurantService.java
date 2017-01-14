@@ -1,6 +1,7 @@
 package org.nalby.zomato.service;
 
 
+
 import org.nalby.zomato.response.Response;
 
 public interface RestaurantService {
@@ -13,8 +14,13 @@ public interface RestaurantService {
 
 	public Response getRestauransByCategory(int category, int page);
 
-	public Response getRestauransByCollection(int collection);
+	public Response getRestauransByFeatureId(int featureId);
 	
 	public Response getRestauransStats();
+	
+	public Response getCategories();
+	
+	public Response getCategoriedRestaurans(int categoryId, int page);
+	
 	
 }

@@ -4,17 +4,22 @@ package org.nalby.zomato.controller;
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
+import org.nalby.zomato.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 @RestController
 public class ZomatoController {
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	
+	@Autowired
+	private SearchService searchService;
 	
 	@RequestMapping(value = "/api/v1/restaurant/{id}", method = RequestMethod.GET)
 	public Response getRestaurant(@PathVariable("id") int id) {
@@ -28,7 +33,7 @@ public class ZomatoController {
 
 	@RequestMapping(value = "/api/v1/restaurant/feature/{feature}", method = RequestMethod.GET)
 	public Response getRestaurantsByFeature(@PathVariable("feature") Integer featureId) {
-		return restaurantService.getRestauransByCollection(featureId);
+		return restaurantService.getRestauransByFeatureId(featureId);
 	}
 
 	@RequestMapping(value = "/api/v1/restaurant/stats", method = RequestMethod.GET)
@@ -45,5 +50,21 @@ public class ZomatoController {
 		}
 		throw new BadParameterException("Unknown collection type:" + type);
 	}
+
+	@RequestMapping(value = "/api/v1/category", method = RequestMethod.GET)
+	public Response getCategories() {
+		return restaurantService.getCategories();
+	}
 	
+
+	@RequestMapping(value = "/api/v1/search/criteria/{categoryId}", method = RequestMethod.GET)
+	public Response getSearchCriteria(@PathVariable("categoryId") int categoryId) {
+		return searchService.getSearchCriteria(categoryId, 1);
+	}
+	
+	
+	@RequestMapping(value = "/api/v1/test/{fet}", method = RequestMethod.GET)
+	public Response test(@PathVariable("fet") int id) {
+		return null;
+	}
 }

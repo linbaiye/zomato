@@ -1,13 +1,23 @@
 .container-fluid {
   max-width: 1160px; }
 
+.nodisplay {
+  display: none; }
+
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden; }
+
 html, body {
   background: #F3F3F3; }
 
 .clickable:hover {
   cursor: pointer; }
 
-.center-bgimg, #index-page .featured-card .featured-thumb-img, #collection-body #featured-image, #collection-body .restaurant-bgimg {
+.align-right {
+  text-align: right; }
+
+.center-bgimg, #collection-body #featured-image, #collection-body .restaurant-bgimg, .featured-card .featured-thumb-img {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat; }
@@ -40,6 +50,9 @@ html, body {
 
 .grey-border {
   border: 1px solid #e7e7e7; }
+
+.nopadding {
+  padding: 0; }
 
 * {
   font-family: 'Source Sans Pro', Arial, sans-serif; }
@@ -115,7 +128,7 @@ html, body {
     align-items: center; }
     #index-page #quick-search .search-item p {
       margin-bottom: 20px; }
-  @media screen and (min-width: 970px) {
+  @media screen and (min-width: 992px) {
     #index-page #quick-search .search-item {
       width: 12.5%; } }
   #index-page #quick-search .search-item-box {
@@ -134,7 +147,8 @@ html, body {
 #index-page #book-form {
   background-color: white;
   padding: 15px 15px 32px 15px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
   #index-page #book-form .dropdown, #index-page #book-form .btn-group {
     width: 100%; }
     #index-page #book-form .dropdown .dropdown-toggle, #index-page #book-form .btn-group .dropdown-toggle {
@@ -163,30 +177,15 @@ html, body {
   #index-page #book-form #book-button {
     width: 100%;
     margin-top: 20px; }
-#index-page .featured-card {
-  display: inline-block;
-  height: 120px;
-  padding: 0;
-  margin-bottom: 20px;
-  border-radius: 3px; }
-  #index-page .featured-card .featured-thumb-img {
-    border-radius: 3px 0 0 3px;
-    height: 100%; }
-  #index-page .featured-card .featured-text {
-    border-radius: 0 3px 3px 0;
-    background-color: white;
-    padding-top: 10px;
-    color: black;
-    height: 100%; }
-    #index-page .featured-card .featured-text .featured-title {
-      font-weight: 600;
-      font-size: 15px; }
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
+  #index-page .featured-box {
+    width: 98%; }
   #index-page .even {
-    padding-left: 8px; }
+    text-align: right; }
   #index-page .odd {
-    padding-right: 8px; } }
+    text-align: left; } }
 #index-page #all-collections-href {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
   line-height: 44px;
   background-color: white;
   color: #cb202d;
@@ -351,7 +350,8 @@ html, body {
     margin-bottom: 20px; }
   #collection-body #featured-image {
     height: 300px;
-    border-radius: 3px 3px 0 0; }
+    border-radius: 3px 3px 0 0;
+    text-align: right; }
   #collection-body #featured-text {
     background-color: white;
     padding: 20px 0 20px 10px;
@@ -374,5 +374,108 @@ html, body {
     padding-top: 10px; }
   #collection-body .restaurant-name, #collection-body .restaurant-address, #collection-body .restaurant-cuisine {
     margin: 0; }
+  @media screen and (min-width: 992px) {
+    #collection-body .featured-box {
+      width: 97%; }
+    #collection-body .col2 {
+      text-align: center; }
+    #collection-body .col3 {
+      text-align: right; } }
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    #collection-body .featured-box {
+      width: 98%; }
+    #collection-body .odd {
+      text-align: left; }
+    #collection-body .even {
+      text-align: right; } }
+
+.featured-card {
+  display: inline-block;
+  height: 120px;
+  padding: 0;
+  margin-bottom: 20px;
+  border-radius: 3px; }
+  .featured-card .featured-box, .featured-card .featured-thumb-img, .featured-card .featured-text {
+    height: 100%;
+    display: inline-block; }
+  .featured-card .featured-box {
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+  .featured-card .featured-thumb-img {
+    border-radius: 3px 0 0 3px; }
+  .featured-card .featured-text {
+    border-radius: 0 3px 3px 0;
+    background-color: white;
+    padding-top: 10px;
+    color: black;
+    text-align: left; }
+    .featured-card .featured-text .featured-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px; }
+  @media screen and (max-width: 767px) {
+    .featured-card .featured-box {
+      width: 100%; } }
+
+.nolevel {
+  background-color: #CDCDCD; }
+
+.level1 {
+  background-color: #FF7800; }
+
+.level2 {
+  background-color: #FFBA00; }
+
+.level3 {
+  background-color: #CDD614; }
+
+.level4 {
+  background-color: #9ACD32; }
+
+.level5 {
+  background-color: #5BA829; }
+
+.level6 {
+  background-color: #3F7E00; }
+
+.restaurant-rate {
+  width: 40px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  font-weight: 600;
+  display: inline-block; }
+
+#search-body .item, #search-body .name, #search-body .address, #search-body .district {
+  margin-bottom: 5px; }
+#search-body .criterion {
+  margin-bottom: 20px; }
+#search-body .thumb, #search-body .text-info, #search-body .restaurant-rate, #search-body .key, #search-body .value {
+  display: inline-block; }
+#search-body .thumb {
+  height: 110px; }
+#search-body .restaurant-rate {
+  float: right; }
+#search-body .basic-info-box, #search-body .info-row-2 {
+  padding: 0 20px; }
+#search-body .basic-info {
+  border-bottom: 1px solid rgba(200, 200, 200, 0.3); }
+#search-body .info-row-3 {
+  border-top: 1px solid rgba(200, 200, 200, 0.3); }
+#search-body .restaurant {
+  padding: 20px 0;
+  background-color: white;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+#search-body .key, #search-body .value, #search-body .basic-info,
+#search-body .info-row-3, #search-body .table-book-button, #search-body .phone {
+  padding: 0; }
+#search-body .basic-info, #search-body .restaurant, #search-body .basic-info-box {
+  overflow: auto; }
+#search-body .phone, #search-body .table-book-button {
+  padding-top: 20px;
+  text-align: center; }
 
 /*# sourceMappingURL=zomato.css.map */

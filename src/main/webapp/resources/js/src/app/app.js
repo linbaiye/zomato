@@ -12,10 +12,14 @@
 		.when("/feature/:id", {
 			templateUrl: "static/html/collection.html"
 		})
+		.when("/search/category/:id", {
+			templateUrl: "static/html/search.html"
+		});
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
+	.controller("SearchCriteriaController", ["$http", "$routeParams", "baseUrl", SearchCriteriaController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");
@@ -27,18 +31,36 @@
 			}
 			return token.join(",");
 		}
-	}).filter("joinCuisine", function() {
+	}).filter("joinNameOfList", function() {
 		return function(list) {
 			if (!(list instanceof Array)) {
 				return list;
 			}
 			var token = [];
 			for (var i = 0; i < list.length; i++) {
+				if (list[i].type) {
+					token.push(list[i].type);
+					continue;
+				}
 				if (list[i].name) {
 					token.push(list[i].name);
 				}
 			}
 			return token.join(", ");
 		}
+	}).filter("rateClass", function() {
+		return function(rate) {
+			if (!rate) {
+				return "nolevel";
+			}
+			for (var i = 1; i <= 6; i++) {
+				if (rate.toFixed(2) < (2 + (i * 0.5))) {
+					return "level" + i;
+				}
+			}
+			return "level6";
+		}
+	}).filter("shortenDesc", function() {
+		return shortenFunction(65);
 	});
 }());

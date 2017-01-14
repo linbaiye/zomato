@@ -25,12 +25,12 @@
       }
     }
   }
-  @media screen and (max-width : 767px) {
+  @media screen and (max-width : $small - 1) {
     #home-href {
       display: none;
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: $small) {
     #home-href {
       text-align: center;
     }
@@ -78,7 +78,7 @@
         margin-bottom: 20px;
       }
     }
-    @media screen and (min-width: 970px) {
+    @media screen and (min-width: $medium) {
       .search-item {
         width: 12.5%;
       }
@@ -105,6 +105,7 @@
     background-color: white;
     padding: 15px 15px 32px 15px;
     border-radius: $default-radius;
+    @include stereoscopic;
     .dropdown, .btn-group {
       width: 100%;
       .dropdown-toggle {
@@ -139,38 +140,20 @@
       margin-top: 20px;
     }
   }
-  .featured-card {
-    display: inline-block;
-    height: 120px;
-    padding: 0;
-    margin-bottom: 20px;
-    border-radius: $default-radius;
-    .featured-thumb-img {
-      border-radius: $default-radius 0 0 $default-radius;
-      height: 100%;
-      @extend  .center-bgimg;
+  @media screen and (min-width: $small) {
+    .featured-box {
+      width: 98%;
     }
-    .featured-text {
-      border-radius: 0 $default-radius $default-radius 0;
-      background-color: white;
-      padding-top: 10px;
-      color: black;
-      height: 100%;
-      .featured-title {
-        font-weight: 600;
-        font-size: 15px;
-      }
-    }
-  }
-  @media (min-width: 768px) {
     .even {
-      padding-left: 8px;
+      text-align: right;
     }
     .odd {
-      padding-right: 8px;
+      text-align: left;
     }
   }
+
   #all-collections-href {
+    @include stereoscopic;
     line-height: 44px;
     background-color: white;
     color: $default-red;

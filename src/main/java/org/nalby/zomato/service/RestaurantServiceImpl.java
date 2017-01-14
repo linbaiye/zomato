@@ -20,7 +20,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private RestaurantDao restaurantDao;
 	
-	private static int RESTAURANT_NUMBER_PER_PAGE = 10;
+	public final static int RESTAURANT_NUMBER_PER_PAGE = 10;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
@@ -53,13 +53,24 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Transactional
-	public Response getRestauransByCollection(int collection) {
-		return new Response(ErrorCode.EOK, restaurantDao.getRestaurantsByCollection(collection));
+	public Response getRestauransByFeatureId(int featureId) {
+		return new Response(ErrorCode.EOK, restaurantDao.getRestaurantsByFeatureId(featureId));
 	}
 
 	@Transactional
 	public Response getRestauransStats() {
 		return new Response(ErrorCode.EOK, restaurantDao.getRestauratStats());
+	}
+
+	@Transactional
+	public Response getCategories() {
+		return new Response(ErrorCode.EOK, restaurantDao.getCategories());
+	}
+
+	@Transactional
+	public Response getCategoriedRestaurans(int categoryId, int page) {
+		return new Response(ErrorCode.EOK,
+				restaurantDao.getListByCategory(categoryId, page * RESTAURANT_NUMBER_PER_PAGE, RESTAURANT_NUMBER_PER_PAGE));
 	}
 
 }

@@ -1,0 +1,44 @@
+#search-body {
+  .item, .name, .address, .district {
+    margin-bottom: 5px;
+  }
+  .criterion {
+    margin-bottom: 20px;
+  }
+  .thumb, .text-info, .restaurant-rate, .key, .value {
+    display: inline-block;
+  }
+  .thumb {
+    height: 110px;
+  }
+  .restaurant-rate {
+    float: right;
+  }
+  .basic-info-box, .info-row-2 {
+    padding: 0 20px;
+  }
+  .basic-info {
+    border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+  }
+  .info-row-3 {
+    border-top: 1px solid rgba(200, 200, 200, 0.3);
+  }
+  .restaurant {
+    padding: 20px 0;
+    background-color: white;
+    border-radius: $default-radius;
+    margin-bottom: 20px;
+    @include stereoscopic;
+  }
+  .key, .value, .basic-info,
+  .info-row-3, .table-book-button, .phone {
+    padding: 0;
+  }
+  .basic-info, .restaurant, .basic-info-box {
+    overflow: auto;
+  }
+  .phone, .table-book-button {
+    padding-top: 20px;
+    text-align: center;
+  }
+}
