@@ -36,7 +36,7 @@ function BodyController($http, $location, baseUrl, broker) {
 		$location.path("feature/" + featured);
 	}
 	vm.gotoCategorySearch = function(categoryId) {
-		$location.path("search/category/" + categoryId);
+		$location.path("search/category/" + categoryId + "/" + 1);
 	}
 	$http.get(baseUrl + "/api/v1/feature/main_page").then(initFeaturedCollections, function(response) {	});
 	$http.get(baseUrl + "/api/v1/category").then(initQuickSearch, function(response) {	});

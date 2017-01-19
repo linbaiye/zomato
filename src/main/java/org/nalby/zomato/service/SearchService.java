@@ -4,6 +4,8 @@ import org.nalby.zomato.response.Response;
 
 public interface SearchService {
 	
-	public Response getSearchCriteria(int categoryId, int page);
+	public Response getCategoriedRestaurants(int categoryId, int page);
+	
+	public Response getSearchComponents();
 
 }

@@ -1,6 +1,7 @@
 (function() {
 	angular.module("app", [ "ui.bootstrap", "ngRoute"])
 	.service("broker", BrokerService)
+	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
@@ -12,14 +13,14 @@
 		.when("/feature/:id", {
 			templateUrl: "static/html/collection.html"
 		})
-		.when("/search/category/:id", {
+		.when("/search/category/:categoryId/:page", {
 			templateUrl: "static/html/search.html"
 		});
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
-	.controller("SearchCriteriaController", ["$http", "$routeParams", "baseUrl", SearchCriteriaController])
+	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", SearchCriteriaController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");

@@ -1,5 +1,6 @@
 package org.nalby.zomato.dao;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -113,5 +114,12 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		Query query = session.getNamedQuery(QueryName.FIND_CATEGORIED_RESTAURANTS_IN);
 		query.setParameterList("ids", ids);
 		return query.list();
+	}
+
+	public BigInteger getRestaurantCountInCategory(int categoryId) {
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery("SELECT COUNT(*) FROM restaurant_categories WHERE category_id = :id");
+		query.setParameter("id", categoryId);
+		return (BigInteger) query.uniqueResult();
 	}
 }

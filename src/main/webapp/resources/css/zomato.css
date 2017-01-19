@@ -438,6 +438,11 @@ html, body {
 .level6 {
   background-color: #3F7E00; }
 
+.container-style, #search-body .restaurant {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+
 .restaurant-rate {
   width: 40px;
   line-height: 30px;
@@ -447,35 +452,48 @@ html, body {
   font-weight: 600;
   display: inline-block; }
 
+@media screen and (min-width: 992px) {
+  #search-body .col1 {
+    width: 20%;
+    padding-right: 0; }
+  #search-body .col3 {
+    width: 30%; } }
 #search-body .item, #search-body .name, #search-body .address, #search-body .district {
   margin-bottom: 5px; }
 #search-body .criterion {
   margin-bottom: 20px; }
 #search-body .thumb, #search-body .text-info, #search-body .restaurant-rate, #search-body .key, #search-body .value {
   display: inline-block; }
+#search-body .name, #search-body .district {
+  font-weight: 600; }
+#search-body .name {
+  font-size: 20px;
+  color: #cb202d; }
+#search-body .district {
+  color: black; }
 #search-body .thumb {
-  height: 110px; }
+  height: 110px;
+  border-radius: 3px; }
 #search-body .restaurant-rate {
   float: right; }
 #search-body .basic-info-box, #search-body .info-row-2 {
-  padding: 0 20px; }
+  padding: 0 15px; }
+#search-body .info-line {
+  padding-top: 10px; }
 #search-body .basic-info {
-  border-bottom: 1px solid rgba(200, 200, 200, 0.3); }
+  border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+  padding: 0 0 15px 0; }
 #search-body .info-row-3 {
   border-top: 1px solid rgba(200, 200, 200, 0.3); }
 #search-body .restaurant {
-  padding: 20px 0;
-  background-color: white;
-  border-radius: 3px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
-#search-body .key, #search-body .value, #search-body .basic-info,
-#search-body .info-row-3, #search-body .table-book-button, #search-body .phone {
+  padding: 15px 0;
+  margin-bottom: 20px; }
+#search-body .key, #search-body .value, #search-body .info-row-3, #search-body .table-book-button, #search-body .phone {
   padding: 0; }
-#search-body .basic-info, #search-body .restaurant, #search-body .basic-info-box {
+#search-body .basic-info, #search-body .restaurant, #search-body .basic-info-box, #search-body .info-line {
   overflow: auto; }
 #search-body .phone, #search-body .table-book-button {
-  padding-top: 20px;
+  padding-top: 15px;
   text-align: center; }
 
 /*# sourceMappingURL=zomato.css.map */

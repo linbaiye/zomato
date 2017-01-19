@@ -11,4 +11,5 @@ public final class QueryName {
 	public static final String FIND_CUISINES = "Cuisine.findAll";
 	public static final String FIND_BASIC_CATEGORIES = "BasicCategory.findAll";
 	public static final String FIND_CATEGORIED_RESTAURANTS_IN = "CategoriedRestaurant.findInIds";
+	public static final String GET_TOTAL_RESTAURANT_IN_CATEGORY = "CategoriedRestaurant.countAll";
 }

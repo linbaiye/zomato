@@ -1,4 +1,13 @@
 #search-body {
+  @media screen and (min-width: $medium) {
+    .col1 {
+      width: 20%;
+      padding-right: 0;
+    }
+    .col3 {
+      width: 30%;
+    }
+  }
   .item, .name, .address, .district {
     margin-bottom: 5px;
   }
@@ -8,37 +17,49 @@
   .thumb, .text-info, .restaurant-rate, .key, .value {
     display: inline-block;
   }
+  .name, .district {
+    font-weight: 600;
+  }
+  .name {
+    font-size: 20px;
+    color: $default-red;
+  }
+  .district {
+    color: black;
+  }
   .thumb {
     height: 110px;
+    border-radius: $default-radius;
   }
   .restaurant-rate {
     float: right;
   }
   .basic-info-box, .info-row-2 {
-    padding: 0 20px;
+    padding: 0 15px;
+  }
+  .info-line {
+    padding-top: 10px;
   }
   .basic-info {
     border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+    padding: 0 0 15px 0;
   }
   .info-row-3 {
     border-top: 1px solid rgba(200, 200, 200, 0.3);
   }
   .restaurant {
-    padding: 20px 0;
-    background-color: white;
-    border-radius: $default-radius;
+    padding: 15px 0;
+    @extend .container-style;
     margin-bottom: 20px;
-    @include stereoscopic;
   }
-  .key, .value, .basic-info,
-  .info-row-3, .table-book-button, .phone {
+  .key, .value, .info-row-3, .table-book-button, .phone {
     padding: 0;
   }
-  .basic-info, .restaurant, .basic-info-box {
+  .basic-info, .restaurant, .basic-info-box, .info-line {
     overflow: auto;
   }
   .phone, .table-book-button {
-    padding-top: 20px;
+    padding-top: 15px;
     text-align: center;
   }
 }

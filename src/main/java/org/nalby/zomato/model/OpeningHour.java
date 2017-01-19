@@ -2,6 +2,7 @@ package org.nalby.zomato.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +20,8 @@ public class OpeningHour implements Serializable {
 		private static final long serialVersionUID = 1L;
 		private Integer restaurantId; 
 		private String day;
-		private Date start;
-		private Date end;
+		private Time start;
+		private Time end;
 	}
 	@Id @Column(name = "restaurant_id")
 	private Integer restaurantId; 
@@ -29,10 +30,14 @@ public class OpeningHour implements Serializable {
 	private String day;
 
 	@Id
-	private Date start;
+	private Time start;
 
 	@Id
-	private Date end;
+	private Time end;
+
+	public Integer getRestaurantId() {
+		return restaurantId;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -42,11 +47,11 @@ public class OpeningHour implements Serializable {
 		return day;
 	}
 
-	public Date getStart() {
+	public Time getStart() {
 		return start;
 	}
 
-	public Date getEnd() {
+	public Time getEnd() {
 		return end;
 	}
 	

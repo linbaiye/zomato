@@ -5,15 +5,18 @@ import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
 import org.nalby.zomato.service.SearchService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 @RestController
 public class ZomatoController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ZomatoController.class);
 	
 	@Autowired
 	private RestaurantService restaurantService;
@@ -56,10 +59,16 @@ public class ZomatoController {
 		return restaurantService.getCategories();
 	}
 	
+	@RequestMapping(value = "/api/v1/search/components")
+	public Response getSearchComponents() {
+		logger.info("/api/v1/components is requested.");
+		return searchService.getSearchComponents();
+	}
 
-	@RequestMapping(value = "/api/v1/search/criteria/{categoryId}", method = RequestMethod.GET)
-	public Response getSearchCriteria(@PathVariable("categoryId") int categoryId) {
-		return searchService.getSearchCriteria(categoryId, 1);
+	@RequestMapping(value = "/api/v1/search/category/{categoryId}/{page}", method = RequestMethod.GET)
+	public Response getSearchCriteria(@PathVariable("categoryId") int categoryId, @PathVariable("page") int page) {
+		logger.info("/api/v1/search/category/ is requested with [{}, {}].", categoryId, page);
+		return searchService.getCategoriedRestaurants(categoryId, page);
 	}
 	
 	

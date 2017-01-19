@@ -56,6 +56,12 @@
   background-color: #3F7E00;
 }
 
+.container-style {
+  background-color: white;
+  border-radius: $default-radius;
+  @include stereoscopic;
+}
+
 .restaurant-rate {
   width: 40px;
   line-height: 30px;

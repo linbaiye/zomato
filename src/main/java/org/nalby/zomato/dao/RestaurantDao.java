@@ -1,5 +1,6 @@
 package org.nalby.zomato.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.nalby.zomato.model.CategoriedRestaurant;
@@ -31,4 +32,6 @@ public interface RestaurantDao {
 	public List<Integer> getRestaurantIdsByCategoryId(int categoryId, int limit, int offset);
 	
 	public List<CategoriedRestaurant> getCategoriedRestaurants(List<Integer> ids);
+	
+	public BigInteger getRestaurantCountInCategory(int categoryId);
 }
