@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.nalby.zomato.dao.RestaurantDao;
-import org.nalby.zomato.model.FeaturedCollection;
-import org.nalby.zomato.model.Restaurant;
+import org.nalby.zomato.entity.FeaturedCollection;
+import org.nalby.zomato.entity.Restaurant;
 import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.slf4j.Logger;
@@ -68,9 +68,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Transactional
-	public Response getCategoriedRestaurans(int categoryId, int page) {
+	public Response getCategoriedRestaurants(int categoryId, int page) {
 		return new Response(ErrorCode.EOK,
 				restaurantDao.getListByCategory(categoryId, page * RESTAURANT_NUMBER_PER_PAGE, RESTAURANT_NUMBER_PER_PAGE));
+	}
+
+	@Transactional
+	public Response getRecommandedRestaurants() {
+		return null;
 	}
 
 }

@@ -7,5 +7,7 @@ public interface SearchService {
 	public Response getCategoriedRestaurants(int categoryId, int page);
 	
 	public Response getSearchComponents();
+	
+	public Response test();
 
 }

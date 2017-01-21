@@ -1,4 +1,4 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
 import java.io.Serializable;
 import java.sql.Date;

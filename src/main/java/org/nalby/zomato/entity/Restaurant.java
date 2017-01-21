@@ -1,4 +1,4 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
 import java.util.LinkedList;
 import java.util.List;

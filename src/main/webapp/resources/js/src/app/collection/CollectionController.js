@@ -10,7 +10,7 @@ function CollectionController($location, $http, $routeParams, broker, baseUrl) {
 				return;
 			}
 			var fn = shortenFunction(40);
-			var rl = data.data["restaurantList"];
+			var rl = data.data["restaurantSet"];
 			for (var i = 0; i < rl.length; i++) {
 				rl[i]["shortName"] = fn(rl[i]["name"]);
 			}

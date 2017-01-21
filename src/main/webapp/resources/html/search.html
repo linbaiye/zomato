@@ -10,11 +10,21 @@
 				<hr/>
 				<div class="criterion">
 					<p class="title"><strong>Category</strong></p>
-					<p class="clickable item" ng-repeat="item in vm.search.categoryList">{{item.name}}</p>
+					<p class="clickable item" ng-repeat="item in vm.search.categoryList">
+						<span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span>
+					</p>
 				</div>
 				<div class="criterion">
 					<p class="title"><strong>Cuisine</strong></p>
-					<p class="clickable item" ng-repeat="item in vm.search.first10Cuisines">{{item.name}}</p>
+					<p class="clickable item" ng-repeat="item in vm.search.first10Cuisines">
+						<span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span>
+					</p>
+				</div>
+				<div class="criterion">
+					<p class="title"><strong>Location</strong></p>
+					<p class="clickable item" ng-repeat="item in vm.search.placeList">
+						<span>{{item.district}}</span> <span class="stats-value grey-text">{{item.count}}</span>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -34,11 +44,11 @@
 					</div>
 					<div class="info-row-2 col-xs-12">
 						<div class="info-line">
-							<p class="key col-xs-4">CUISINES:</p><p class="value col-xs-8">{{item.cuisineList | joinNameOfList}}</p>
-							<p class="key col-xs-4">TODAY'S HOURS:</p><p class="value col-xs-8">{{item.todayHours}}</p>
-							<p class="key col-xs-4">COST FOR TWO:</p><p class="value col-xs-8">A${{item.costForTwo}}</p>
+							<p class="key col-xs-4 grey-text">CUISINES:</p><p class="value col-xs-8">{{item.cuisineSet | joinNameOfList}}</p>
+							<p class="key col-xs-4 grey-text">TODAY'S HOURS:</p><p class="value col-xs-8">{{item.todayHours}}</p>
+							<p class="key col-xs-4 grey-text">COST FOR TWO:</p><p class="value col-xs-8">A${{item.costForTwo}}</p>
 							<div class="{{(!item.featureList || item.featureList.length == 0) ? 'nodisplay':''}}">
-								<p class="key col-xs-4">FEATURED IN:</p><p class="value col-xs-8">{{item.featureList | joinNameOfList}}</p>
+								<p class="key col-xs-4 grey-text">FEATURED IN:</p><p class="value col-xs-8">{{item.featureList | joinNameOfList}}</p>
 							</div>
 						</div>
 					</div>

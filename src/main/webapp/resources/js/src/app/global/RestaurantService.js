@@ -44,16 +44,21 @@ function RestaurantService($http, $q, baseUrl) {
 		}
 	}
 
-	function shortCuisineList(data) {
+	function shortList(data) {
 		var cusinesToShow = [];
 		/* The cuisineList is too long to display, show part of it and display it fully on demand. */
 		for (var i = 0; i < 10 && i < data.cuisineList.length; i++) {
 			cusinesToShow[i] = data.cuisineList[i];
 		}
+		var placeListToShow = [];
+		for (var i = 0; i < 10 && i < data.placeList.length; i++) {
+			placeListToShow[i] = data.placeList[i];
+		}
 		return search = {
 			first10Cuisines : cusinesToShow,
 			categoryList : data.categoryList,
-			cuisineList : data.cuisineList
+			cuisineList : data.cuisineList,
+			placeList : placeListToShow
 		}
 	}
 	
@@ -65,7 +70,7 @@ function RestaurantService($http, $q, baseUrl) {
         		 deferred.reject(response.data);
         	 } else {
         		 console.log(response.data)
-        		 deferred.resolve(shortCuisineList(response.data.data));
+        		 deferred.resolve(shortList(response.data.data));
         	 }
              return deferred.promise;
          }, function (response) {
@@ -82,7 +87,7 @@ function RestaurantService($http, $q, baseUrl) {
         	 if (response.data.error != "EOK") {
         		 deferred.reject(response.data);
         	 } else {
-        		 console.log(response.data)
+        		 //console.log(response.data)
         		 deferred.resolve(transformRestaurantDetails(response.data.data));
         	 }
              return deferred.promise;

@@ -61,7 +61,13 @@ public class ZomatoController {
 	
 	@RequestMapping(value = "/api/v1/search/components")
 	public Response getSearchComponents() {
-		logger.info("/api/v1/components is requested.");
+		logger.info("/api/v1/search/components is requested.");
+		return searchService.getSearchComponents();
+	}
+	
+	@RequestMapping(value = "/api/v1/search/recommand")
+	public Response getSearchRecommand() {
+		logger.info("/api/v1/search/recommand is requested.");
 		return searchService.getSearchComponents();
 	}
 
@@ -72,8 +78,8 @@ public class ZomatoController {
 	}
 	
 	
-	@RequestMapping(value = "/api/v1/test/{fet}", method = RequestMethod.GET)
-	public Response test(@PathVariable("fet") int id) {
-		return null;
+	@RequestMapping(value = "/api/v1/test", method = RequestMethod.GET)
+	public Response test() {
+		return searchService.test();
 	}
 }

@@ -1,4 +1,4 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,17 +14,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Formula;
 import org.nalby.zomato.util.QueryName;
 
 
 @Entity
 @Table(name = "restaurants")
 @NamedQueries(
-@NamedQuery(name = QueryName.FIND_CATEGORIED_RESTAURANTS_IN, query = "SELECT cr FROM CategoriedRestaurant cr WHERE cr.id IN :ids")
+@NamedQuery(name = QueryName.FIND_CATEGORIED_RESTAURANTS_IN, query = "SELECT r FROM CategoriedRestaurant r "
+		+ "INNER JOIN FETCH r.address "
+		+ "INNER JOIN FETCH r.reviewSet "
+		+ "INNER JOIN FETCH r.cuisineSet WHERE r.id IN :ids")
 )
 public class CategoriedRestaurant extends BasicRestraurant {
-	
 	
 	public List<OpeningHour> getOpeningHours() {
 		return openingHours;
@@ -71,7 +72,6 @@ public class CategoriedRestaurant extends BasicRestraurant {
 	public String getPhone() {
 		return phone;
 	}
-	
 	
 	
 }

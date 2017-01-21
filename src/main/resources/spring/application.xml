@@ -22,18 +22,23 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="annotatedClasses">
 			<list>
-				<value>org.nalby.zomato.model.FeaturedCollection</value>
-				<value>org.nalby.zomato.model.FeatureType</value>
-				<value>org.nalby.zomato.model.FeaturedRestaurants</value>
-				<value>org.nalby.zomato.model.Restaurant</value>
-				<value>org.nalby.zomato.model.FeaturedRestaurant</value>
-				<value>org.nalby.zomato.model.RestaurantStats</value>
-				<value>org.nalby.zomato.model.Address</value>
-				<value>org.nalby.zomato.model.Category</value>
-				<value>org.nalby.zomato.model.Cuisine</value>
-				<value>org.nalby.zomato.model.BasicReview</value>
-				<value>org.nalby.zomato.model.OpeningHour</value>
-				<value>org.nalby.zomato.model.CategoriedRestaurant</value>
+				<value>org.nalby.zomato.entity.FeaturedCollection</value>
+				<value>org.nalby.zomato.entity.FeatureType</value>
+				<value>org.nalby.zomato.entity.FeaturedRestaurants</value>
+				<value>org.nalby.zomato.entity.Restaurant</value>
+				<value>org.nalby.zomato.entity.FeaturedRestaurant</value>
+				<value>org.nalby.zomato.entity.RestaurantStats</value>
+				<value>org.nalby.zomato.entity.Address</value>
+				<value>org.nalby.zomato.entity.Category</value>
+				<value>org.nalby.zomato.entity.Cuisine</value>
+				<value>org.nalby.zomato.entity.BasicReview</value>
+				<value>org.nalby.zomato.entity.OpeningHour</value>
+				<value>org.nalby.zomato.entity.RecommandRestaurant</value>
+				<value>org.nalby.zomato.entity.CategoriedRestaurant</value>
+				<value>org.nalby.zomato.stats.AbstractStats</value>
+				<value>org.nalby.zomato.stats.CategoryStats</value>
+				<value>org.nalby.zomato.stats.CuisineStats</value>
+				<value>org.nalby.zomato.stats.PlaceStats</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

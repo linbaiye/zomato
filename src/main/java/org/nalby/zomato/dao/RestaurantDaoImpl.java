@@ -1,23 +1,27 @@
 package org.nalby.zomato.dao;
 
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.nalby.zomato.model.CategoriedRestaurant;
-import org.nalby.zomato.model.Category;
-import org.nalby.zomato.model.Cuisine;
-import org.nalby.zomato.model.FeaturedCollection;
-import org.nalby.zomato.model.FeaturedRestaurant;
-import org.nalby.zomato.model.FeaturedRestaurants;
-import org.nalby.zomato.model.Restaurant;
-import org.nalby.zomato.model.RestaurantStats;
+import org.nalby.zomato.entity.CategoriedRestaurant;
+import org.nalby.zomato.entity.Category;
+import org.nalby.zomato.entity.Cuisine;
+import org.nalby.zomato.entity.FeaturedCollection;
+import org.nalby.zomato.entity.FeaturedRestaurant;
+import org.nalby.zomato.entity.FeaturedRestaurants;
+import org.nalby.zomato.entity.RecommandRestaurant;
+import org.nalby.zomato.entity.Restaurant;
+import org.nalby.zomato.entity.RestaurantStats;
+import org.nalby.zomato.stats.CategoryStats;
+import org.nalby.zomato.stats.CuisineStats;
+import org.nalby.zomato.stats.PlaceStats;
 import org.nalby.zomato.util.QueryName;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +66,17 @@ public class RestaurantDaoImpl implements RestaurantDao {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public FeaturedRestaurants getRestaurantsByFeatureId(int featureId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.getNamedQuery(QueryName.FIND_FEATURED_RESTAURANTS_BY_ID);
+		Query query = session.getNamedQuery(QueryName.GET_FEATURED_DETAILS);
 		query.setParameter("id", featureId);
-		
-		return (FeaturedRestaurants) query.uniqueResult();
+		FeaturedRestaurants featuredRestaurants = (FeaturedRestaurants) query.uniqueResult();
+		query = session.getNamedQuery(QueryName.FIND_FEATURED_RESTAURANTS);
+		query.setParameterList("ids", featuredRestaurants.getRestaurantIds());
+		Set<FeaturedRestaurant> set = new HashSet<FeaturedRestaurant>(query.list());
+		featuredRestaurants.setRestaurantSet(set);
+		return featuredRestaurants;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -82,17 +91,19 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private <T> List<T> getList(String name) {
+	@SuppressWarnings("rawtypes")
+	private List getList(String name) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(name);
-		return query.list();
+		return  query.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Category> getCategories() {
 		return getList(QueryName.FIND_CATEGORIES);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Cuisine> getCuisines() {
 		return getList(QueryName.FIND_CUISINES);
 	}
@@ -109,11 +120,11 @@ public class RestaurantDaoImpl implements RestaurantDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<CategoriedRestaurant> getCategoriedRestaurants(List<Integer> ids) {
+	public Set<CategoriedRestaurant> getCategoriedRestaurants(List<Integer> ids) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(QueryName.FIND_CATEGORIED_RESTAURANTS_IN);
 		query.setParameterList("ids", ids);
-		return query.list();
+		return new HashSet<CategoriedRestaurant>(query.list());
 	}
 
 	public BigInteger getRestaurantCountInCategory(int categoryId) {
@@ -122,4 +133,45 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		query.setParameter("id", categoryId);
 		return (BigInteger) query.uniqueResult();
 	}
+
+	public Object test() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery(QueryName.GET_RECOMMANDED_CAFTE);
+		query.setParameter("id", 63);
+		return query.list();
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public List<CategoryStats> getCategoryStats() {
+		return getList(QueryName.GET_CATEGORY_STATS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CuisineStats> getCuisineStats() {
+		return getList(QueryName.GET_CUISINE_STATS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PlaceStats> getPlaceStats() {
+		return getList(QueryName.GET_PLACE_STATS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Integer> getRestaurantIdsByKeywordId(int kid, int number) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("SELECT restaurant_id FROM restaurant_keywords WHERE keyword_id = :id LIMIT :limit");
+		query.setParameter("id", kid);
+		query.setParameter("limit", number);
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<RecommandRestaurant> getRecommandRestaurants(List<Integer> ids) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery(QueryName.GET_RECOMMANDED_CAFTE);
+		query.setParameterList("ids", ids);
+		return new HashSet<RecommandRestaurant>(query.list());
+	}
+	
 }

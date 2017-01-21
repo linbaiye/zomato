@@ -1,4 +1,4 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +15,6 @@ public class BasicReview {
 	
 	private Double rate;
 	
-	@ManyToOne
-	@JoinColumn(name = "restaurant_id")
-	private FeaturedRestaurant restaurant;
-
 	public Integer getId() {
 		return id;
 	}

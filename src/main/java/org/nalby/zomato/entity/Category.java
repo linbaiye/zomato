@@ -1,4 +1,4 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,11 @@ import javax.persistence.Table;
 import org.nalby.zomato.util.QueryName;
 
 @Entity
-@Table(name = "cuisines")
-@NamedQuery(name = QueryName.FIND_CUISINES, query = "SELECT c FROM Cuisine c")
-public class Cuisine {
-	@Id @Column(name = "cuisine_id")
+@Table(name = "categories")
+@NamedQuery(name = QueryName.FIND_CATEGORIES, query = "SELECT c FROM Category c")
+public class Category {
+	
+	@Id
 	private Integer id;
 	
 	private String name;
@@ -24,4 +25,12 @@ public class Cuisine {
 	public String getName() {
 		return name;
 	}
+
+	@Column(name = "img_url")
+	private String imageUrl;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
 }

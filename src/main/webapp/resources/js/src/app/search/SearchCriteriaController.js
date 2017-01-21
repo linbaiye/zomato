@@ -8,6 +8,7 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 		}
 		restaurantService.getRestuarantsByCategory(cateId, page)
 		.then(function(data) {
+			console.log(data);
 			vm.data = data;
 		}, function(data) {
 			console.log(data);

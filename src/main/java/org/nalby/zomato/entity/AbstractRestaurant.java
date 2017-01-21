@@ -1,16 +1,17 @@
-package org.nalby.zomato.model;
+package org.nalby.zomato.entity;
 
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 @MappedSuperclass
 public abstract class AbstractRestaurant {
@@ -18,8 +19,8 @@ public abstract class AbstractRestaurant {
 	private Integer id;
 	private String name;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
+	@OneToOne
+	@PrimaryKeyJoinColumn
 	private Address address;
 	
 	public Integer getId() {
@@ -33,7 +34,5 @@ public abstract class AbstractRestaurant {
 	public Address getAddress() {
 		return address;
 	}
-	
-	
 
 }

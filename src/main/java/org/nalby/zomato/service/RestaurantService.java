@@ -20,7 +20,9 @@ public interface RestaurantService {
 	
 	public Response getCategories();
 	
-	public Response getCategoriedRestaurans(int categoryId, int page);
+	public Response getCategoriedRestaurants(int categoryId, int page);
+	
+	public Response getRecommandedRestaurants();
 	
 	
 }

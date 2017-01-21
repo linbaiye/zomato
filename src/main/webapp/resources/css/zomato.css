@@ -474,7 +474,7 @@ html, body {
 #search-body .thumb {
   height: 110px;
   border-radius: 3px; }
-#search-body .restaurant-rate {
+#search-body .restaurant-rate, #search-body .stats-value {
   float: right; }
 #search-body .basic-info-box, #search-body .info-row-2 {
   padding: 0 15px; }
