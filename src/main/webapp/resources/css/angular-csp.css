@@ -22,23 +22,35 @@ x-ng-cloak
 .x-ng-cloak
 ,
 .ng-hide
+
+
 :not
+
  
+
 (
 .ng-hide-animate
+
  
+
 )
 {
 display
+
+
 :
+
  
+
 none
+
  
+
 !
 important
+
+
 ;
-
-
 }
 ng\:form {
 	display: block;
