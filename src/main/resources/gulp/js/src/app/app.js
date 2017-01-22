@@ -1,8 +1,9 @@
 (function() {
 	angular.module("app", [ "ui.bootstrap", "ngRoute"])
-	.service("broker", BrokerService)
-	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
+	.service("broker", BrokerService)
+	.service("util", UtilService)
+	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
 			templateUrl: "static/html/index.html"
@@ -21,6 +22,7 @@
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", SearchCriteriaController])
+	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");
@@ -63,5 +65,10 @@
 		}
 	}).filter("shortenDesc", function() {
 		return shortenFunction(65);
+	}).filter("getDistrict", function() {
+		return function(address) {
+			var token = address.split(",");
+			return token.length >= 3 ? token[token.length - 3] : "";
+		}
 	});
 }());

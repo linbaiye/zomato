@@ -37,7 +37,7 @@
 							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
 							<div class="text-info col-md-8">
 								<p class="name">{{item.name}}</p>
-								<p class="district">{{item.address.district}}</p>
+								<p class="district">{{item.address.textAddress | getDistrict}}</p>
 								<p class="address grey-text">{{item.address.address}}</p>
 							</div>
 						</div>
@@ -62,7 +62,34 @@
 				<ul uib-pagination boundary-links="true" ng-change="vm.pageChanged()" max-size="10" total-items="vm.data.total" ng-model="vm.data.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 			</div>
 		</div>
-		<div class="col-md-3 col3 container-style">
+		<div class="col-md-3 col3" ng-controller="RecommandRestaurantController as vm" id="recommand-restaurants">
+			<div ng-repeat="(name, data) in vm.data" class="container-style">
+				<div class="inner box">
+					<div class="col-xs-12 nopadding">
+						<h3 class="recommand-type">
+							<strong>{{data.text.title}}</strong>
+						</h3>
+						<p class="grey-text">
+							{{data.text.desc}}
+						</p>
+					</div>
+					<div ng-repeat="r in data.restaurantList" class="col-xs-12 nopadding box">
+						<div ng-repeat="item in r" class="col-xs-4 box">
+							<div class="restaurant-box box col-{{$index % 3}}">
+								<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb">
+									<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
+								</div>
+								<p class="restaurant-name">
+									{{item.name}}
+								</p>
+								<p class="restaurant-addr grey-text">
+									{{item.address.textAddress | getDistrict }}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

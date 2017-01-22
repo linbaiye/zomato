@@ -30,7 +30,6 @@ function RestaurantService($http, $q, baseUrl) {
 			var restaurant = data.restaurantList[i];
 			var addr = restaurant.address;
 			var token = addr.textAddress.split(",");
-			addr["district"]  = token[token.length - 3];
 			token.splice(token.length - 1, 1);
 			addr["address"] = token.join(", ");
 			var cost = /.+A\$([.\d]+).*/g.exec(restaurant.approximatePrice);

@@ -14,7 +14,9 @@ $small: 768px;
   white-space: nowrap;
   overflow: hidden;
 }
-
+.box {
+  overflow: auto;
+}
 html, body {
   background: #F3F3F3;
 }
