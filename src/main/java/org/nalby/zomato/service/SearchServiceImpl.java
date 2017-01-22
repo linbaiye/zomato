@@ -28,8 +28,6 @@ public class SearchServiceImpl implements SearchService {
 	@Transactional
 	public Response getSearchComponents() {
 		Map<String, Object> result = new HashMap<String, Object>();
-		//List<Category> categorieList = restaurantDao.getCategories();
-		//List<Cuisine> cuisineList = restaurantDao.getCuisines();
 		result.put("categoryList", restaurantDao.getCategoryStats());
 		result.put("cuisineList", restaurantDao.getCuisineStats());
 		result.put("placeList", restaurantDao.getPlaceStats());

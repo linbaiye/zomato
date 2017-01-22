@@ -1,10 +1,18 @@
 package org.nalby.zomato.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.print.attribute.standard.RequestingUserName;
+import javax.validation.constraints.Null;
 
 import org.nalby.zomato.dao.RestaurantDao;
 import org.nalby.zomato.entity.FeaturedCollection;
+import org.nalby.zomato.entity.RecommandRestaurant;
 import org.nalby.zomato.entity.Restaurant;
 import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
@@ -73,9 +81,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 				restaurantDao.getListByCategory(categoryId, page * RESTAURANT_NUMBER_PER_PAGE, RESTAURANT_NUMBER_PER_PAGE));
 	}
 
+	private static final Map<String, Integer> RECOMMAND_KEYWORD_MAP = new HashMap<String, Integer>();
+	static {
+		RECOMMAND_KEYWORD_MAP.put("cafe", 1);
+		RECOMMAND_KEYWORD_MAP.put("dinner", 4);
+		RECOMMAND_KEYWORD_MAP.put("take-away", 194);
+	}
 	@Transactional
 	public Response getRecommandedRestaurants() {
-		return null;
+		Map<String, Object> ret = new HashMap<String, Object>();
+		for (String key : RECOMMAND_KEYWORD_MAP.keySet()) {
+			List<Integer> ids = restaurantDao.getRestaurantIdsByKeywordId(RECOMMAND_KEYWORD_MAP.get(key), 6);
+			ret.put(key, ids == null || ids.isEmpty() ? null : restaurantDao.getRecommandRestaurants(ids));
+		}
+		return new Response(ErrorCode.EOK, ret);
 	}
 
 }

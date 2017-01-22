@@ -1,16 +1,16 @@
 function RestaurantService($http, $q, baseUrl) {
 
 	function tConvert (time) {
-		  // Check correct time format and split into components
-		  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d):[0-5]\d?$/) || [time];
-		  if (time.length > 1) { // If time format correct
-		    time = time.slice (1);  // Remove full string match value
-		    time[4] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
-		    time[0] = +time[0] % 12 || 12; // Adjust hours
-		  }
-		  return time.join (''); // return adjusted time or original string
+		// Check correct time format and split into components
+		time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d):[0-5]\d?$/) || [time];
+		if (time.length > 1) { // If time format correct
+			time = time.slice (1);  // Remove full string match value
+			time[4] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+			time[0] = +time[0] % 12 || 12; // Adjust hours
+		}
+		return time.join (''); // return adjusted time or original string
 	}
-	
+
 	function getTodayOpeningHours(hourList) {
 		var dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 		var today = new Date().getDay();
@@ -44,6 +44,26 @@ function RestaurantService($http, $q, baseUrl) {
 		}
 	}
 
+	function commitPromise(url, callback) {
+		var deferred = $q.defer();
+		return $http.get(url)
+		.then(function (response) {
+			if (response.data.error != "EOK") {
+				deferred.reject(response.data);
+			} else {
+				if (callback) {
+					var result = deferred.resolve(callback(response.data.data));
+				} else {
+					deferred.resolve(response.data.data);
+				}
+			}
+			return deferred.promise;
+		}, function (response) {
+			deferred.reject(response.data);
+			return deferred.promise;
+		});
+	}
+
 	function shortList(data) {
 		var cusinesToShow = [];
 		/* The cuisineList is too long to display, show part of it and display it fully on demand. */
@@ -61,40 +81,20 @@ function RestaurantService($http, $q, baseUrl) {
 			placeList : placeListToShow
 		}
 	}
-	
+
 	this.loadSearchCompoments = function() {
-		var deferred = $q.defer();
-		return $http.get(baseUrl + "/api/v1/search/components")
-		.then(function (response) {
-	     	 if (response.data.error != "EOK") {
-        		 deferred.reject(response.data);
-        	 } else {
-        		 console.log(response.data)
-        		 deferred.resolve(shortList(response.data.data));
-        	 }
-             return deferred.promise;
-         }, function (response) {
-        	deferred.reject(response.data);
-            return deferred.promise;
-         });
+		return commitPromise(baseUrl + "/api/v1/search/components", shortList);
 	}
 
 
 	this.getRestuarantsByCategory = function(categoryId, page) {
-		var deferred = $q.defer();
-		return $http.get(baseUrl + "/api/v1/search/category/" + categoryId + "/" + page)
-         .then(function (response) {
-        	 if (response.data.error != "EOK") {
-        		 deferred.reject(response.data);
-        	 } else {
-        		 //console.log(response.data)
-        		 deferred.resolve(transformRestaurantDetails(response.data.data));
-        	 }
-             return deferred.promise;
-         }, function (response) {
-        	deferred.reject(response.data);
-             return deferred.promise;
-         });
+		return commitPromise(baseUrl + "/api/v1/search/category/" + categoryId + "/" + page, transformRestaurantDetails);
 	}
-	
+
+	this.getRecommandRestaurants = function() {
+		return commitPromise(baseUrl + "/api/v1/search/recommand", function(data) {
+			console.log(data);
+			return data;
+		});
+	}
 }
