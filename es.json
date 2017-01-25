@@ -1,0 +1,39 @@
+{
+    "mappings" : {
+        "restaurant": {
+            "properties": {
+                "name": {
+                    "type" : "text"
+                },
+                "open_hours": {
+                    "type": "nested",
+                    "properties": {
+                      "start-second": {
+                        "type": "integer"
+                      },
+                      "end-second": {
+                        "type": "integer"
+                      }
+                    }
+                },
+                "known_for": {
+                  "type": "text"
+                },
+                "phone" : {
+                  "type": "text"
+                },
+                "address" :{
+                  "type": "nested",
+                  "properties": {
+                    "text-address": {
+                      "type": "text"
+                    },
+                    "location": {
+                      "type": "geo_point"
+                    }
+                  }
+                }
+            }
+        }
+    }
+}
