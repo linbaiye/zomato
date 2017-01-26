@@ -60,26 +60,25 @@ def get_reviews(rest_id):
     records = cursor.fetchall()
     ret = []
     for i in records:
-        ret.append({"review_id": i[0], "review_text": i[1],
-            "user_id": i[2], "rate": i[3], "review_time": i[4]})
+        ret.append({"review_text": i[1],
+            "user_id": i[2], "rate": i[3], "review_time": i[4].strftime('%Y-%m-%d %H:%M:%S')})
     return ret
 
 
 def tuple_to_dic(i):
-    return {
-    'id': i[0],
-    'name': i[1],
-    'phone': i[2],
-    'known_for': i[3],
-    'address' : {
-        'text' : i[4],
-        'longitude' : i[5],
-        'latitude': i[6]
-        }
+    ret = {
+        'id': i[0],
+        'name': i[1]
     }
-
-page = 0
-
+    if i[2] is not None:
+        ret['phone'] = i[2]
+    if i[3] is not None:
+        ret['known_for'] = i[3]
+    if i[4] is not None:
+        ret['address'] = {}
+        ret['address']['text_address'] = i[4]
+        ret['address']['location'] = str(round(i[6], 8))+","+ str(round(i[5], 8))
+    return ret
 
 
 def transform_for_es(rest):
@@ -95,9 +94,18 @@ def transform_for_es(rest):
     for k in optional_keys:
         if rest[k] is not None:
             ret[k] = rest[k]
+    ret['']
     return ret
 
+def avg_rate(reviews):
+    if len(reviews) == 0:
+        return 0
+    total = 0
+    for r in reviews:
+        total += r['rate']
+    return round(total / len(reviews), 5)
 
+page = 0
 while True:
     cursor.execute("SELECT r.restaurant_id, r.name, r.phone, r.known_for,\
     a.address, a.longitude, a.latitude FROM restaurants r INNER JOIN addresses a\
@@ -109,18 +117,16 @@ while True:
     res_list = []
     for i in records:
         rest = tuple_to_dic(i)
-        """rest['categories'] = get_categories(i[0])
+        rest['categories'] = get_categories(i[0])
         rest['features'] = get_features(i[0])
         rest['cuisines'] = get_cuisines(i[0])
-        rest['highlights'] = get_cuisines(i[0])
+        rest['highlights'] = get_highlights(i[0])
         rest['keywords'] = get_keywords(i[0])
-        rest['reviews'] = get_reviews(i[0])
-        rest['reviews'] = get_reviews(i[0])"""
         rest['open_hours'] = get_open_hours(i[0])
-        #res_list.append(rest)
-        print rest
-        es_body = transform_for_es(rest)
-        print es_body
-        es.index(doc_type='restaurant', index="zomato", id=rest['id'], body=es_body)
+        rest['reviews'] = get_reviews(i[0])
+        rest['avg_rate'] = avg_rate(rest['reviews'])
+        #print rest['avg_rate']
+        es.index(doc_type='restaurant', index="zomato", id=rest['id'], body=rest)
+        #es.update(doc_type='restaurant', index="zomato", id=rest['id'], body={"doc": {"avg_rate": avg_rate(rest['reviews'])}})
+        #print   avg_rate(rest['reviews'])
     page = page + 1
-    break

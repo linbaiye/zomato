@@ -1,39 +1,95 @@
 {
-    "mappings" : {
-        "restaurant": {
-            "properties": {
-                "name": {
-                    "type" : "text"
-                },
-                "open_hours": {
-                    "type": "nested",
-                    "properties": {
-                      "start-second": {
-                        "type": "integer"
-                      },
-                      "end-second": {
-                        "type": "integer"
-                      }
-                    }
-                },
-                "known_for": {
-                  "type": "text"
-                },
-                "phone" : {
-                  "type": "text"
-                },
-                "address" :{
-                  "type": "nested",
-                  "properties": {
-                    "text-address": {
-                      "type": "text"
-                    },
-                    "location": {
-                      "type": "geo_point"
-                    }
-                  }
-                }
-            }
+  "settings": {
+    "analysis": {
+      "filter": {
+        "tag_synonym_filter": {
+          "type": "synonym",
+          "synonyms": [
+            "cafe,cafes,Cafés,coffee"
+          ]
         }
+      },
+      "analyzer": {
+        "tag_synonyms": {
+          "tokenizer": "standard",
+          "filter": [
+            "tag_synonym_filter"
+          ]
+        }
+      }
     }
+  },
+  "mappings" : {
+    "restaurant": {
+      "properties": {
+        "name": {
+          "type" : "text"
+        },
+        "open_hours": {
+          "type": "nested",
+          "properties": {
+            "start-second": {
+              "type": "integer"
+            },
+            "end-second": {
+              "type": "integer"
+            }
+          }
+        },
+        "known_for": {
+          "type": "text"
+        },
+        "phone" : {
+          "type": "keyword"
+        },
+        "address" :{
+          "type": "nested",
+          "properties": {
+            "text-address": {
+              "type": "text"
+            },
+            "location": {
+              "type": "geo_point"
+            }
+          }
+        },
+        "reviews": {
+          "type": "nested",
+          "properties": {
+            "rate": {
+              "type": "float"
+            },
+            "review_time": {
+              "type": "date",
+              "format": "yyy-MM-dd HH:mm:ss"
+            },
+            "review_text": {
+              "type": "text"
+            },
+            "user_id": {
+              "type": "long"
+            }
+          }
+        },
+        "categories": {
+          "type": "keyword"
+        },
+        "keywords": {
+          "type": "keyword"
+        },
+        "features": {
+          "type": "keyword"
+        },
+        "cuisines": {
+          "type": "keyword"
+        },
+        "highlights": {
+          "type": "keyword"
+        },
+        "avg_rate": {
+          "type": "float"
+        }
+      }
+    }
+  }
 }

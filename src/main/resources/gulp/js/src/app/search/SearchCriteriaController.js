@@ -8,6 +8,7 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 		}
 		restaurantService.getRestuarantsByCategory(cateId, page)
 		.then(function(data) {
+			window.scrollTo(0, 0);
 			vm.data = data;
 		}, function(data) {
 		});
@@ -19,7 +20,7 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 	}, function(data) {
 	});
 
-	loadCategoriedRestaurants($routeParams["categoryId"], $routeParams["page"] - 1)
+	loadCategoriedRestaurants($routeParams["categoryId"], $routeParams["page"] - 1);
 	vm.pageChanged = function() {
 		loadCategoriedRestaurants($routeParams["categoryId"], vm.data.currentPage - 1);
 	}
