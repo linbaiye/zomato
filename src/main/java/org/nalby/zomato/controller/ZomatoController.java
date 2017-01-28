@@ -1,7 +1,15 @@
 package org.nalby.zomato.controller;
 
 
+import java.util.Map;
+
+import javax.print.attribute.standard.RequestingUserName;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.nalby.zomato.exception.BadParameterException;
+import org.nalby.zomato.form.SearchBody;
+import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
 import org.nalby.zomato.service.SearchService;
@@ -9,9 +17,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class ZomatoController {
@@ -76,6 +88,11 @@ public class ZomatoController {
 	public Response getSearchCriteria(@PathVariable("categoryId") int categoryId, @PathVariable("page") int page) {
 		logger.info("/api/v1/search/category/ is requested with [{}, {}].", categoryId, page);
 		return searchService.getCategoriedRestaurants(categoryId, page);
+	}
+	
+	@RequestMapping(value = "/api/v1/search/compound", method = RequestMethod.POST)
+	public String compoundSearch(@RequestBody @NotNull Map<String, Object> request) {
+		return searchService.compoundSearch(request);
 	}
 	
 	

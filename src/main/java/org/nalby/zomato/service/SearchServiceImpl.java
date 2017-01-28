@@ -7,7 +7,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.nalby.zomato.dao.RestaurantDao;
+import org.nalby.zomato.dao.SearchDao;
 import org.nalby.zomato.entity.CategoriedRestaurant;
+import org.nalby.zomato.exception.BadParameterException;
+import org.nalby.zomato.exception.InternalErrorExpection;
+import org.nalby.zomato.form.SearchBody;
 import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.slf4j.Logger;
@@ -16,14 +20,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
 	private RestaurantDao restaurantDao;
 	
+	@Autowired
+	private SearchDao searchDao;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchServiceImpl.class);
 
+	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	@Transactional
 	public Response getSearchComponents() {
@@ -53,6 +64,21 @@ public class SearchServiceImpl implements SearchService {
 		BigInteger total = restaurantDao.getRestaurantCountInCategory(categoryId);
 		result.put("total", total);
 		return new Response(ErrorCode.EOK, result);
+	}
+	
+	public String compoundSearch(Map<String, Object> searchBody) {
+		Integer from = (Integer) searchBody.get("from");
+		Integer size = (Integer) searchBody.get("size");
+		if (size > 10 || from < 0) {
+			throw new BadParameterException("Unexpected range, from:" + from + " size " + size);
+		}
+		try {
+			String tmp = mapper.writeValueAsString(searchBody);
+			return searchDao.proxyToES(tmp);
+		} catch (JsonProcessingException e) {
+			LOGGER.error("Got exception:", e);
+			throw new InternalErrorExpection("Failed to search documents.");
+		}
 	}
 
 

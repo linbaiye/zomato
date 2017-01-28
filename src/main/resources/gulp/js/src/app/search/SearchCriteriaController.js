@@ -13,6 +13,17 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 		}, function(data) {
 		});
 	}
+	vm.selectedCategories = {};
+
+	vm.clickCategory = function(name) {
+		if (vm.selectedCategories[name]) {
+			delete vm.selectedCategories[name];
+		} else {
+			vm.selectedCategories[name] = true;
+		}
+		console.log(vm.selectedCategories);
+	}
+
 
 	restaurantService.loadSearchCompoments()
 	.then(function(data) {

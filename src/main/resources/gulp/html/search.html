@@ -10,7 +10,7 @@
 				<hr/>
 				<div class="criterion">
 					<p class="title"><strong>Category</strong></p>
-					<p class="clickable item" ng-repeat="item in vm.search.categoryList">
+					<p class="clickable item" ng-repeat="item in vm.search.categoryList" ng-click="vm.clickCategory(item.name)">
 						<span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span>
 					</p>
 				</div>
