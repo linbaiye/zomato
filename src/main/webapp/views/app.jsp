@@ -13,6 +13,8 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 <script src="${resourceUrl}/js/src/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+
 <link href="${resourceUrl}/css/zomato.css" rel="stylesheet">
 <script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
 

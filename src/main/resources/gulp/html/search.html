@@ -4,8 +4,11 @@
 		<div class="col-xs-12">
 			<h2><strong>Dinner in Sydney</strong></h2>
 		</div>
-		<div class="col-md-2 col1">
-			<div class="col-xs-12  container-style">
+		<div class="col-md-2 col-sm-4 col-xs-12 col1">
+			<div class="col-xs-12 container-style" id="small-screen-filter">
+				<h4><strong>Filters</strong></h4>
+			</div>
+			<div class="col-xs-12 container-style" id="big-screen-filter">
 				<h4><strong>Filters</strong></h4>
 				<hr/>
 				<div class="criterion category">
@@ -29,14 +32,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-8 col-xs-12 col2">
 			<div class="col-xs-12 nopadding">
 				<div ng-repeat="item in vm.data.restaurantList" class="restaurant">
 					<div class="basic-info-box col-xs-12">
 						<div class="basic-info">
-							<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb col-md-3"></div>
-							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
-							<div class="text-info col-md-8">
+							<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb col-xs-4 col-sm-3"></div>
+							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-xs-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
+							<div class="text-info col-xs-12 col-sm-8">
 								<p class="name">{{item.name}}</p>
 								<p class="district">{{item.address | getDistrict}}</p>
 								<p class="address grey-text">{{item.address}}</p>

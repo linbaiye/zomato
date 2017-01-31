@@ -139,7 +139,6 @@ function RestaurantService($http, $q, baseUrl) {
 					id : hit['_id'],
 					address : source['address']['text_address'],
 					costForTwo: source['cost_for_2'],
-					featureList: source['features'],
 					name: source['name'],
 					thumbImageUrl: source['thumb_img_url'],
 					rate: source['avg_rate']
@@ -147,6 +146,10 @@ function RestaurantService($http, $q, baseUrl) {
 				tmp['cuisineSet'] = [];
 				for (var j = 0 ; j < source['cuisines'].length; j++) {
 					tmp['cuisineSet'].push({"name": source['cuisines'][j]});
+				}
+				tmp['featureList'] = []
+				for (var j = 0; j < source['features'].length; j++) {
+					tmp['featureList'].push({"name": source['features'][j]});
 				}
 				var open_hours = hit['_source']['open_hours'];
 				var open_hour_list = [];
