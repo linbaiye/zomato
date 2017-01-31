@@ -1,27 +1,38 @@
 
 function SearchCriteriaController(restaurantService, $routeParams) {
 	var vm = this;
+	vm.checkedCategory = null;
+	vm.currentPage = 0;
 
-	function loadCategoriedRestaurants(cateId, page) {
-		if (page < 0) {
-			page = 0;
-		}
-		restaurantService.getRestuarantsByCategory(cateId, page)
-		.then(function(data) {
+	function buildSearchCriteria() {
+		var builder = new SearchCriteriaBuilder();
+		builder.addQueryKey(vm.checkedCategory);
+		builder.addSource(["open_hours", 'phone', 'address', 'name', 'avg_rate', 'cuisines', 'cost_for_2', 'features', 'thumb_img_url']);
+		builder.addSearchFields("categories");
+		builder.setPage(vm.currentPage);
+		return builder.build();
+	}
+
+
+	function searchBriefRestaurants() {
+		var criteria = buildSearchCriteria();
+		restaurantService.search(criteria, vm.currentPage).then(function(data) {
 			window.scrollTo(0, 0);
+			data.currentPage = data.currentPage + 1;
 			vm.data = data;
 		}, function(data) {
 		});
 	}
-	vm.selectedCategories = {};
+
+
+	function loadCategoriedRestaurants(cate, page) {
+		vm.checkedCategory = cate;
+		vm.currentPage = page;
+		searchBriefRestaurants();
+	}
 
 	vm.clickCategory = function(name) {
-		if (vm.selectedCategories[name]) {
-			delete vm.selectedCategories[name];
-		} else {
-			vm.selectedCategories[name] = true;
-		}
-		console.log(vm.selectedCategories);
+		loadCategoriedRestaurants(name, 0);
 	}
 
 
@@ -31,8 +42,9 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 	}, function(data) {
 	});
 
-	loadCategoriedRestaurants($routeParams["categoryId"], $routeParams["page"] - 1);
 	vm.pageChanged = function() {
-		loadCategoriedRestaurants($routeParams["categoryId"], vm.data.currentPage - 1);
+		loadCategoriedRestaurants(vm.checkedCategory, vm.data.currentPage - 1);
 	}
+
+	loadCategoriedRestaurants($routeParams["category"], 0);
 }

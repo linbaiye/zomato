@@ -28,6 +28,7 @@
 	<script src="${resourceUrl}/js/src/app/global/BrokerService.js"></script>
 	<script src="${resourceUrl}/js/src/app/global/RestaurantService.js"></script>
 	<script src="${resourceUrl}/js/src/app/global/UtilService.js"></script>
+	<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
 	<script src="${resourceUrl}/js/src/app/app.js"></script>
 </body>
 </html>

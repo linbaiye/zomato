@@ -43,24 +43,46 @@ function RestaurantService($http, $q, baseUrl) {
 		}
 	}
 
-	function commitPromise(url, callback) {
+	function _commitRequest(deferred, url, callback, data, onRequestOkCb) {
+		function onRequestError(response) {
+			deferred.reject(response.data);
+			return deferred.promise;
+		}
+		if (!data) {
+			return $http.get(url).then(onRequestOkCb, onRequestError);
+		}
+		return $http.post(url, JSON.stringify(data), {headers: {'Content-Type': 'Application/json'}})
+			.then(onRequestOkCb, onRequestError);
+	}
+
+	function commitPromiseV2(url, callback, data) {
 		var deferred = $q.defer();
-		return $http.get(url)
-		.then(function (response) {
+		function onRequestOk(response) {
+			if (callback) {
+					deferred.resolve(callback(response.data));
+			} else {
+					deferred.resolve(response.data);
+			}
+			return deferred.promise;
+		}
+		return _commitRequest(deferred, url, callback, data, onRequestOk);
+	}
+
+	function commitPromise(url, callback, data) {
+		var deferred = $q.defer();
+		function onRequestOk(response) {
 			if (response.data.error != "EOK") {
 				deferred.reject(response.data);
 			} else {
 				if (callback) {
-					var result = deferred.resolve(callback(response.data.data));
+					deferred.resolve(callback(response.data.data));
 				} else {
 					deferred.resolve(response.data.data);
 				}
 			}
 			return deferred.promise;
-		}, function (response) {
-			deferred.reject(response.data);
-			return deferred.promise;
-		});
+		}
+		return _commitRequest(deferred, url, callback, data, onRequestOk);
 	}
 
 	function shortList(data) {
@@ -81,6 +103,7 @@ function RestaurantService($http, $q, baseUrl) {
 		}
 	}
 
+
 	this.loadSearchCompoments = function() {
 		return commitPromise(baseUrl + "/api/v1/search/components", shortList);
 	}
@@ -91,9 +114,56 @@ function RestaurantService($http, $q, baseUrl) {
 	}
 
 	this.getRecommandRestaurants = function() {
-		return commitPromise(baseUrl + "/api/v1/search/recommand", function(data) {
-			console.log(data);
-			return data;
-		});
+		return commitPromise(baseUrl + "/api/v1/search/recommand");
+	}
+
+	/* Copyied from stackoverflow. */
+	function toTimeString(sec_num) {
+	 	var hours   = Math.floor(sec_num / 3600);
+	 	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	 	var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	 	if (hours   < 10) {hours   = "0"+hours;}
+	 	if (minutes < 10) {minutes = "0"+minutes;}
+	 	if (seconds < 10) {seconds = "0"+seconds;}
+	 	return hours+':'+minutes+':'+seconds;
+	}
+
+
+	this.search = function(searchCriteria, currentPage) {
+		return commitPromiseV2(baseUrl + "/api/v1/search/compound", function(data) {
+			var list = [];
+			for (var i = 0; i < data.hits.hits.length; i++) {
+				var hit = data.hits.hits[i];
+				var source = hit['_source'];
+				var tmp = {
+					id : hit['_id'],
+					address : source['address']['text_address'],
+					costForTwo: source['cost_for_2'],
+					featureList: source['features'],
+					name: source['name'],
+					thumbImageUrl: source['thumb_img_url'],
+					rate: source['avg_rate']
+				}
+				tmp['cuisineSet'] = [];
+				for (var j = 0 ; j < source['cuisines'].length; j++) {
+					tmp['cuisineSet'].push({"name": source['cuisines'][j]});
+				}
+				var open_hours = hit['_source']['open_hours'];
+				var open_hour_list = [];
+				for (var day in open_hours) {
+					if (open_hours[day]['start_second'] == -1) {
+						continue;
+					}
+					open_hour_list.push({'day': day, 'start': toTimeString(open_hours[day]['start_second']), 'end': toTimeString(open_hours[day]['end_second'])});
+				}
+				tmp['todayHours'] = getTodayOpeningHours(open_hour_list);
+				list.push(tmp);
+			}
+			return {
+				total: data.hits.total,
+				restaurantList: list,
+				currentPage: currentPage
+			};
+		}, searchCriteria);
 	}
 }

@@ -14,7 +14,7 @@
 		.when("/feature/:id", {
 			templateUrl: "static/html/collection.html"
 		})
-		.when("/search/category/:categoryId/:page", {
+		.when("/search/category/:category", {
 			templateUrl: "static/html/search.html"
 		});
 	}])

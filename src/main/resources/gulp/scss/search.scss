@@ -8,6 +8,18 @@
       width: 30%;
     }
   }
+  .category {
+    .active {
+      margin-left: -15px;
+      margin-right: -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      background-color: #9ACD32;
+      span {
+        color: white;
+      }
+    }
+  }
   .item, .name, .address, .district {
     margin-bottom: 5px;
   }

@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 
 function BodyController($http, $location, baseUrl, broker) {
 	var vm = this;
-	
 
-	
+
+
 	function initFeaturedCollections(response) {
 		var data = response.data;
 		if (data.error !== "EOK") {
@@ -35,8 +35,8 @@ function BodyController($http, $location, baseUrl, broker) {
 	vm.gotoCollection = function(featured) {
 		$location.path("feature/" + featured);
 	}
-	vm.gotoCategorySearch = function(categoryId) {
-		$location.path("search/category/" + categoryId + "/" + 1);
+	vm.gotoCategorySearch = function(category) {
+		$location.path("search/category/" + category);
 	}
 	$http.get(baseUrl + "/api/v1/feature/main_page").then(initFeaturedCollections, function(response) {	});
 	$http.get(baseUrl + "/api/v1/category").then(initQuickSearch, function(response) {	});

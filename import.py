@@ -1,5 +1,6 @@
 import MySQLdb
 from elasticsearch import Elasticsearch
+import re
 
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
@@ -78,6 +79,11 @@ def tuple_to_dic(i):
         ret['address'] = {}
         ret['address']['text_address'] = i[4]
         ret['address']['location'] = str(round(i[6], 8))+","+ str(round(i[5], 8))
+    if i[7] is not None:
+        m = re.search('.+A\$([.\d]+).*', i[7])
+        ret['cost_for_2'] = m.group(1)
+    if i[8] is not None:
+        ret['thumb_img_url'] = i[8]
     return ret
 
 
@@ -105,10 +111,11 @@ def avg_rate(reviews):
         total += r['rate']
     return round(total / len(reviews), 5)
 
+
 page = 0
 while True:
     cursor.execute("SELECT r.restaurant_id, r.name, r.phone, r.known_for,\
-    a.address, a.longitude, a.latitude FROM restaurants r INNER JOIN addresses a\
+    a.address, a.longitude, a.latitude, r.approx_price, r.thumb_img_url FROM restaurants r INNER JOIN addresses a\
     ON r.address_id = a.address_id  LIMIT %s OFFSET %s",
     (10, page * 10,))
     records = cursor.fetchall()

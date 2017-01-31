@@ -43,7 +43,7 @@
 			<h2>Collections</h2>
 			<p class="grey-text">Explore curated lists of top restaurants, cafes, pubs, and bars in and around Sydney, based on trends</p>
 			<div ng-repeat="item in vm.collections"
-			 	class="col-sm-6 col-xs-12 featured-card clickable" 
+			 	class="col-sm-6 col-xs-12 featured-card clickable"
 			 	ng-class-odd="'odd'" ng-class-even="'even'"
 			 	ng-click="vm.gotoCollection(item.featuredId)">
 			 	<div class="featured-box">
@@ -117,7 +117,7 @@
 				{{vm.quickSearches.length}}</p>
 			<div id="quick-search">
 				<div class="search-item col-sm-3 col-xs-6" ng-repeat="i in vm.quickSearches">
-					<div class="search-item-box clickable" ng-click="vm.gotoCategorySearch(i.id)">
+					<div class="search-item-box clickable" ng-click="vm.gotoCategorySearch(i.name)">
 						<img ng-src="{{i.imageUrl}}" />
 						<p>{{i.name}}</p>
 					</div>
