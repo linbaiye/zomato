@@ -1,18 +1,39 @@
 <div id="embeddable-header">
 	<div class="container-fluid" ng-controller="HeaderController as vm">
 		<div class="row">
-			<div class="col-xs-12">
-				<button class="btn btn-default darkred-style">Zomato</button>
-				<div class="input-group">
-					<span class="input-group-addon" id="search-icon"><i
-						class="fa fa-search" aria-hidden="true"></i></span> <input type="text"
-						class="form-control search-input"
-						placeholder="Search for restaurants or cusines"
-						aria-describedby="search-icon">
+			<div class="col-xs-12" id="component-container">
+				<div class="col-sm-2 col-xs-1 col-md-1 component">
+					<a id="index-href" href="#/">
+						<button class="btn">
+							<span class="mobile-invisible">zomato</span>
+							<i class="fa only-mobile-visible fa-long-arrow-left mobile-icon" aria-hidden="true"></i>
+						</button>
+					</a>
 				</div>
-				<button class="btn btn-default darkred-style">Search</button>
-				<button class="btn btn-default skyblue-style">Book a table</button>
-				<button class="btn btn-default">Log in</button>
+				<div class="col-sm-6 col-xs-8 component">
+					<div class="col-xs-11 col-sm-10" id="input-box">
+						<div class="input-group">
+							<!--div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+							<input type="text" class="form-control" id="exampleInputAmount" placeholder="Search for restaurants or cusines"-->
+							<span class="input-group-addon mobile-invisible" id="search-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+							<input type="text" class="form-control search-input"
+							placeholder="Search for restaurants or cusines" aria-describedby="search-icon">
+						</div>
+					</div>
+					<div class="col-sm-2 col-xs-1" id="button-box">
+						<button class="btn red-btn">
+							<span class="mobile-invisible">Search</span>
+							<span class="only-mobile-visible" id="mobile-search-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+						</button>
+					</div>
+				</div>
+				<div class="col-sm-2 component mobile-invisible">
+					<button class="btn blue-btn">Book a table</button>
+				</div>
+				<div class="col-sm-2 col-xs-1 component col-md-1">
+					<button class="btn btn-default"><span class="mobile-invisible">Log in</span>
+						<i class="fa fa-user-circle-o mobile-icon only-mobile-visible" aria-hidden="true"></i></button>
+				</div>
 			</div>
 		</div>
 	</div>

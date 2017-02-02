@@ -1,40 +1,119 @@
 #embeddable-header {
-  background-color: white;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  .col-xs-12 {
+  #component-container {
     @include flex;
-    div[class="input-group"] {
-      width: 60%;
-      margin: auto 0 auto 5%;
-      span {
-        background-color: white;
-        border-right: 0;
-        font-size: 13px;
-        opacity: .7;
-        padding-right: 0;
+    .component {
+      margin: auto;
+      text-align: center;
+    }
+  }
+  input {
+    @include noshadow;
+  }
+}
+@media (min-width: $small) {
+  #embeddable-header {
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    #index-href button {
+      line-height: 50px;
+      @include redbtn;
+    }
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    #input-box {
+      padding-right: 0;
+
+    }
+    #button-box {
+      padding-left: 0;
+    }
+    .component {
+      margin: auto;
+    }
+    #component-container {
+      div[class="input-group"] {
+        span {
+          background-color: white;
+          border-right: 0;
+          font-size: 13px;
+          padding-right: 0;
+        }
+        input {
+          border-left: 0;
+        }
       }
+    }
+  }
+}
+@media (max-width: $small - 1) {
+  #embeddable-header {
+  #component-container {
+    height: 40px;
+    .col-xs-8 {
+      @include flex;
+    }
+  }
+    background-color: $default-red;
+    .mobile-icon {
+      font-size: 15px;
+      color: white;
+    }
+    .component {
+      padding: 0;
+    }
+    #component-container>div.component:first-child {
+      margin-left: 0;
+    }
+    #component-container>div.component:last-child {
+      margin-right: 0;
+      text-align: right;
+    }
+    button {
+      @include button-style;
+      border: none;
+      background-color: transparent;
+    }
+    input {
+      color: white;
+    }
+    #input-box {
       input {
-        @include noshadow;
-        border-left: 0;
+        border: 1px solid white;
+        background-color: $default-red;
+        border-radius: 4px;
+      }
+      .input-group {
+        width: 100%;
+      }
+      padding: 0;
+    }
+    #button-box {
+      padding: 0;
+      margin: auto;
+      span {
+        padding: 0;
       }
     }
-    button:first-child {
-      height: 60px;
-      font-weight: 600;
+
+    #mobile-search-icon {
+      background-color: $default-red;
+      color: white;
+      border: none;
     }
-    button:nth-of-type(2) {
-      margin: auto auto auto 0;
+    input::-webkit-input-placeholder {
+      color: white !important;
     }
-    button:nth-of-type(3) {
-      margin: auto auto auto 5%;
+
+    input:-moz-placeholder { /* Firefox 18- */
+      color: white !important;
     }
-    button:last-child {
-      padding-left: 20px;
-      padding-right: 20px;
-      margin: auto 0 auto 5%;
-      border: 1px solid #e0e0e0;
+
+    input::-moz-placeholder {  /* Firefox 19+ */
+      color: white !important;
+    }
+
+    input:-ms-input-placeholder {
+      color: white !important;
     }
   }
 }

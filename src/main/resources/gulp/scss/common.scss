@@ -70,3 +70,16 @@
   font-weight: 600;
   display: inline-block;
 }
+
+
+
+@media (min-width: $small) {
+  .visible-on-mobile, .only-mobile-visible {
+    display: none;
+  }
+}
+@media  (max-width: $small - 1) {
+  .mobile-invisible {
+    display: none;
+  }
+}

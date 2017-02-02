@@ -31,7 +31,6 @@ html, body {
 @mixin button-style {
   background-image: none;
   background-color: white;
-  border: none;
   text-shadow: none;
   @include noshadow;
 }
@@ -79,6 +78,22 @@ html, body {
 
 .btn {
   @include button-style;
+}
+.red-btn {
+  @extend .btn;
+  border: 1px solid $default-red;
+  @include darkred-style;
+}
+
+@mixin redbtn{
+  @include button-style;
+  border: 1px solid $default-red;
+  @include darkred-style;
+}
+.blue-btn {
+  @extend .btn;
+  border: 1px solid #33aedc;
+  @include skyblue-style;
 }
 .darkred-style, .darkred-style:hover, .darkred-style:focus, .darkred-style:active:focus {
   outline: none;

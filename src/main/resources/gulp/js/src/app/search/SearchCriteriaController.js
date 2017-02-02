@@ -3,6 +3,8 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 	var vm = this;
 	vm.checkedCategory = null;
 	vm.currentPage = 0;
+	vm.filtersStatus = 'filters-collapsed';
+	vm.filterStatus = 'filter-collapsed';
 
 	function buildSearchCriteria() {
 		var builder = new SearchCriteriaBuilder();
@@ -44,6 +46,9 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 
 	vm.pageChanged = function() {
 		loadCategoriedRestaurants(vm.checkedCategory, vm.data.currentPage - 1);
+	}
+	vm.toggleFiltersClass = function() {
+		vm.filtersStatus = (vm.filtersStatus == 'filters-open') ? 'filters-collapsed' : 'filters-open';
 	}
 
 	loadCategoriedRestaurants($routeParams["category"], 0);

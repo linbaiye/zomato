@@ -19,6 +19,11 @@
       padding-left: 0;
     }
   }
+  @media screen and (min-width: $small) {
+    #filters, .side-nav {
+      padding: 0;
+    }
+  }
   @media screen and (max-width: $small - 1) {
     .text-info {
       padding: 0;
@@ -26,35 +31,47 @@
     .col2 {
       padding-left: 15px;
     }
-    .col1 {
+    div#filter-container.filters-open {
+      top: 0;
+      margin-left: -15px;
+    }
+    div#filter-container.filters-collapsed {
+      bottom: 0;
+    }
+    div#filter-container.filters-collapsed, div#filter-container.filters-open {
       height: auto;
       position: fixed;
       z-index: 3;
-      bottom: 0;
       padding: 0;
-      background-color: #dedede;
     }
-    #small-screen-filter {
-      height: 40px;
-      background-color: #cecece;
+    div#filters.filters-collapsed, .filter-collapsed {
+      display: none;
+    }
+    #filter-container {
+      background-color: #EDF1F4;
+    }
+    #filters {
+      padding-top: 20px;
+    }
+    #filter-tag {
+      line-height: 40px;
+      background-color: #cb202d;
+      color: white;
       padding: 0;
-      margin: 0;
-      display: block;
+      margin: 0 0 0 -15px;
       text-align: center;
     }
-    #big-screen-filter {
-      display: none;
+    .criterion {
+      margin-left: -15px;
+      margin-right: -15px;
+      padding: 0 15px;
+      background-color: white;
+      line-height: 40px;
     }
   }
-  @media screen and (min-width: $small) {
-    #small-screen-filter {
-      display: none;
-    }
-    #big-screen-filter {
-      display: block;
-    }
+  .side-nav {
+    list-style-type: none;
   }
-
 
   .category {
     .active {
