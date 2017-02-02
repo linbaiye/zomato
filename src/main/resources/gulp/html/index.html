@@ -113,13 +113,12 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>Quick Searches</h2>
-			<p class="grey-text">Discover restaurants by type of meal
-				{{vm.quickSearches.length}}</p>
+			<p class="grey-text">Discover restaurants by type of meal</p>
 			<div id="quick-search">
-				<div class="search-item col-sm-3 col-xs-6" ng-repeat="i in vm.quickSearches">
-					<div class="search-item-box clickable" ng-click="vm.gotoCategorySearch(i.name)">
-						<img ng-src="{{i.imageUrl}}" />
-						<p>{{i.name}}</p>
+				<div class="search-item col-xs-6 col-sm-3" ng-repeat="i in vm.quickSearches">
+					<div ng-repeat="j in i" class="col-xs-12 col-sm-6 search-item-box clickable" ng-click="vm.gotoCategorySearch(j.name)">
+						<img ng-src="{{j.imageUrl}}" />
+						<p>{{j.name}}</p>
 					</div>
 				</div>
 			</div>

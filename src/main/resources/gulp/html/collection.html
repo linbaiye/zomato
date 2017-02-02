@@ -1,8 +1,8 @@
 <ng-include src="'static/html/header.html'"></ng-include>
-<div id="collection-body" class="container-fluid" ng-controller="CollectionController as vm">
+<div id="collection-body" class="container-fluid content-body" ng-controller="CollectionController as vm">
 	<div class="row">
 		<div class="{{vm.currentCollection ? '' : 'nodisplay'}} col-xs-12">
-			<div id="featured-image" ng-style="{'background-image': 'url('+ vm.currentCollection.imageUrl +'?output-format=webp)'}"></div>
+			<div id="featured-image" ng-style="{'background-image': 'url('+ vm.currentCollection.imageUrl +')'}"></div>
 			<div id="featured-text">
 				<p id="featured-type">{{vm.currentCollection.type}}</p>
 				<p>{{vm.currentCollection.description}}</p>
@@ -36,7 +36,7 @@
 		</div>
 		<div class="col-xs-12">
 			<div ng-repeat="item in vm.collections"
-			 	class="col-sm-6 col-md-4 col-xs-12 featured-card clickable {{item.col}}" 
+			 	class="col-sm-6 col-md-4 col-xs-12 featured-card clickable {{item.col}}"
 			 	ng-class-odd="'odd'" ng-class-even="'even'"
 			 	ng-click="vm.gotoCollection(item.featuredId)">
 			 	<div class="featured-box">

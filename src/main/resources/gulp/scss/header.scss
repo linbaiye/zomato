@@ -46,13 +46,21 @@
   }
 }
 @media (max-width: $small - 1) {
-  #embeddable-header {
-  #component-container {
-    height: 40px;
-    .col-xs-8 {
-      @include flex;
-    }
+  .content-body {
+    margin-top: $mobile-header-height;
   }
+  #embeddable-header {
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    #component-container {
+      height: 40px;
+      .col-xs-8 {
+        @include flex;
+      }
+    }
     background-color: $default-red;
     .mobile-icon {
       font-size: 15px;
@@ -63,6 +71,10 @@
     }
     #component-container>div.component:first-child {
       margin-left: 0;
+      text-align: left;
+      button {
+        padding-left: 0;
+      }
     }
     #component-container>div.component:last-child {
       margin-right: 0;

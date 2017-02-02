@@ -68,24 +68,18 @@
     border-radius: $default-radius;
     @include stereoscopic;
     padding: 40px 10px 30px 10px;;
-    @include flex;
-    flex-wrap: wrap;
     align-items: center;
+    overflow: auto;
     .search-item {
-      @include flex;
       align-items: center;
+      padding: 0;
       p {
         margin-bottom: 20px;
       }
     }
-    @media screen and (min-width: $medium) {
-      .search-item {
-        width: 12.5%;
-      }
-    }
     .search-item-box {
+      padding: 0;
       text-align: center;
-      margin: auto;
     }
     img {
       width: 48px;

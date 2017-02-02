@@ -18,7 +18,7 @@
 			templateUrl: "static/html/search.html"
 		});
 	}])
-	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", BodyController])
+	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", SearchCriteriaController])

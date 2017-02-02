@@ -11,7 +11,7 @@
       padding: 0 15px;
     }
   }
-  @media screen and (max-width: $medium - 1) {
+  @media screen and (min-width: $small) and (max-width: $medium - 1) {
     .col3 {
       display: none;
     }
@@ -19,7 +19,7 @@
       padding-left: 0;
     }
   }
-  @media screen and (min-width: $small) {
+  @media (min-width: $small) {
     #filters, .side-nav {
       padding: 0;
     }
@@ -32,7 +32,7 @@
       padding-left: 15px;
     }
     div#filter-container.filters-open {
-      top: 0;
+      top: $mobile-header-height;
       margin-left: -15px;
     }
     div#filter-container.filters-collapsed {

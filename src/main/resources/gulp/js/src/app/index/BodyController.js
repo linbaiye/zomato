@@ -2,7 +2,7 @@
  *
  */
 
-function BodyController($http, $location, baseUrl, broker) {
+function BodyController($http, $location, baseUrl, broker, utilService) {
 	var vm = this;
 
 
@@ -21,7 +21,9 @@ function BodyController($http, $location, baseUrl, broker) {
 		if (data.error !== "EOK") {
 			return;
 		}
-		vm.quickSearches = data.data;
+		var result = utilService.to2DArray(data.data, 2);
+		console.log(result);
+		vm.quickSearches = result;
 	}
 
 	function initStatistic(response) {

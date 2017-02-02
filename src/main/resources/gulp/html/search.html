@@ -1,5 +1,5 @@
 <ng-include src="'static/html/header.html'"></ng-include>
-<div id="search-body" class="container-fluid"  ng-controller="SearchCriteriaController as vm">
+<div id="search-body" class="container-fluid content-body"  ng-controller="SearchCriteriaController as vm">
 	<div class="row">
 		<div class="col-xs-12">
 			<h2><strong>Dinner in Sydney</strong></h2>
@@ -46,8 +46,8 @@
 				<div ng-repeat="item in vm.data.restaurantList" class="restaurant">
 					<div class="basic-info-box col-xs-12">
 						<div class="basic-info">
-							<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb col-xs-4 col-sm-3"></div>
-							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-xs-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
+							<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb col-xs-5 col-sm-3"></div>
+							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-xs-2">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
 							<div class="text-info col-xs-12 col-sm-8">
 								<p class="name">{{item.name}}</p>
 								<p class="district">{{item.address | getDistrict}}</p>

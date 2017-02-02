@@ -2,7 +2,9 @@
   .row {
     margin-bottom: 20px;
   }
-  margin-top: 20px;
+  @media (min-width: $small) {
+    margin-top: 20px;
+  }
   #featured-image {
     @extend  .center-bgimg;
     height: 300px;
@@ -13,7 +15,6 @@
   .restaurant-rate {
     width: 40px;
   }
-
 
   #featured-text {
     background-color: white;
