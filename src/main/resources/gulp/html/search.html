@@ -1,39 +1,45 @@
 <ng-include src="'static/html/header.html'"></ng-include>
 <div id="search-body" class="container-fluid content-body"  ng-controller="SearchCriteriaController as vm">
+	<div id="spinner" ng-class="{'active': vm.spinner}"><i class="fa fa-refresh fa-spin"></i></div>
 	<div class="row">
 		<div class="col-xs-12">
 			<h2><strong>Dinner in Sydney</strong></h2>
 		</div>
 		<div class="col-md-2 col-sm-4 col-xs-12 col1">
 			<div class="col-xs-12 container-style" ng-class="vm.filtersStatus" id="filter-container">
-				<h4 id="filter-tag" ng-click="vm.toggleFiltersClass()"><strong>Filters</strong></h4>
+				<h4 id="filter-tag" ng-click="vm.toggleFiltersClass()"><strong>Filters </strong>
+					<i ng-show="vm.filtersStatus == 'filters-collapsed'" class="fa only-mobile-visible fa-arrow-circle-up" aria-hidden="true"></i>
+					<i ng-show="vm.filtersStatus == 'filters-open'" class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+				</h4>
 				<hr class="mobile-invisible"/>
 				<div ng-class="vm.filtersStatus" class="col-xs-12" id="filters">
-				<ul class="criterion category side-nav">
+				<ul class="criterion category">
 					<li class="nav-tag">
 						<p class="title"><strong>Choose Category</strong></p>
 					</li>
 					<li ng-repeat="item in vm.search.categoryList" ng-click="vm.clickCategory(item.name)"
-							class="clickable {{item.name == vm.checkedCategory ? 'active': ''}}" ng-class="vm.filterStatus">
-							<p class="item"><span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span></p>
+							class="clickable filter-item" ng-class="{'active': vm.checkedCategory == item.name}">
+							<p><span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span></p>
 					</li>
 				</ul>
-				<ul class="criterion side-nav">
+				<ul class="criterion cuisine">
 					<li class="nav-tag">
 						<p class="title"><strong>Choose Cuisine</strong></p>
 					</li>
-					<li ng-repeat="item in vm.search.first10Cuisines" ng-class="vm.filterStatus">
-						<p class="clickable item">
+					<li ng-repeat="item in vm.search.first10Cuisines" ng-click="vm.clickCuisine(item.name)"
+						class="clickable filter-item" ng-class="{'active': vm.checkedCuisine == item.name}">
+						<p>
 							<span>{{item.name}}</span> <span class="stats-value grey-text">{{item.count}}</span>
 						</p>
 					</li>
 				</ul>
-				<ul class="criterion side-nav">
+				<ul class="criterion location">
 						<li class="nav-tag">
 							<p class="title"><strong>Choose Location</strong></p>
 						</li>
-						<li ng-repeat="item in vm.search.placeList" ng-class="vm.filterStatus">
-							<p class="clickable item">
+						<li ng-repeat="item in vm.search.placeList" ng-click="vm.clickLocation(item.district)"
+							class="clickable filter-item" ng-class="{'active': vm.checkedLocation == item.district}">
+							<p>
 								<span>{{item.district}}</span> <span class="stats-value grey-text">{{item.count}}</span>
 							</p>
 						</li>

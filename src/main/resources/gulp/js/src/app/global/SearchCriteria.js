@@ -1,74 +1,65 @@
 function SearchCriteriaBuilder() {
-  var arg = {
-    fields: [],
-    query: "",
-    "_source": [],
-    page: 0,
-  };
-
-  function addObjectToArray(array, obj) {
-    if (typeof obj == "string") {
-      array.push(obj.trim());
-    } else if (obj instanceof Array) {
-      for (var i = 0; i < obj.length; i++) {
-        array.push(obj[i].trim());
-      }
-    }
-  }
-
+  var criteria = {};
 
   this.setPage = function(page) {
     if (page < 0) {
       throw "Invalid page number.";
     }
-    arg['page'] = page;
+    criteria['from'] = page * 10;
+    criteria['size'] = 10;
   }
 
-  this.addQueryKey = function(k) {
-    if (k == "Cafés") {
-      k = "cafe";
+  this.addNestedMustPhraseMatch = function(path, field, query) {
+    if (!path || !field || !query) {
+      throw "Invalid parameters to build query.";
     }
-    arg.query = arg.query + " " + k;
-  }
-
-  this.addSearchFields = function(f) {
-      addObjectToArray(arg.fields, f);
-  }
-
-  this.addSource = function(s) {
-    addObjectToArray(arg["_source"], s);
-  }
-
-  function isValid() {
-    if (!arg['fields'].length || !arg['query'] || !arg['_source'].length) {
-      return false;
+    var matchPhrase = {};
+    matchPhrase[path + "." + field] = query;
+    var nestedMust = {
+      "nested": {
+        "path": path,
+        "query": {
+          "match_phrase": matchPhrase
+        }
+      }
     }
-    return true;
+    if (!criteria['query']) {
+      criteria['query'] = {};
+      criteria['query']['bool'] = {};
+    }
+    criteria['query']['bool']['must'] = nestedMust;
+  }
+
+
+  this.addFilterTerms = function (terms) {
+    if (!terms || !(terms instanceof Array)) {
+      throw "Invalid parameters to build filter.";
+    }
+    var tmp = [];
+    for (var i = 0; i < terms.length; i++) {
+      if (typeof terms[i] != "object") {
+        throw "Only objects are valid to build filter.";
+      }
+      tmp.push({"term": terms[i]});
+    }
+    if (!criteria['query']) {
+      criteria['query'] = {};
+      criteria['query']['bool'] = {};
+      criteria['query']['bool']['filter'] = [];
+    }
+    for (var i = 0; i < tmp.length; i++) {
+      criteria['query']['bool']['filter'].push(tmp[i]);
+    }
+  }
+
+  this.addSources = function(sourceArray) {
+    if (!sourceArray || !(sourceArray instanceof Array)) {
+      throw "Invalid parameters to build filter.";
+    }
+    criteria['_source'] = sourceArray;
   }
 
   this.build = function() {
-    if (!isValid()) {
-      throw "Invalid parameters.";
-    }
-    var tmp = {};
-    for (var k in arg) {
-      if (k == "page") {
-        tmp['from'] = arg[k] * 10;
-        tmp['size'] = 10;
-      } else if (k == "query") {
-        tmp["query"] = {
-          "multi_match": {
-            "query": arg[k].trim(),
-            "fields": arg['fields']
-          }
-        }
-        if (arg[k].indexOf("cafe") > 0) {
-          tmp["query"]['multi_match']['analyzer'] = "tag_synonyms";
-        }
-      } else if (k == '_source') {
-        tmp['_source'] = arg[k];
-      }
-    }
-    return tmp;
+    return criteria;
   }
 }

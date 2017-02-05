@@ -25,23 +25,6 @@ function RestaurantService($http, $q, baseUrl) {
 		return "Closed";
 	}
 
-	function transformRestaurantDetails(data) {
-		for (var i = 0; i < data.restaurantList.length; i++) {
-			var restaurant = data.restaurantList[i];
-			var addr = restaurant.address;
-			var token = addr.textAddress.split(",");
-			token.splice(token.length - 1, 1);
-			addr["address"] = token.join(", ");
-			var cost = /.+A\$([.\d]+).*/g.exec(restaurant.approximatePrice);
-			restaurant.costForTwo =  (!cost || cost.length < 2) ? "" : cost[1];
-			restaurant.todayHours = getTodayOpeningHours(restaurant.openingHours);
-		}
-		return {
-			restaurantList : data.restaurantList,
-			currentPage : data.currentPage + 1,
-			total: data.total
-		}
-	}
 
 	function _commitRequest(deferred, url, callback, data, onRequestOkCb) {
 		function onRequestError(response) {
@@ -51,7 +34,7 @@ function RestaurantService($http, $q, baseUrl) {
 		if (!data) {
 			return $http.get(url).then(onRequestOkCb, onRequestError);
 		}
-		return $http.post(url, JSON.stringify(data), {headers: {'Content-Type': 'Application/json'}})
+		return $http.post(url, unescape(encodeURIComponent(JSON.stringify(data))), {headers: {'Content-Type': 'Application/json'}})
 			.then(onRequestOkCb, onRequestError);
 	}
 
@@ -108,10 +91,6 @@ function RestaurantService($http, $q, baseUrl) {
 		return commitPromise(baseUrl + "/api/v1/search/components", shortList);
 	}
 
-
-	this.getRestuarantsByCategory = function(categoryId, page) {
-		return commitPromise(baseUrl + "/api/v1/search/category/" + categoryId + "/" + page, transformRestaurantDetails);
-	}
 
 	this.getRecommandRestaurants = function() {
 		return commitPromise(baseUrl + "/api/v1/search/recommand");

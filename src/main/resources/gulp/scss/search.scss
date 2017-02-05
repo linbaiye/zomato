@@ -20,7 +20,7 @@
     }
   }
   @media (min-width: $small) {
-    #filters, .side-nav {
+    #filters, .criterion {
       padding: 0;
     }
   }
@@ -41,7 +41,7 @@
     div#filter-container.filters-collapsed, div#filter-container.filters-open {
       height: auto;
       position: fixed;
-      z-index: 3;
+      z-index: 4;
       padding: 0;
     }
     div#filters.filters-collapsed, .filter-collapsed {
@@ -69,24 +69,34 @@
       line-height: 40px;
     }
   }
-  .side-nav {
+  .criterion {
     list-style-type: none;
   }
 
-  .category {
-    .active {
-      margin-left: -15px;
-      margin-right: -15px;
-      padding-left: 15px;
-      padding-right: 15px;
-      background-color: #9ACD32;
-      transition: background-color 500ms linear;
-      span {
-        color: white;
-      }
+  .filter-item {
+    transition: background-color 500ms linear;
+  }
+  .filter-item.active {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #9ACD32;
+    span {
+      color: white;
     }
   }
-  .item, .name, .address, .district {
+  .criterion .active {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: background-color 500ms linear;
+    span {
+      color: white;
+    }
+  }
+  .filter-item p, .name, .address, .district {
     margin-bottom: 5px;
   }
   .criterion {

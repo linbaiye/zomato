@@ -22,6 +22,10 @@
     border-radius: 0 0 $default-radius $default-radius;
     @include stereoscopic;
   }
+  .featured-text  {
+    overflow: hidden;
+  }
+
   #featured-type, .restaurant-name {
     font-size: 18px;
     font-weight: 600;
@@ -49,6 +53,7 @@
   .restaurant-address, .restaurant-cuisine {
     @extend .grey-text;
   }
+
   @media screen and (min-width: $medium) {
     .featured-box {
       width: 97%;

@@ -117,9 +117,30 @@ html, body {
 .nopadding {
   padding: 0;
 }
+#spinner {
+  display: none;
+}
+#spinner.active {
+  z-index: 100;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  display: block;
+  background-color: black;
+}
+#spinner i {
+  position: relative;
+  color: $default-red;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+}
 
 * {
-	font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 
 @import "index-page.scss";
