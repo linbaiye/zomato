@@ -1,11 +1,5 @@
-#rest-info-body {
-  margin-top: 20px;
-  #rest-info-col {
-    width: 70%;
-    >div:first-child, #details {
-      border-radius: 4px;
-      box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    }
+#restaurant-details-container {
+  #restaurant-details {
     #bg-img {
       height: 300px;
       background-position: center;
@@ -13,14 +7,14 @@
       background-repeat: no-repeat;
       border-radius: 4px 4px 0 0;
     }
-    #rest-brief {
+    #restaurant-info {
       background-color: #fafafa;
       @include flex;
-      padding: 10px 20px 0 20px;
+      padding: 10px 20px 20px 20px;
+      border-radius: 0 0 4px 4px;
     }
   }
-
-  .left {
+  #left {
     margin-left: 0;
     width: 70%;
     div:last-child {
@@ -29,7 +23,7 @@
       font-size: 600;
     }
   }
-  .right {
+  #right {
     margin-right: 0;
     width: 30%;
   }
@@ -41,31 +35,56 @@
     text-align: center;
     width: 80px;
     float: right;
-    height: 40px;
-    background-color: #9ACD32;
     line-height: 40px;
     color: white;
     font-weight: 600;
     border-radius: 4px;
     span:first-child {
-      font-size: 28px;
+      font-size: 22px;
     }
     span:last-child {
-      font-size: 21px;
+      font-size: 18px;
     }
   }
-  #book-table {
-    background-color: #fafafa;
-    padding: 0 20px 0 20px;
-    >div {
-      border-top: 1px solid rgba(200,200,200,.4);
-      padding: 10px 0 15px 0;
+  .box {
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    background-color: white;
+    margin-top: 20px;
+  }
+  .review-box {
+    padding: 20px;
+  }
+
+  #write-comment-section {
+    padding: 20px 15px;
+    #review-input {
+      @include noshadow;
+      margin-bottom: 20px;
     }
-    border-radius: 0 0 4px 4px;
+    #add-review-btn {
+      background-color: #099E44;
+      color: white;
+      border-color: #099E44;
+    }
+  }
+
+  .user-icon {
+    height: 60px;
+    display: inline-block;
+    width: 60px;
+    border-radius: 50px;
+    background-position: center;
+  }
+  .user-name {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-weight: 600;
   }
 
   #details {
-    margin-top: 20px;
     @include flex;
     padding: 20px;
     background-color: white;
@@ -93,5 +112,11 @@
         color: #099E44;
       }
     }
+    #phone-number {
+      color: #099E44;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
   }
 }

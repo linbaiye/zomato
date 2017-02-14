@@ -1,36 +1,29 @@
 <ng-include src="'static/html/header.html'"></ng-include>
-<div id="rest-info-body" class="container-fluid" ng-controller="RestaurantDetailsController as vm">
+<div id="restaurant-details-container" class="container-fluid" ng-controller="RestaurantDetailsController as vm">
 	<div class="row">
 		<div class="col-xs-12">
-			<div id="rest-info-col">
-				<div>
+			<div class="col-md-8 col-xs-12" id="restaurant-details">
+				<div id="feature-img" class="box">
 					<div id="bg-img" ng-style="{'background-image': 'url(' + vm.restaurant.img_url + ')'}"></div>
-					<div id="rest-brief">
-						<div class="left">
+					<div id="restaurant-info">
+						<div id="left">
 							<div id="rest-name">{{vm.restaurant.name}}</div>
 							<div>
-								<span>{{vm.restaurant.district}}</span>&nbsp;&#8226;&nbsp;<span
-									ng-repeat="k in vm.restaurant.keywords">{{k}}&nbsp;</span>
+								<span>{{vm.restaurant.district}}</span>&nbsp;&#8226;&nbsp;<span ng-repeat="k in vm.restaurant.keywords">{{k}}&nbsp;</span>
 							</div>
 						</div>
-						<div class="right">
+						<div id="right">
 							<div id="rate" class="{{vm.restaurant.avg_rate | rateClass}}">
-								<span>{{vm.restaurant.avg_rate | number:1 || "-"}}</span><span>/5</span>
+								<span>{{vm.restaurant.avg_rate > 0 ? (vm.restaurant.avg_rate | number:1) : "-"}}</span><span ng-show="vm.restaurant.avg_rate > 0">/5</span>
 							</div>
-						</div>
-					</div>
-					<div id="book-table">
-						<div>
-							<button class="btn btn-default skyblue-style">Book a
-								table</button>
 						</div>
 					</div>
 				</div>
-				<div id="details">
+				<div id="details" class="box">
 					<div class="details-col">
 						<div class="details-row">
 							<div class="detail-name">Phone number</div>
-							<div class="detail-value">{{vm.restaurant.phone || "Not available"}}</div>
+							<div class="detail-value" id="phone-number">{{vm.restaurant.phone || "Not available"}}</div>
 						</div>
 						<div class="details-row">
 							<div class="detail-name">Cuisines</div>
@@ -40,7 +33,7 @@
 						</div>
 						<div class="details-row">
 							<div class="detail-name">Cost</div>
-							<div class="detail-value">{{vm.restaurant.cost_for_2 || "Not available"}}</div>
+							<div class="detail-value">{{'A$' + vm.restaurant.cost_for_2 + ' for two people (approx.)' || "Not available"}}</div>
 						</div>
 					</div>
 					<div class="details-col">
@@ -65,6 +58,22 @@
 							<div class="detail-value">{{vm.restaurant.knownFor}}</div>
 						</div>
 					</div>
+				</div>
+				<div id="write-comment-section" class="box">
+					<p>
+						Write a Review
+					</p>
+					<input id="review-input" type="text" placehoder="Share your review"  class="form-control">
+					<button type="button" id="add-review-btn" class="btn btn-default">Add Your Review</button>
+				</div>
+				<div class="box review-box" ng-repeat="item in vm.reviews">
+					<div>
+						<div class="user-icon" ng-style="{'background-image': 'url(' + item.user.iconUrl + ')'}"></div>
+						<div class="user-name">{{item.user.name}}</div>
+					</div>
+					<p ng-bind-html="item.review_text">
+						{{item.review_text}}
+					</p>
 				</div>
 			</div>
 			<div id="random-restaurants"></div>

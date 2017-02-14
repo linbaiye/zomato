@@ -17,6 +17,7 @@
 		<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
 		<link href="${resourceUrl}/css/zomato.css" rel="stylesheet" />
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
 	</head>
@@ -29,9 +30,11 @@
 		<script src="${resourceUrl}/js/src/app/search/SearchCriteriaController.js"></script>
 		<script src="${resourceUrl}/js/src/app/search/RecommandRestaurantController.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/BrokerService.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/HttpPromiseSerivce.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/RestaurantService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/UtilService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/UserService.js"></script>
 		<script src="${resourceUrl}/js/src/app/app.js"></script>
 	</body>
 </html>

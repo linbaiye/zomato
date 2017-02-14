@@ -1,8 +1,9 @@
 (function() {
-	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService"])
+	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize"])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
 	.service("broker", BrokerService)
 	.service("util", UtilService)
+	.service("userService", UserService)
 	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
@@ -26,7 +27,7 @@
 	.controller("HeaderController", HeaderController)
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
-	.controller("RestaurantDetailsController", ["restaurantService", "$routeParams", RestaurantDetailsController])
+	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", RestaurantDetailsController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");

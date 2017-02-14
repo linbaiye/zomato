@@ -1,5 +1,5 @@
 function RestaurantService($http, $q, baseUrl) {
-
+	HttpPromiseSerivce.call(this, $http, $q);
 	function tConvert (time) {
 		// Check correct time format and split into components
 		time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d):[0-5]\d?$/) || [time];
@@ -25,49 +25,6 @@ function RestaurantService($http, $q, baseUrl) {
 		return "Closed";
 	}
 
-
-	function _commitRequest(deferred, url, callback, data, onRequestOkCb) {
-		function onRequestError(response) {
-			deferred.reject(response.data);
-			return deferred.promise;
-		}
-		if (!data) {
-			return $http.get(url).then(onRequestOkCb, onRequestError);
-		}
-		return $http.post(url, unescape(encodeURIComponent(JSON.stringify(data))), {headers: {'Content-Type': 'Application/json'}})
-			.then(onRequestOkCb, onRequestError);
-	}
-
-	function commitPromiseV2(url, callback, data) {
-		var deferred = $q.defer();
-		function onRequestOk(response) {
-			if (callback) {
-					deferred.resolve(callback(response.data));
-			} else {
-					deferred.resolve(response.data);
-			}
-			return deferred.promise;
-		}
-		return _commitRequest(deferred, url, callback, data, onRequestOk);
-	}
-
-	function commitPromise(url, callback, data) {
-		var deferred = $q.defer();
-		function onRequestOk(response) {
-			if (response.data.error != "EOK") {
-				deferred.reject(response.data);
-			} else {
-				if (callback) {
-					deferred.resolve(callback(response.data.data));
-				} else {
-					deferred.resolve(response.data.data);
-				}
-			}
-			return deferred.promise;
-		}
-		return _commitRequest(deferred, url, callback, data, onRequestOk);
-	}
-
 	function shortList(data) {
 		var cusinesToShow = [];
 		/* The cuisineList is too long to display, show part of it and display it fully on demand. */
@@ -89,11 +46,11 @@ function RestaurantService($http, $q, baseUrl) {
 
 
 	this.loadSearchCompoments = function() {
-		return commitPromise(baseUrl + "/api/v1/search/components", shortList);
+		return this.commitPromise(baseUrl + "/api/v1/search/components", shortList);
 	}
 
 	this.getRecommandRestaurants = function() {
-		return commitPromise(baseUrl + "/api/v1/search/recommend");
+		return this.commitPromise(baseUrl + "/api/v1/search/recommend");
 	}
 
 	/* Copyied from stackoverflow. */
@@ -108,14 +65,14 @@ function RestaurantService($http, $q, baseUrl) {
 	}
 
 	this.loadRestaurantById = function(id) {
-		return commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id, function(data) {
+		return this.commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id, function(data) {
 			console.log(data);
 			return data;
 		});
 	}
 
 	this.search = function(searchCriteria, currentPage) {
-		return commitPromiseV2(baseUrl + "/api/v1/search/compound", function(data) {
+		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound", function(data) {
 			var list = [];
 			for (var i = 0; i < data.hits.hits.length; i++) {
 				var hit = data.hits.hits[i];
