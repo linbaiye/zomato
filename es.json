@@ -95,6 +95,9 @@
         },
         "avg_rate": {
           "type": "float"
+        },
+        "img_url": {
+            "type": "keyword"
         }
       }
     }

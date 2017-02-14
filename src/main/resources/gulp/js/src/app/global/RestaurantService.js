@@ -107,8 +107,12 @@ function RestaurantService($http, $q, baseUrl) {
 	 	return hours+':'+minutes+':'+seconds;
 	}
 
-
-
+	this.loadRestaurantById = function(id) {
+		return commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id, function(data) {
+			console.log(data);
+			return data;
+		});
+	}
 
 	this.search = function(searchCriteria, currentPage) {
 		return commitPromiseV2(baseUrl + "/api/v1/search/compound", function(data) {

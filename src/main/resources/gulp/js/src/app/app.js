@@ -24,8 +24,9 @@
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
-	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", SearchCriteriaController])
+	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
+	.controller("RestaurantDetailsController", ["restaurantService", "$routeParams", RestaurantDetailsController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");

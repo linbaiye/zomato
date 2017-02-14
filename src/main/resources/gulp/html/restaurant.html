@@ -1,11 +1,10 @@
 <ng-include src="'static/html/header.html'"></ng-include>
-<div id="rest-info-body" class="container-fluid"
-	ng-controller="RestaurantInfoController as vm">
+<div id="rest-info-body" class="container-fluid" ng-controller="RestaurantDetailsController as vm">
 	<div class="row">
 		<div class="col-xs-12">
 			<div id="rest-info-col">
 				<div>
-					<div id="bg-img" ng-style="vm.restaurant.bgImg"></div>
+					<div id="bg-img" ng-style="{'background-image': 'url(' + vm.restaurant.img_url + ')'}"></div>
 					<div id="rest-brief">
 						<div class="left">
 							<div id="rest-name">{{vm.restaurant.name}}</div>
@@ -15,8 +14,8 @@
 							</div>
 						</div>
 						<div class="right">
-							<div id="rate">
-								<span>{{vm.restaurant.rate || "-"}}</span><span>/5</span>
+							<div id="rate" class="{{vm.restaurant.avg_rate | rateClass}}">
+								<span>{{vm.restaurant.avg_rate | number:1 || "-"}}</span><span>/5</span>
 							</div>
 						</div>
 					</div>
@@ -36,12 +35,12 @@
 						<div class="details-row">
 							<div class="detail-name">Cuisines</div>
 							<div class="detail-value">
-								<span ng-repeat="item in vm.restaurant.cuisines">{{item}}{{$last || ","}}</span>
+								<span ng-repeat="item in vm.restaurant.cuisines">{{item}}{{$last || ", "}}</span>
 							</div>
 						</div>
 						<div class="details-row">
 							<div class="detail-name">Cost</div>
-							<div class="detail-value">{{vm.restaurant.approxPrice || "Not available"}}</div>
+							<div class="detail-value">{{vm.restaurant.cost_for_2 || "Not available"}}</div>
 						</div>
 					</div>
 					<div class="details-col">
@@ -51,7 +50,7 @@
 						</div>
 						<div class="details-row">
 							<div class="detail-name">Address</div>
-							<div class="detail-value">{{vm.restaurant.address || "Not available"}}</div>
+							<div class="detail-value">{{vm.restaurant.address.text_address || "Not available"}}</div>
 						</div>
 					</div>
 					<div class="details-col">

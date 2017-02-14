@@ -6,8 +6,8 @@ import org.nalby.zomato.response.Response;
 
 public interface RestaurantService {
 
-	/* Get by id. */
-	public Response getRestaurant(int id);
+	public String getRestaurant(int id);
+
 	public Response getAllFeaturedCollections();
 
 	public Response getMainPageFeaturedCollections();

@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 import org.nalby.zomato.dao.RestaurantDao;
+import org.nalby.zomato.dao.SearchDao;
 import org.nalby.zomato.entity.FeaturedCollection;
 import org.nalby.zomato.entity.Restaurant;
 import org.nalby.zomato.response.ErrorCode;
@@ -23,18 +24,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private RestaurantDao restaurantDao;
 	
+	@Autowired
+	private SearchDao searchDao;
+	
 	public final static int RESTAURANT_NUMBER_PER_PAGE = 10;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
-	@Transactional
-	public Response getRestaurant(int id) {
-		Restaurant restaurant = restaurantDao.getRestaurant(id);
-		if (restaurant == null){
-			LOGGER.info("Failed to find restaurant with id:{}.", id);
-			return new Response(ErrorCode.ENOREST);
-		}
-		return new Response(ErrorCode.EOK, restaurant);
+	public String getRestaurant(int id) {
+		return searchDao.getRestaurant(id);
 	}
 
 	@Transactional

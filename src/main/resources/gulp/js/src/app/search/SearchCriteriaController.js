@@ -1,5 +1,5 @@
 
-function SearchCriteriaController(restaurantService, $routeParams, util, modalService) {
+function SearchCriteriaController(restaurantService, $routeParams, util, modalService, $location) {
 	var vm = this;
 	vm.filtersStatus = 'filters-collapsed';
 	vm.filterStatus = 'filter-collapsed';
@@ -23,6 +23,19 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 		return builder.build();
 	}
 
+	function showError() {
+		modalService.showModal({
+			templateUrl: 'error.html',
+			controller: function($scope, close) {
+				$scope.close = function(result) {
+					close(result, 400);
+				}
+			}
+		}).then(function(modal) {
+			modal.element.modal();
+		});
+	}
+
 	function searchBriefRestaurants(pageToGo) {
 		var criteria = buildSearchCriteria(pageToGo);
 		vm.spinner = true;
@@ -33,9 +46,9 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 			vm.spinner = false;
 		}, function(data) {
 			vm.spinner = false;
+			showError();
 		});
 	}
-
 
 	vm.clickCategory = function(name) {
 		vm.checkedCategory = (vm.checkedCategory == name) ? null : name;
@@ -58,7 +71,13 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 	.then(function(data) {
 		vm.search = data;
 	}, function(data) {
+			showError();
 	});
+
+
+	vm.gotoRestaurant = function(id) {
+		$location.path("restaurant/" + id);
+	}
 
 	vm.pageChanged = function() {
 		searchBriefRestaurants(vm.data.currentPage - 1);

@@ -84,6 +84,8 @@ def tuple_to_dic(i):
         ret['cost_for_2'] = m.group(1)
     if i[8] is not None:
         ret['thumb_img_url'] = i[8]
+    if i[9] is not None:
+        ret['img_url'] = i[9]
     return ret
 
 
@@ -100,7 +102,8 @@ def transform_for_es(rest):
     for k in optional_keys:
         if rest[k] is not None:
             ret[k] = rest[k]
-    ret['']
+    if rest['img_url']:
+        ret['img_url'] = rest['img_url']
     return ret
 
 def avg_rate(reviews):
@@ -115,7 +118,7 @@ def avg_rate(reviews):
 page = 0
 while True:
     cursor.execute("SELECT r.restaurant_id, r.name, r.phone, r.known_for,\
-    a.address, a.longitude, a.latitude, r.approx_price, r.thumb_img_url FROM restaurants r INNER JOIN addresses a\
+    a.address, a.longitude, a.latitude, r.approx_price, r.thumb_img_url, r.img_url FROM restaurants r INNER JOIN addresses a\
     ON r.address_id = a.address_id  LIMIT %s OFFSET %s",
     (10, page * 10,))
     records = cursor.fetchall()
@@ -132,7 +135,6 @@ while True:
         rest['open_hours'] = get_open_hours(i[0])
         rest['reviews'] = get_reviews(i[0])
         rest['avg_rate'] = avg_rate(rest['reviews'])
-        #print rest['avg_rate']
         es.index(doc_type='restaurant', index="zomato", id=rest['id'], body=rest)
         #es.update(doc_type='restaurant', index="zomato", id=rest['id'], body={"doc": {"avg_rate": avg_rate(rest['reviews'])}})
         #print   avg_rate(rest['reviews'])
