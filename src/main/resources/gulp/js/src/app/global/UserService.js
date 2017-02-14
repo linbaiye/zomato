@@ -14,6 +14,7 @@ function UserService($http, $q, baseUrl) {
       }
       var newReviews = reviews.slice(0);
       for (var i = 0; i < newReviews.length; i++) {
+        newReviews[i].epoch = new Date(newReviews[i].review_time).getTime();
         for (var j = 0; j < data.data.length; j++) {
           if (newReviews[i]['user_id'] == data.data[j]['id']) {
             newReviews[i]['user'] = data.data[j];

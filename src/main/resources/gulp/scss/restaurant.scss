@@ -76,12 +76,24 @@
     border-radius: 50px;
     background-position: center;
   }
-  .user-name {
+  .user-name-box {
     display: inline-block;
     vertical-align: top;
     padding-left: 15px;
     padding-top: 10px;
+  }
+  .user-name {
     font-weight: 600;
+  }
+  .user-tag {
+    background-color: #0072BC;
+    color: white;
+    padding: 1px;
+    font-size: 10px;
+    border-radius: 2px;
+  }
+  .review-time {
+    font-size: 12px;
   }
 
   #details {

@@ -69,8 +69,14 @@
 				<div class="box review-box" ng-repeat="item in vm.reviews">
 					<div>
 						<div class="user-icon" ng-style="{'background-image': 'url(' + item.user.iconUrl + ')'}"></div>
-						<div class="user-name">{{item.user.name}}</div>
+						<div class="user-name-box">
+							<span class="user-name">{{item.user.name}}</span>
+							<span ng-show="item.user.tag" class="user-tag">{{item.user.tag}}</span>
+						</div>
 					</div>
+					<p class="grey-text review-time">
+						{{item.epoch | date:'dd-MMM-yyyy'}}
+					</p>
 					<p ng-bind-html="item.review_text">
 						{{item.review_text}}
 					</p>
