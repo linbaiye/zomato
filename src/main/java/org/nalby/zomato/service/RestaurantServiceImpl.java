@@ -2,17 +2,12 @@ package org.nalby.zomato.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import javax.print.attribute.standard.RequestingUserName;
-import javax.validation.constraints.Null;
 
 import org.nalby.zomato.dao.RestaurantDao;
 import org.nalby.zomato.entity.FeaturedCollection;
-import org.nalby.zomato.entity.RecommandRestaurant;
 import org.nalby.zomato.entity.Restaurant;
 import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;

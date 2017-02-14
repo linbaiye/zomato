@@ -1,5 +1,5 @@
 
-function SearchCriteriaController(restaurantService, $routeParams) {
+function SearchCriteriaController(restaurantService, $routeParams, util, modalService) {
 	var vm = this;
 	vm.filtersStatus = 'filters-collapsed';
 	vm.filterStatus = 'filter-collapsed';
@@ -37,22 +37,20 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 	}
 
 
-	function loadCategoriedRestaurants(cate) {
-		vm.checkedCategory = cate;
-		searchBriefRestaurants(0);
-	}
-
 	vm.clickCategory = function(name) {
-		loadCategoriedRestaurants(name);
-	}
-
-	vm.clickCuisine = function(name) {
-		vm.checkedCuisine = (vm.checkedCuisine == name) ? null : name;
+		vm.checkedCategory = (vm.checkedCategory == name) ? null : name;
 		searchBriefRestaurants(0);
 	}
 
-	vm.clickLocation = function(location) {
-		vm.checkedLocation = (vm.checkedLocation == location) ? null : location;
+	vm.clickCuisine = function(item) {
+		vm.search.first10Cuisines = util.moveItemToHead(item, vm.search.first10Cuisines, 'name');
+		vm.checkedCuisine = (vm.checkedCuisine == item.name) ? null : item.name;
+		searchBriefRestaurants(0);
+	}
+
+	vm.clickLocation = function(item) {
+		vm.search.first10Places = util.moveItemToHead(item, vm.search.first10Places, 'district');
+		vm.checkedLocation = (vm.checkedLocation == item.district) ? null : item.district;
 		searchBriefRestaurants(0);
 	}
 
@@ -66,8 +64,37 @@ function SearchCriteriaController(restaurantService, $routeParams) {
 		searchBriefRestaurants(vm.data.currentPage - 1);
 	}
 
+	vm.openModal = function(type) {
+		modalService.showModal({
+			templateUrl: 'modal.html',
+			controller: function($scope, close) {
+				$scope.close = function(result) {
+					close(result, 400);
+				}
+			},
+			controllerAs : "modal"
+		}).then(function(modal) {
+			if (type == 'cuisine') {
+				modal.controller.itemListOfModal = vm.search.cuisineList;
+			} else if (type == 'location') {
+				modal.controller.itemListOfModal = vm.search.placeList;
+			}
+    	modal.element.modal();
+      modal.close.then(function(result) {
+				if (type == "cuisine" && result) {
+					vm.clickCuisine(result);
+				} else if (type == "location" && result) {
+					vm.clickLocation(result);
+				}
+      });
+    });
+	}
+
 	vm.toggleFiltersClass = function() {
 		vm.filtersStatus = (vm.filtersStatus == 'filters-open') ? 'filters-collapsed' : 'filters-open';
+		vm.isCol3Hidden = true;
 	}
-	loadCategoriedRestaurants($routeParams["category"]);
+	vm.checkedCategory = $routeParams["category"];
+	vm.checkedLocation = $routeParams["location"];
+	searchBriefRestaurants(0);
 }

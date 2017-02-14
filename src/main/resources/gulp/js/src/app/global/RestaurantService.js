@@ -82,7 +82,8 @@ function RestaurantService($http, $q, baseUrl) {
 			first10Cuisines : cusinesToShow,
 			categoryList : data.categoryList,
 			cuisineList : data.cuisineList,
-			placeList : placeListToShow
+			first10Places: placeListToShow,
+			placeList: data.placeList
 		}
 	}
 
@@ -91,9 +92,8 @@ function RestaurantService($http, $q, baseUrl) {
 		return commitPromise(baseUrl + "/api/v1/search/components", shortList);
 	}
 
-
 	this.getRecommandRestaurants = function() {
-		return commitPromise(baseUrl + "/api/v1/search/recommand");
+		return commitPromise(baseUrl + "/api/v1/search/recommend");
 	}
 
 	/* Copyied from stackoverflow. */
@@ -106,6 +106,8 @@ function RestaurantService($http, $q, baseUrl) {
 	 	if (seconds < 10) {seconds = "0"+seconds;}
 	 	return hours+':'+minutes+':'+seconds;
 	}
+
+
 
 
 	this.search = function(searchCriteria, currentPage) {

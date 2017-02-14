@@ -1,0 +1,12 @@
+.modal {
+  .criterion {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  ul {
+    overflow: auto;
+    p {
+      margin-bottom: 5px;
+    }
+  }
+}

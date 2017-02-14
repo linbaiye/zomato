@@ -18,4 +18,23 @@ function UtilService() {
     }
     return ret;
   }
+
+  this.moveItemToHead = function(item, array, key) {
+    var newArray = array.slice(0);
+    var index = -1;
+    for (var i = 0; i < newArray.length; i++) {
+      if (item[key] == newArray[i][key]) {
+        index = i;
+        break;
+      }
+    }
+    if (index >= 0) {
+      var tmp = newArray[0];
+      newArray[0] = newArray[index];
+      newArray[index] = tmp;
+    } else {
+      newArray[0] = item;
+    }
+    return newArray;
+  }
 }

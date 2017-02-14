@@ -7,7 +7,7 @@ import javax.persistence.NamedNativeQuery;
 import org.nalby.zomato.util.QueryName;
 
 @NamedNativeQuery(name = QueryName.GET_PLACE_STATS, resultClass = PlaceStats.class, 
-	query = "SELECT district, count(*) AS count FROM addresses GROUP BY district ORDER BY count DESC")
+	query = "SELECT district, count(*) AS count FROM addresses GROUP BY district ORDER BY count DESC LIMIT 60")
 @Entity
 public class PlaceStats {
 

@@ -77,9 +77,9 @@ public class ZomatoController {
 		return searchService.getSearchComponents();
 	}
 	
-	@RequestMapping(value = "/api/v1/search/recommand")
-	public Response getSearchRecommand() {
-		logger.info("/api/v1/search/recommand is requested.");
+	@RequestMapping(value = "/api/v1/search/recommend")
+	public Response getSearchRecommend() {
+		logger.info("/api/v1/search/recommend is requested.");
 		return restaurantService.getRecommandedRestaurants();
 		//return searchService.getSearchComponents();
 	}

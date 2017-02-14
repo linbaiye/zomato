@@ -1,5 +1,5 @@
 (function() {
-	angular.module("app", [ "ui.bootstrap", "ngRoute"])
+	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService"])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
 	.service("broker", BrokerService)
 	.service("util", UtilService)
@@ -16,12 +16,15 @@
 		})
 		.when("/search/category/:category", {
 			templateUrl: "static/html/search.html"
+		})
+		.when("/search/location/:location", {
+			templateUrl: "static/html/search.html"
 		});
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", HeaderController)
-	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", SearchCriteriaController])
+	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {

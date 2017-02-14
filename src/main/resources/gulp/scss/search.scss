@@ -34,21 +34,24 @@
     div#filter-container.filters-open {
       top: $mobile-header-height;
       margin-left: -15px;
+      height: 100%;
+      overflow-y: scroll;
     }
     div#filter-container.filters-collapsed {
       bottom: 0;
+      height: auto;
     }
     div#filter-container.filters-collapsed, div#filter-container.filters-open {
-      height: auto;
       position: fixed;
       z-index: 4;
       padding: 0;
     }
-    div#filters.filters-collapsed, .filter-collapsed {
+    div#filters.filters-collapsed, .filter-collapsed, .col2.hidden {
       display: none;
     }
     #filter-container {
       background-color: #EDF1F4;
+      border-radius: 0;
     }
     #filters {
       padding-top: 20px;
@@ -64,10 +67,16 @@
     .criterion {
       margin-left: -15px;
       margin-right: -15px;
-      padding: 0 15px;
+      padding: 20px 15px;
       background-color: white;
       line-height: 40px;
+      li {
+        line-height: 25px;
+      }
     }
+  }
+  .nav-more .more {
+    color: $default-red;
   }
   .criterion {
     list-style-type: none;

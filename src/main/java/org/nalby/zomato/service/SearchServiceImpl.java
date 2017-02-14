@@ -11,7 +11,6 @@ import org.nalby.zomato.dao.SearchDao;
 import org.nalby.zomato.entity.CategoriedRestaurant;
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.exception.InternalErrorExpection;
-import org.nalby.zomato.form.SearchBody;
 import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.slf4j.Logger;
