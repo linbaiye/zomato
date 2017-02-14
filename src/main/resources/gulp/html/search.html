@@ -75,6 +75,9 @@
 		</div>
 		<div class="col-md-6 col-sm-8 col-xs-12 col2" ng-class="{'hidden': vm.filtersStatus == 'filters-open'}">
 			<div class="col-xs-12 nopadding">
+				<div ng-show="!vm.data.restaurantList || vm.data.restaurantList.length == 0">
+					<h4 class="grey-text">No restaurant meet with your search criteria.</h4>
+				</div>
 				<div ng-repeat="item in vm.data.restaurantList" class="restaurant">
 					<div class="basic-info-box col-xs-12">
 						<div class="basic-info">
@@ -103,7 +106,7 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="vm.data" class="col-xs-12">
+			<div ng-show="vm.data.total > 10" class="col-xs-12">
 				<ul uib-pagination boundary-links="true" ng-change="vm.pageChanged()" max-size="10" total-items="vm.data.total" ng-model="vm.data.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 			</div>
 		</div>
