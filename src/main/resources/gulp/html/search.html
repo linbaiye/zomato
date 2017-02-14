@@ -106,7 +106,7 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="vm.data.total > 10" class="col-xs-12">
+			<div ng-show="vm.data.total > 10" class="col-xs-12" id="paging-container">
 				<ul uib-pagination boundary-links="true" ng-change="vm.pageChanged()" max-size="10" total-items="vm.data.total" ng-model="vm.data.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 			</div>
 		</div>

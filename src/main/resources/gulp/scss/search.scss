@@ -75,6 +75,20 @@
       }
     }
   }
+  #paging-container {
+    text-align: center;
+  }
+  .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover,
+  .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover,
+  .pagination > li > a, .pagination > li > span {
+    color: $default-blue;
+  }
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span,
+  .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: $default-blue;
+    border-color: $default-blue;
+    color: white;
+  }
   .nav-more .more {
     color: $default-red;
   }
