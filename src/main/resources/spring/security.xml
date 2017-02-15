@@ -17,7 +17,7 @@
 			authentication-failure-handler-ref="authFailureHandler"
 			username-parameter="username"
 			password-parameter="password"/>
-		<logout success-handler-ref="logoutHandler"/>
+		<logout success-handler-ref="authSuccessHandler"/>
 	</http>
 	<global-method-security pre-post-annotations="enabled"/>
 	<authentication-manager alias="authManager">
