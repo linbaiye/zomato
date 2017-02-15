@@ -159,7 +159,7 @@
     border-top: 1px solid rgba(200, 200, 200, 0.3);
   }
   .restaurant {
-    padding: 15px 0;
+    padding-top: 15px;
     @extend .container-style;
     margin-bottom: 20px;
   }
@@ -176,6 +176,10 @@
   .phone, .table-book-button {
     padding-top: 15px;
     text-align: center;
+    padding-bottom: 15px;
+  }
+  .phone {
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
   }
 
   #recommand-restaurants {
