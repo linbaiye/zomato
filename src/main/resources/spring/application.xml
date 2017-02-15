@@ -15,6 +15,7 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
 		p:url="${mysql.url}" p:driverClassName="${mysql.driver}" p:username="${mysql.username}"
 		p:password="${mysql.password}"/>
@@ -55,5 +56,5 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<context:annotation-config/>
-	<context:component-scan base-package="org.nalby.zomato.service, org.nalby.zomato.dao, org.nalby.zomato.exception"/>
+	<context:component-scan base-package="org.nalby.zomato.service, org.nalby.zomato.dao, org.nalby.zomato.exception, org.nalby.zomato.security"/>
 </beans>
