@@ -9,7 +9,7 @@
 						<div id="left">
 							<div id="rest-name">{{vm.restaurant.name}}</div>
 							<div>
-								<span>{{vm.restaurant.district}}</span>&nbsp;&#8226;&nbsp;<span ng-repeat="k in vm.restaurant.keywords">{{k}}&nbsp;</span>
+								<span>{{vm.restaurant.address.text_address | getDistrict}}</span>&nbsp;&#8226;&nbsp;<span ng-repeat="k in vm.restaurant.keywords">{{k}}&nbsp;</span>
 							</div>
 						</div>
 						<div id="right">
@@ -53,18 +53,20 @@
 								<p ng-repeat="item in vm.restaurant.highlights" class="highlight"><i class="fa fa-check" aria-hidden="true"></i> {{item}}</p>
 							</div>
 						</div>
-						<div class="details-row" ng-if="vm.restaurant.knownFor">
+						<div class="details-row" ng-if="vm.restaurant.known_for">
 							<div class="detail-name">Known for</div>
-							<div class="detail-value">{{vm.restaurant.knownFor}}</div>
+							<div class="detail-value grey-text">{{vm.restaurant.known_for}}</div>
 						</div>
 					</div>
 				</div>
 				<div id="write-comment-section" class="box">
 					<p>
-						Write a Review
+						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="rfloat">Cancel</span>
 					</p>
-					<input id="review-input" type="text" placehoder="Share your review"  class="form-control">
-					<button type="button" id="add-review-btn" class="btn btn-default">Add Your Review</button>
+					<textarea ng-show='vm.isWritingReview' rows='5' class="noshadow form-control"/>
+					<input ng-hide='vm.isWritingReview' ng-focus='vm.isWritingReview = true' type="text" placehoder="Share your review"  class="noshadow form-control">
+					<button ng-hide='vm.isWritingReview' type="button" class="review-btn btn btn-default">Add Your Review</button>
+					<button ng-show='vm.isWritingReview' type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
 				</div>
 				<div class="box review-box" ng-repeat="item in vm.reviews">
 					<div>
@@ -77,8 +79,8 @@
 					<p class="grey-text review-time">
 						{{item.epoch | date:'dd-MMM-yyyy'}}
 					</p>
-					<p ng-bind-html="item.review_text">
-						{{item.review_text}}
+					<p>
+						<strong>RATED</strong> <span class="user-rate {{item.rate | rateClass}}">{{item.rate | number:1}}</span><span ng-bind-html="item.review_text">{{item.review_text}}</span>
 					</p>
 				</div>
 			</div>

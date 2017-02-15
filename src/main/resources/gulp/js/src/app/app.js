@@ -72,6 +72,9 @@
 		return shortenFunction(65);
 	}).filter("getDistrict", function() {
 		return function(address) {
+			if (!address || typeof address != "string") {
+				return;
+			}
 			var token = address.split(",");
 			return token.length >= 3 ? token[token.length - 3] : "";
 		}
