@@ -111,33 +111,7 @@
 			</div>
 		</div>
 		<div class="col-md-3 col3 mobile-invisible" ng-controller="RecommandRestaurantController as vm" id="recommand-restaurants">
-			<div ng-repeat="(name, data) in vm.data" class="container-style">
-				<div class="inner box">
-					<div class="col-xs-12 nopadding">
-						<h3 class="recommand-type">
-							<strong>{{data.text.title}}</strong>
-						</h3>
-						<p class="grey-text">
-							{{data.text.desc}}
-						</p>
-					</div>
-					<div ng-repeat="r in data.restaurantList" class="col-xs-12 nopadding box">
-						<div ng-repeat="item in r" class="col-xs-4 box">
-							<div class="restaurant-box box col-{{$index % 3}}">
-								<a href="#/restaurant/{{item.id}}" target="_blank" ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb">
-									<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
-								</a>
-								<p class="restaurant-name">
-									{{item.name}}
-								</p>
-								<p class="restaurant-addr grey-text">
-									{{item.address.textAddress | getDistrict }}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div ng-include="'static/html/right-side.html'"></div>
 		</div>
 	</div>
 </div>

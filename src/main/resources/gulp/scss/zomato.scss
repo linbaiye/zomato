@@ -115,6 +115,15 @@ html, body {
 .grey-border {
   border: 1px solid #e7e7e7;
 }
+.redborder {
+  border-color: $default-red;
+}
+.blueborder {
+  border-color: $default-blue;
+}
+.whiteborder {
+  border-color: white;
+}
 .nopadding {
   padding: 0;
 }

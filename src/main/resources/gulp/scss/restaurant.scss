@@ -1,4 +1,7 @@
 #restaurant-details-container {
+  @media (max-width: $small - 1) {
+    padding: 0;
+  }
   #restaurant-details {
     #bg-img {
       height: 300px;
@@ -46,11 +49,14 @@
       font-size: 18px;
     }
   }
-  .box {
+  #recommand-restaurants, .detail-box {
+    margin-top: 20px;
+    overflow: auto;
+  }
+  .detail-box {
     border-radius: 4px;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     background-color: white;
-    margin-top: 20px;
   }
   .review-box {
     padding: 20px;

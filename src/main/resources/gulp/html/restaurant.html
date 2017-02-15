@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="col-md-8 col-xs-12" id="restaurant-details">
-				<div id="feature-img" class="box">
+				<div id="feature-img" class="detail-box">
 					<div id="bg-img" ng-style="{'background-image': 'url(' + vm.restaurant.img_url + ')'}"></div>
 					<div id="restaurant-info">
 						<div id="left">
@@ -19,7 +19,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="details" class="box">
+				<div id="details" class="detail-box">
 					<div class="details-col">
 						<div class="details-row">
 							<div class="detail-name">Phone number</div>
@@ -59,16 +59,20 @@
 						</div>
 					</div>
 				</div>
-				<div id="write-comment-section" class="box">
+				<div id="write-comment-section" class="detail-box">
 					<p>
 						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="rfloat">Cancel</span>
 					</p>
-					<textarea ng-show='vm.isWritingReview' rows='5' class="noshadow form-control"/>
-					<input ng-hide='vm.isWritingReview' ng-focus='vm.isWritingReview = true' type="text" placehoder="Share your review"  class="noshadow form-control">
-					<button ng-hide='vm.isWritingReview' type="button" class="review-btn btn btn-default">Add Your Review</button>
-					<button ng-show='vm.isWritingReview' type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
+					<div>
+						<textarea ng-show='vm.isWritingReview' rows='5' class="noshadow form-control"/>
+						<input ng-hide='vm.isWritingReview' ng-focus='vm.isWritingReview = true' type="text" placehoder="Share your review"  class="noshadow form-control">
+					</div>
+					<div>
+						<button ng-hide='vm.isWritingReview' type="button" class="review-btn btn btn-default">Add Your Review</button>
+						<button ng-show='vm.isWritingReview' type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
+					</div>
 				</div>
-				<div class="box review-box" ng-repeat="item in vm.reviews">
+				<div class="detail-box review-box" ng-repeat="item in vm.reviews">
 					<div>
 						<div class="user-icon" ng-style="{'background-image': 'url(' + item.user.iconUrl + ')'}"></div>
 						<div class="user-name-box">
@@ -84,7 +88,9 @@
 					</p>
 				</div>
 			</div>
-			<div id="random-restaurants"></div>
+			<div class="col-md-4 mobile-invisible" ng-controller="RecommandRestaurantController as vm" id="recommand-restaurants">
+				<div ng-include="'static/html/right-side.html'"></div>
+			</div>
 		</div>
 	</div>
 </div>
