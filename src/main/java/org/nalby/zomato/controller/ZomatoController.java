@@ -1,6 +1,10 @@
 package org.nalby.zomato.controller;
 
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
@@ -9,6 +13,7 @@ import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
 import org.nalby.zomato.service.SearchService;
+import org.nalby.zomato.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class ZomatoController {
@@ -28,6 +35,12 @@ public class ZomatoController {
 	
 	@Autowired
 	private SearchService searchService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@SuppressWarnings("unused")
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	@RequestMapping(value = "/api/v1/restaurant/{id}", method = RequestMethod.GET)
 	public String getRestaurant(@PathVariable("id") int id) {
@@ -87,6 +100,13 @@ public class ZomatoController {
 		return searchService.compoundSearch(request);
 	}
 	
+	@RequestMapping(value = "/api/v1/user/list", method = RequestMethod.POST)
+	public Response getUsers(@RequestBody @NotNull List<Long> ids) {
+		for (Long id: ids) {
+			logger.info("id:" + id);
+		}
+		return userService.getUsersByIds(ids);
+	}
 	
 	@RequestMapping(value = "/api/v1/test", method = RequestMethod.GET)
 	public Response test() {

@@ -13,10 +13,11 @@
 		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script src="${resourceUrl}/js/src/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 		<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
 		<link href="${resourceUrl}/css/zomato.css" rel="stylesheet" />
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
 	</head>
@@ -29,9 +30,11 @@
 		<script src="${resourceUrl}/js/src/app/search/SearchCriteriaController.js"></script>
 		<script src="${resourceUrl}/js/src/app/search/RecommandRestaurantController.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/BrokerService.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/HttpPromiseSerivce.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/RestaurantService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/UtilService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/UserService.js"></script>
 		<script src="${resourceUrl}/js/src/app/app.js"></script>
 	</body>
 </html>

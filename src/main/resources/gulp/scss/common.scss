@@ -81,3 +81,39 @@
     display: none;
   }
 }
+#recommand-restaurants {
+  padding-left: 0;
+  .container-style {
+    overflow: auto;
+    margin-bottom: 20px;
+  }
+  .col-xs-4 {
+    padding: 0;
+    text-align: center;
+    .restaurant-box {
+      width: 95%;
+      display: inline-block;
+    }
+    .restaurant-name,.restaurant-addr {
+      font-size: 12px;
+      text-align: left;
+    }
+    .restaurant-name {
+      margin-bottom: 0;
+    }
+  }
+  .recommend-thumb {
+    width: 100%;
+    height: 80px;
+    display: inline-block;
+    border-radius: $default-radius;
+  }
+  .inner {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .restaurant-rate {
+    width: 30px;
+    font-size: 12px;
+  }
+}

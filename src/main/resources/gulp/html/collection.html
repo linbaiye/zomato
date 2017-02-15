@@ -17,11 +17,11 @@
 		<div class="col-xs-12">
 			<div class="col-xs-12" id="restraurant-list">
 				<div ng-repeat="r in vm.currentCollection.restaurantSet" class="restaurant-item col-xs-6 col-md-4">
-					<div class="restaurant-bgimg clickable align-right" ng-style="{'background-image': 'url('+ r.imageUrl +')'}">
+					<a href="#/restaurant/{{r.id}}" target="_blank" class="restaurant-bgimg clickable align-right" ng-style="{'background-image': 'url('+ r.imageUrl +')'}">
 						<p class="{{r.rate | rateClass}} restaurant-rate">{{!r.rate ? "-" : r.rate.toFixed(1)}}</p>
-					</div>
+					</a>
 					<div class="restaurant-text">
-						<p class="restaurant-name nowrap">{{r.shortName}}</p>
+						<a href="#/restaurant/{{r.id}}" target="_blank" class="restaurant-name nowrap">{{r.shortName}}</a>
 						<p class="restaurant-address nowrap">{{r.address.textAddress | joinDistrictAndCity}}</p>
 						<p class="restaurant-cuisine nowrap">{{r.cuisineSet | joinNameOfList}}</p>
 					</div>

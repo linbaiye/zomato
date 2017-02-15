@@ -35,6 +35,7 @@
 				<value>org.nalby.zomato.entity.OpeningHour</value>
 				<value>org.nalby.zomato.entity.RecommandRestaurant</value>
 				<value>org.nalby.zomato.entity.CategoriedRestaurant</value>
+				<value>org.nalby.zomato.entity.User</value>
 				<value>org.nalby.zomato.stats.AbstractStats</value>
 				<value>org.nalby.zomato.stats.CategoryStats</value>
 				<value>org.nalby.zomato.stats.CuisineStats</value>

@@ -6,7 +6,6 @@
 			<h2><strong>Dinner in Sydney</strong></h2>
 		</div>
 		<div class="col-xs-12">
-
 			<script type="text/ng-template" id="modal.html">
           <div class="modal fade">
            <div class="modal-dialog">
@@ -82,10 +81,10 @@
 				<div ng-repeat="item in vm.data.restaurantList" class="restaurant">
 					<div class="basic-info-box col-xs-12">
 						<div class="basic-info">
-							<div ng-click="vm.gotoRestaurant(item.id)" ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb clickable col-xs-5 col-sm-3"></div>
+							<a href="#/restaurant/{{item.id}}" target="_blank" ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb clickable col-xs-5 col-sm-3"></a>
 							<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-xs-2">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
 							<div class="text-info col-xs-12 col-sm-8">
-								<p class="name clickable" ng-click="vm.gotoRestaurant(item.id)">{{item.name}}</p>
+								<a class="name" target="_blank" href="#/restaurant/{{item.id}}">{{item.name}}</a>
 								<p class="district">{{item.address | getDistrict}}</p>
 								<p class="address grey-text">{{item.address}}</p>
 							</div>
@@ -112,33 +111,7 @@
 			</div>
 		</div>
 		<div class="col-md-3 col3 mobile-invisible" ng-controller="RecommandRestaurantController as vm" id="recommand-restaurants">
-			<div ng-repeat="(name, data) in vm.data" class="container-style">
-				<div class="inner box">
-					<div class="col-xs-12 nopadding">
-						<h3 class="recommand-type">
-							<strong>{{data.text.title}}</strong>
-						</h3>
-						<p class="grey-text">
-							{{data.text.desc}}
-						</p>
-					</div>
-					<div ng-repeat="r in data.restaurantList" class="col-xs-12 nopadding box">
-						<div ng-repeat="item in r" class="col-xs-4 box">
-							<div class="restaurant-box box col-{{$index % 3}}">
-								<div ng-style="{'background-image': 'url(' + item.thumbImageUrl + ')'}" class="center-bgimg thumb">
-									<p class="restaurant-rate nopadding {{item.rate | rateClass}} col-md-1">{{!item.rate ? "-" : item.rate.toFixed(1)}}</p>
-								</div>
-								<p class="restaurant-name">
-									{{item.name}}
-								</p>
-								<p class="restaurant-addr grey-text">
-									{{item.address.textAddress | getDistrict }}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div ng-include="'static/html/right-side.html'"></div>
 		</div>
 	</div>
 </div>

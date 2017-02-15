@@ -18,7 +18,6 @@ function RecommandRestaurantController(restaurantService, util) {
       "desc": "Takeaway restaurants"
     }
   }
-  //restaurantService
 
   restaurantService.getRecommandRestaurants().then(function(data) {
     for (var k in data) {
