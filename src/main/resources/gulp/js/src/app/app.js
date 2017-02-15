@@ -24,7 +24,7 @@
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
-	.controller("HeaderController", HeaderController)
+	.controller("HeaderController", ["ModalService", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
 	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", RestaurantDetailsController])

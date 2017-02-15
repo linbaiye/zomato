@@ -61,11 +61,10 @@
 				</div>
 				<div id="write-comment-section" class="detail-box">
 					<p>
-						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="rfloat">Cancel</span>
+						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="clickable rfloat">Cancel</span>
 					</p>
 					<div>
-						<textarea ng-show='vm.isWritingReview' rows='5' class="noshadow form-control"/>
-						<input ng-hide='vm.isWritingReview' ng-focus='vm.isWritingReview = true' type="text" placehoder="Share your review"  class="noshadow form-control">
+						<textarea ng-focus="vm.isWritingReview = true" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
 					</div>
 					<div>
 						<button ng-hide='vm.isWritingReview' type="button" class="review-btn btn btn-default">Add Your Review</button>

@@ -1,13 +1,13 @@
 
-<div id="index-header">
+<div id="index-header" ng-controller="HeaderController as vm">
 	<div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12" id="header-buttons-row">
-					<button  class="btn btn-default red-btn">Looking for a job</button>
+					<button  class="btn red-btn">Looking for a job</button>
 					<div id="right-side">
-						<button class="btn btn-default blue-btn">Book a Table</button>
-						<button class="btn whiteborder btn-default">Log in</button>
+						<button class="btn blue-btn">Book a Table</button>
+						<button ng-click="vm.onClickLogin()" class="btn whiteborder btn-default">Log in</button>
 					</div>
 				</div>
 			</div>

@@ -22,6 +22,30 @@
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
 	</head>
 	<body ng-app="app">
+				<script type="text/ng-template" id="login.html">
+						<div class="modal fade">
+						 <div class="modal-dialog modal-sm">
+							 <div class="modal-content">
+								 <div class="modal-header">
+									 <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+								 </div>
+								 <div class="modal-body">
+									 <div class="form-group">
+										 <label for="user-input">Username</label>
+									 	 <input id="user-input" type="text" placehoder="Username" class="noshadow form-control"/>
+									 </div>
+									 <div class="form-group">
+										 <label for="user-input">Password</label>
+										 <input id="password-input" type="password" placehoder="Password" class="noshadow form-control"/>
+									 </div>
+								 </div>
+								 <div class="modal-footer">
+										<button type="button" class="btn red-btn">Log in</button>
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+				</script>
 		<div ng-view></div>
 		<script src="${resourceUrl}/js/src/app/restaurant/RestaurantDetailsController.js"></script>
 		<script src="${resourceUrl}/js/src/app/restaurant/HeaderController.js"></script>
