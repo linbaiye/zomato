@@ -1,7 +1,7 @@
 /**
  *
  */
-function RestaurantDetailsController(restaurantService, userService, $routeParams) {
+function RestaurantDetailsController(restaurantService, userService, $routeParams, broker, CONFIG) {
 	var vm = this;
 	restaurantService.loadRestaurantById($routeParams['id'])
 	.then(function(data) {
@@ -23,4 +23,24 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 	}, function(data) {
 		console.log(data);
 	});
+
+	vm.onWritingReviewPending = false;
+	vm.onWritingReviewFocus = function() {
+		if (vm.onWritingReviewPending) {
+			return;
+		}
+		var promise = broker.requestCooperation(CONFIG.CONTROLLOR_NAMES.HEADER,
+			{opcode: CONFIG.OPCODE.LOGIN, data: "Please login to comment."});
+		if (!promise) {
+			vm.onWritingReviewPending = false;
+			return;
+		}
+		vm.onWritingReviewPending = true;
+		promise.then(function(ret){
+			vm.onWritingReviewPending = false;
+			vm.isWritingReview = true;
+		}, function(ret) {
+			vm.onWritingReviewPending = false;
+		});
+	}
 }

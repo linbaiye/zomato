@@ -29,6 +29,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<p class="grey-text" ng-show="title">{{title}}</p>
 						</div>
 						<div class="modal-body" ng-form name="loginForm">
 							<div class="form-group">

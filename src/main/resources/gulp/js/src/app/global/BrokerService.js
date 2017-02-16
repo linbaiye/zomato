@@ -1,22 +1,17 @@
 /**
- * 
+ *
  */
 function BrokerService() {
-	var cachedMessages = {};
-	function putSingleMessage(receiver, message) {
-		if (!receiver || !message) {
-			return;
+	var self = this;
+	self.cooperators = {};
+	this.acceptCooperation = function(name, accepter) {
+		self.cooperators[name] = accepter;
+	}
+	this.requestCooperation = function(name, data) {
+		if (!self.cooperators[name]) {
+			return null;
 		}
-		cachedMessages[receiver] = message;
-	}
-	
-	function getSingleMessage(receiver) {
-		return cachedMessages[receiver];
-	}
-
-	return {
-		putSingleMessage: putSingleMessage,
-		getSingleMessage: getSingleMessage
+		return self.cooperators[name](data);
 	}
 }
 

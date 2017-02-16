@@ -1,6 +1,12 @@
 (function() {
 	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize", "ngCookies"])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
+	.constant("CONFIG", {
+		OPCODE: {LOGIN: "login"},
+		CONTROLLOR_NAMES: {
+			HEADER: "header"
+		}
+	})
 	.service("broker", BrokerService)
 	.service("util", UtilService)
 	.service("userService", ["$http", "$q", "baseUrl", "$cookies", UserService])
@@ -24,10 +30,10 @@
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
-	.controller("HeaderController", ["ModalService", "userService", HeaderController])
+	.controller("HeaderController", ["ModalService", "userService", "CONFIG", "$q", "broker", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
-	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", RestaurantDetailsController])
+	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", "broker", "CONFIG", RestaurantDetailsController])
 	.controller("LoginModalController", ["$scope", "$element", "userService", "close", loginModalController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {

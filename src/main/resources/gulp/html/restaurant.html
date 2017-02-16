@@ -64,7 +64,7 @@
 						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="clickable rfloat">Cancel</span>
 					</p>
 					<div>
-						<textarea ng-focus="vm.isWritingReview = true" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
+						<textarea ng-focus="vm.onWritingReviewFocus()" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
 					</div>
 					<div>
 						<button ng-hide='vm.isWritingReview' type="button" class="review-btn btn btn-default">Add Your Review</button>
