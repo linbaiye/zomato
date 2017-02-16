@@ -23,4 +23,11 @@ public class UserDaoImpl implements UserDao {
 		query.setParameterList("ids", ids);
 		return query.list();
 	}
+
+	public User loadUserByName(String name) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = (Query) session.getNamedQuery(QueryName.GET_USER_BY_NAME);
+		query.setParameter("name", name);
+		return (User) query.uniqueResult();
+	}
 }

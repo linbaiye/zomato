@@ -7,7 +7,14 @@ function HttpPromiseSerivce($http, $q) {
     if (!data) {
       return $http.get(url).then(onRequestOkCb, onRequestError);
     }
-    return $http.post(url, unescape(encodeURIComponent(JSON.stringify(data))), {headers: {'Content-Type': 'Application/json'}})
+    if (typeof data == "string") {
+      var headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+      var postData = unescape(encodeURIComponent(data));
+    } else {
+      var headers = {'Content-Type': 'Application/json'}
+      var postData = unescape(encodeURIComponent(JSON.stringify(data)));
+    }
+    return $http.post(url, postData, {headers: headers})
     .then(onRequestOkCb, onRequestError);
   }
 
@@ -29,7 +36,10 @@ function HttpPromiseSerivce($http, $q) {
   }
 
 
-  this.commitPromiseV2 = function(url, callback, data) {
+  this.commitPromiseV2 = function(url, data, callback) {
+    if (typeof url != "string") {
+      throw "Invalid http request.";
+    }
     var deferred = $q.defer();
     function onRequestOk(response) {
       if (callback) {

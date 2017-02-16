@@ -20,7 +20,6 @@ function BodyController($http, $location, baseUrl, broker, utilService) {
 			return;
 		}
 		var result = utilService.to2DArray(data.data, 2);
-		console.log(result);
 		vm.quickSearches = result;
 	}
 
@@ -39,7 +38,7 @@ function BodyController($http, $location, baseUrl, broker, utilService) {
 	vm.gotoCollection = function(featured) {
 		$location.path("feature/" + featured);
 	}
-	
+
 	vm.gotoCategorySearch = function(category) {
 		$location.path("search/category/" + category);
 	}

@@ -1,4 +1,4 @@
-function UserService($http, $q, baseUrl) {
+function UserService($http, $q, baseUrl, $cookies) {
   HttpPromiseSerivce.call(this, $http, $q);
   this.loadUsersByIds = function(reviews) {
     if (!reviews || !(reviews instanceof Array) || reviews.length <= 0) {
@@ -8,7 +8,7 @@ function UserService($http, $q, baseUrl) {
     for (var i = 0; i < reviews.length; i++) {
       ids.push(reviews[i]['user_id']);
     }
-		return this.commitPromiseV2(baseUrl + "/api/v1/user/list", function(data) {
+		return this.commitPromiseV2(baseUrl + "/api/v1/user/list", ids, function(data) {
       if (data.error != "EOK") {
         return null;
       }
@@ -22,6 +22,18 @@ function UserService($http, $q, baseUrl) {
         }
       }
       return newReviews;
-    }, ids);
+    });
+  }
+  this.doAuth = function(username, password) {
+    if (typeof username != "string" || typeof password != "string") {
+      throw "Bad credentials passed.";
+    }
+    return this.commitPromiseV2(baseUrl + "/j_spring_security_check", "username=" + username + "&password=" + password);
+  }
+  this.isAuthed = function() {
+    return $cookies.get('isAuthed');
+  }
+  this.logout = function() {
+    return this.commitPromiseV2(baseUrl + "/j_spring_security_logout");
   }
 }

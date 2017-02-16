@@ -7,7 +7,9 @@
 					<button  class="btn red-btn">Looking for a job</button>
 					<div id="right-side">
 						<button class="btn blue-btn">Book a Table</button>
-						<button ng-click="vm.onClickLogin()" class="btn whiteborder btn-default">Log in</button>
+						<button ng-click="vm.onClickLogin()" class="btn whiteborder btn-default">
+							<span ng-bind-html="vm.statusLabel[vm.status]"></span>
+						</button>
 					</div>
 				</div>
 			</div>

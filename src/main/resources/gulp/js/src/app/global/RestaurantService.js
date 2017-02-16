@@ -65,14 +65,11 @@ function RestaurantService($http, $q, baseUrl) {
 	}
 
 	this.loadRestaurantById = function(id) {
-		return this.commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id, function(data) {
-			console.log(data);
-			return data;
-		});
+		return this.commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id);
 	}
 
 	this.search = function(searchCriteria, currentPage) {
-		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound", function(data) {
+		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound", searchCriteria, function(data) {
 			var list = [];
 			for (var i = 0; i < data.hits.hits.length; i++) {
 				var hit = data.hits.hits[i];
@@ -109,6 +106,6 @@ function RestaurantService($http, $q, baseUrl) {
 				restaurantList: list,
 				currentPage: currentPage
 			};
-		}, searchCriteria);
+		});
 	}
 }

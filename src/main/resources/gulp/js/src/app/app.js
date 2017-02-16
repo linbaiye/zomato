@@ -1,9 +1,9 @@
 (function() {
-	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize"])
+	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize", "ngCookies"])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
 	.service("broker", BrokerService)
 	.service("util", UtilService)
-	.service("userService", UserService)
+	.service("userService", ["$http", "$q", "baseUrl", "$cookies", UserService])
 	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
@@ -24,10 +24,11 @@
 	}])
 	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
-	.controller("HeaderController", ["ModalService", HeaderController])
+	.controller("HeaderController", ["ModalService", "userService", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
 	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", RestaurantDetailsController])
+	.controller("LoginModalController", ["$scope", "$element", "userService", "close", loginModalController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {
 			var token = address.split(",");

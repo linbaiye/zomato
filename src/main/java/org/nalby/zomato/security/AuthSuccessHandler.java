@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,9 +28,12 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 	private final static Logger logger = LoggerFactory.getLogger(AuthSuccessHandler.class);
 	
 	
-	private void writeResponse(ErrorCode code, HttpServletResponse response, int httpCode) throws JsonGenerationException, JsonMappingException, IOException {
+	private void writeResponse(ErrorCode code, HttpServletResponse response, int authCookieMaxAge) throws JsonGenerationException, JsonMappingException, IOException {
 		Response response2 = new Response(ErrorCode.EOK);
 		response.setStatus(HttpServletResponse.SC_OK);
+		Cookie cookie = new Cookie("isAuthed", "true");
+		cookie.setMaxAge(authCookieMaxAge);
+		response.addCookie(cookie);
 		PrintWriter writer = response.getWriter();
 		objectMapper.writeValue(writer, response2);
 		writer.flush();
@@ -37,17 +41,17 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
+			Authentication authentication) throws JsonGenerationException, JsonMappingException, IOException, ServletException {
 		logger.info("{} logged in.", authentication.getName());
-		writeResponse(ErrorCode.EOK, response, HttpServletResponse.SC_OK);
+		writeResponse(ErrorCode.EOK, response, (2 * 24 + 23) * 3600);
 	}
 	
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
+			throws JsonGenerationException, JsonMappingException, IOException, ServletException {
 		if (authentication != null) {
 			logger.info("{} loged out.", authentication.getName());
 		}
-		writeResponse(ErrorCode.EOK, response, HttpServletResponse.SC_OK);
+		writeResponse(ErrorCode.EOK, response, 0);
 	}
 }
 

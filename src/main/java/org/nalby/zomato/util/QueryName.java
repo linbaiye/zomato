@@ -18,5 +18,6 @@ public final class QueryName {
 	public static final String GET_PLACE_STATS = "Stats.place";
 	public static final String GET_RECOMMANDED_CAFTE = "Recommand.cafe";
 	public static final String GET_USERS_BY_IDS = "User.list";
+	public static final String GET_USER_BY_NAME = "User.findByName";
 
 }

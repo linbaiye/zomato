@@ -102,9 +102,7 @@ public class ZomatoController {
 	
 	@RequestMapping(value = "/api/v1/user/list", method = RequestMethod.POST)
 	public Response getUsers(@RequestBody @NotNull List<Long> ids) {
-		for (Long id: ids) {
-			logger.info("id:" + id);
-		}
+		logger.info("trying to list users.");
 		return userService.getUsersByIds(ids);
 	}
 	

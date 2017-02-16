@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -12,9 +13,15 @@ import org.nalby.zomato.util.QueryName;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
-@NamedQuery(name = QueryName.GET_USERS_BY_IDS, query = "SELECT u FROM User u WHERE id IN :ids")
+@NamedQueries({
+	@NamedQuery(name = QueryName.GET_USERS_BY_IDS, query = "SELECT u FROM User u WHERE id IN :ids"),
+	@NamedQuery(name = QueryName.GET_USER_BY_NAME, query = "SELECT u FROM User u WHERE name = :name")
+})
+
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +39,7 @@ public class User implements UserDetails {
 	private String name;
 	
 	@Column(name = "user_password")
+	@JsonIgnore
 	private String password;
 	
 	public Long getId() {
@@ -60,7 +68,7 @@ public class User implements UserDetails {
 	}
 
 	public String getUsername() {
-		return name;
+		return name != null ? name.trim() : name;
 	}
 
 	public boolean isAccountNonExpired() {

@@ -18,37 +18,46 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
 		<link href="${resourceUrl}/css/zomato.css" rel="stylesheet" />
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
 	</head>
 	<body ng-app="app">
-				<script type="text/ng-template" id="login.html">
-						<div class="modal fade">
-						 <div class="modal-dialog modal-sm">
-							 <div class="modal-content">
-								 <div class="modal-header">
-									 <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
-								 </div>
-								 <div class="modal-body">
-									 <div class="form-group">
-										 <label for="user-input">Username</label>
-									 	 <input id="user-input" type="text" placehoder="Username" class="noshadow form-control"/>
-									 </div>
-									 <div class="form-group">
-										 <label for="user-input">Password</label>
-										 <input id="password-input" type="password" placehoder="Password" class="noshadow form-control"/>
-									 </div>
-								 </div>
-								 <div class="modal-footer">
-										<button type="button" class="btn red-btn">Log in</button>
-								 </div>
-							 </div>
-						 </div>
-					 </div>
-				</script>
+		<script type="text/ng-template" id="login.html">
+			<div class="modal fade">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body" ng-form name="loginForm">
+							<div class="form-group">
+								<label for="user-input">Username</label>
+								<input id="user-input" ng-focus="isUsernameValid = true;errorMessage = null" name="username" ng-class="{'input-error': !isUsernameValid}" required type="text" ng-model="username" placehoder="Username" class="noshadow form-control"/>
+							</div>
+							<div class="form-group">
+								<label for="user-input">Password</label>
+								<input id="password-input" ng-focus="isPasswordValid = true;errorMessage = null" name="password" ng-class="{'input-error': !isPasswordValid}" required type="password" ng-model="password" placehoder="Password" class="noshadow form-control"/>
+							</div>
+							<p ng-show="errorMessage" class="error-message" ng-bind="errorMessage"></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" ng-click="doLogin()" class="btn red-btn"><i class="fa fa-spinner fa-pulse fa-fw" ng-show="isAuthing"></i><span ng-show="!isAuthing">Log in</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</script>
+		<script type="text/ng-template" id="login-button">
+			<button ng-click="vm.onClickLogin()" class="btn whiteborder btn-default">
+				<i class="fa fa-spinner fa-pulse fa-fw" ng-show="vm.isLogingOut"></i>
+				<span ng-show="!vm.isLogingOut">{{vm.user.isAuthed ? "Log out" : "Log in"}}</span>
+			</button>
+		</script>
 		<div ng-view></div>
 		<script src="${resourceUrl}/js/src/app/restaurant/RestaurantDetailsController.js"></script>
-		<script src="${resourceUrl}/js/src/app/restaurant/HeaderController.js"></script>
+		<script src="${resourceUrl}/js/src/app/header/HeaderController.js"></script>
+		<script src="${resourceUrl}/js/src/app/header/LoginModalController.js"></script>
 		<script src="${resourceUrl}/js/src/app/collection/CollectionController.js"></script>
 		<script src="${resourceUrl}/js/src/app/index/BodyController.js"></script>
 		<script src="${resourceUrl}/js/src/app/search/SearchCriteriaController.js"></script>
