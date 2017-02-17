@@ -9,6 +9,14 @@ function SearchCriteriaBuilder() {
     criteria['size'] = 10;
   }
 
+
+  function addObject(result, name) {
+    if (!result[name]) {
+      result[name] = {};
+    }
+    return result;
+  }
+
   this.addNestedMustPhraseMatch = function(path, field, query) {
     if (!path || !field || !query) {
       throw "Invalid parameters to build query.";
@@ -57,6 +65,33 @@ function SearchCriteriaBuilder() {
       throw "Invalid parameters to build filter.";
     }
     criteria['_source'] = sourceArray;
+  }
+
+  this.setParent = function(parentId, parentType) {
+    if (typeof parentType != "string") {
+      throw "Invalid parentType, a string is expected."
+    }
+    criteria = {
+      'query': {
+        'has_parent': {
+          "parent_type": parentType,
+          "query": {
+            "term": {
+              "_id": parentId
+            }
+          }
+        }
+      }
+    }
+  }
+
+  this.setFromAndSize = function(from, size) {
+    if (typeof from != "number" || from < 0
+     || typeof size != "number" || size < 1 || size > 10) {
+       throw "Invalid number."
+    }
+    criteria['from'] = from;
+    criteria['size'] = size;
   }
 
   this.build = function() {

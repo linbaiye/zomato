@@ -1,105 +1,87 @@
 {
-  "settings": {
-    "analysis": {
-      "filter": {
-        "tag_synonym_filter": {
-          "type": "synonym",
-          "synonyms": [
-            "cafe,cafes,Cafés,coffee"
-          ]
+    "mappings" : {
+        "restaurant": {
+            "properties": {
+                "name": {
+                    "type" : "text"
+                },
+                "open_hours": {
+                    "type": "nested",
+                    "properties": {
+                        "start_second": {
+                            "type": "integer"
+                        },
+                        "end_second": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "cost_for_2": {
+                    "type": "scaled_float",
+                    "scaling_factor": 100
+                },
+                "known_for": {
+                    "type": "text"
+                },
+                "phone" : {
+                    "type": "keyword"
+                },
+                "address" :{
+                    "type": "nested",
+                    "properties": {
+                        "text_address": {
+                            "type": "text"
+                        },
+                        "location": {
+                            "type": "geo_point"
+                        }
+                    }
+                },
+                "thumb_img_url": {
+                    "type": "keyword"
+                },
+                "categories": {
+                    "type": "keyword"
+                },
+                "keywords": {
+                    "type": "keyword"
+                },
+                "features": {
+                    "type": "keyword"
+                },
+                "cuisines": {
+                    "type": "keyword"
+                },
+                "highlights": {
+                    "type": "keyword"
+                },
+                "avg_rate": {
+                    "type": "float"
+                },
+                "img_url": {
+                    "type": "keyword"
+                }
+            }
+        },
+        "review": {
+            "_parent": {
+                "type" : "restaurant"
+            },
+            "properties": {
+                "rate": {
+                    "type": "float"
+                },
+                "review_time": {
+                    "type": "date",
+                    "format": "yyy-MM-dd HH:mm:ss"
+                },
+                "review_text": {
+                    "type": "text"
+                },
+                "user_id": {
+                    "type": "long"
+                }
+            }
         }
-      },
-      "analyzer": {
-        "tag_synonyms": {
-          "tokenizer": "standard",
-          "filter": [
-            "tag_synonym_filter"
-          ]
-        }
-      }
     }
-  },
-  "mappings" : {
-    "restaurant": {
-      "properties": {
-        "name": {
-          "type" : "text"
-        },
-        "open_hours": {
-          "type": "nested",
-          "properties": {
-            "start_second": {
-              "type": "integer"
-            },
-            "end_second": {
-              "type": "integer"
-            }
-          }
-        },
-        "cost_for_2": {
-            "type": "scaled_float",
-            "scaling_factor": 100
-        },
-        "known_for": {
-          "type": "text"
-        },
-        "phone" : {
-          "type": "keyword"
-        },
-        "address" :{
-          "type": "nested",
-          "properties": {
-            "text_address": {
-              "type": "text"
-            },
-            "location": {
-              "type": "geo_point"
-            }
-          }
-        },
-        "thumb_img_url": {
-            "type": "keyword"
-        },
-        "reviews": {
-          "type": "nested",
-          "properties": {
-            "rate": {
-              "type": "float"
-            },
-            "review_time": {
-              "type": "date",
-              "format": "yyy-MM-dd HH:mm:ss"
-            },
-            "review_text": {
-              "type": "text"
-            },
-            "user_id": {
-              "type": "long"
-            }
-          }
-        },
-        "categories": {
-          "type": "keyword"
-        },
-        "keywords": {
-          "type": "keyword"
-        },
-        "features": {
-          "type": "keyword"
-        },
-        "cuisines": {
-          "type": "keyword"
-        },
-        "highlights": {
-          "type": "keyword"
-        },
-        "avg_rate": {
-          "type": "float"
-        },
-        "img_url": {
-            "type": "keyword"
-        }
-      }
-    }
-  }
 }

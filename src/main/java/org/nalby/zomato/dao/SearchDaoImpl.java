@@ -35,8 +35,8 @@ public class SearchDaoImpl implements SearchDao {
 		return result.toString();
 	}
 
-	public String proxyToES(String searchBody) {
-		HttpPost post = new HttpPost("http://localhost:9200/zomato/restaurant/_search");
+	public String proxyToES(String type, String searchBody) {
+		HttpPost post = new HttpPost("http://localhost:9200/zomato/" + type + "/_search");
 		try {
 			LOGGER.info("POST body:{}.", searchBody);
 			post.setEntity(new StringEntity(searchBody));

@@ -61,7 +61,7 @@ def get_reviews(rest_id):
     records = cursor.fetchall()
     ret = []
     for i in records:
-        ret.append({"review_text": i[1],
+        ret.append({"review_id": i[0], "review_text": i[1],
             "user_id": i[2], "rate": i[3], "review_time": i[4].strftime('%Y-%m-%d %H:%M:%S')})
     return ret
 
@@ -133,9 +133,14 @@ while True:
         rest['highlights'] = get_highlights(i[0])
         rest['keywords'] = get_keywords(i[0])
         rest['open_hours'] = get_open_hours(i[0])
-        rest['reviews'] = get_reviews(i[0])
-        rest['avg_rate'] = avg_rate(rest['reviews'])
+        reviews = get_reviews(i[0])
+        rest['avg_rate'] = avg_rate(reviews)
         es.index(doc_type='restaurant', index="zomato", id=rest['id'], body=rest)
+        for r in reviews:
+            review = {"review_text": r["review_text"],
+                "user_id": r["user_id"], "rate": r["rate"], "review_time": r["review_time"]}
+            es.index(doc_type='review', index="zomato", id=r['review_id'], body=review, parent=rest['id'])
+        #break
         #es.update(doc_type='restaurant', index="zomato", id=rest['id'], body={"doc": {"avg_rate": avg_rate(rest['reviews'])}})
         #print   avg_rate(rest['reviews'])
     page = page + 1

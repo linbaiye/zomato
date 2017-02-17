@@ -10,7 +10,7 @@ public interface SearchService {
 	
 	public Response getSearchComponents();
 
-	public String compoundSearch(Map<String, Object> searchBody);
+	public String compoundSearch(String type, Map<String, Object> searchBody);
 	
 	public Response test();
 

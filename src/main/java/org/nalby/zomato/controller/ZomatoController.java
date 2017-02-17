@@ -95,9 +95,9 @@ public class ZomatoController {
 		return searchService.getCategoriedRestaurants(categoryId, page);
 	}
 	
-	@RequestMapping(value = "/api/v1/search/compound", method = RequestMethod.POST)
-	public String compoundSearch(@RequestBody @NotNull Map<String, Object> request) {
-		return searchService.compoundSearch(request);
+	@RequestMapping(value = "/api/v1/search/compound/{type}", method = RequestMethod.POST)
+	public String compoundSearch(@PathVariable("type") @NotNull String type, @RequestBody @NotNull Map<String, Object> request) {
+		return searchService.compoundSearch(type, request);
 	}
 	
 	@RequestMapping(value = "/api/v1/user/list", method = RequestMethod.POST)

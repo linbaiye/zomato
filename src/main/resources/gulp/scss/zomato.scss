@@ -143,11 +143,20 @@ html, body {
 .noshadow {
   @include noshadow;
 }
+.nomargin {
+  margin: 0;
+}
 .lfloat {
   float: left;
 }
 .rfloat {
   float: right;
+}
+.center-text {
+  text-align: center;
+}
+.line-height-40 {
+  line-height: 40px;
 }
 #spinner {
   display: none;

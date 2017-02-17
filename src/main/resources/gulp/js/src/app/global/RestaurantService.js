@@ -69,7 +69,7 @@ function RestaurantService($http, $q, baseUrl) {
 	}
 
 	this.search = function(searchCriteria, currentPage) {
-		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound", searchCriteria, function(data) {
+		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound/restaurant", searchCriteria, function(data) {
 			var list = [];
 			for (var i = 0; i < data.hits.hits.length; i++) {
 				var hit = data.hits.hits[i];

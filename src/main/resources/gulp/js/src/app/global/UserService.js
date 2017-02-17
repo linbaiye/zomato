@@ -1,13 +1,19 @@
 function UserService($http, $q, baseUrl, $cookies) {
   HttpPromiseSerivce.call(this, $http, $q);
-  this.loadUsersByIds = function(reviews) {
-    if (!reviews || !(reviews instanceof Array) || reviews.length <= 0) {
-      return;
-    }
+
+  function extractIds(reviews) {
     var ids = [];
     for (var i = 0; i < reviews.length; i++) {
       ids.push(reviews[i]['user_id']);
     }
+    return ids;
+  }
+
+  this.loadUsersByReviews = function(reviews) {
+    if (!(reviews instanceof Array) || reviews.length <= 0) {
+      return null;
+    }
+    var ids = extractIds(reviews);
 		return this.commitPromiseV2(baseUrl + "/api/v1/user/list", ids, function(data) {
       if (data.error != "EOK") {
         return null;

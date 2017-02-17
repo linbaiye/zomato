@@ -86,6 +86,11 @@
 						<strong>RATED</strong> <span class="user-rate {{item.rate | rateClass}}">{{item.rate | number:1}}</span><span ng-bind-html="item.review_text">{{item.review_text}}</span>
 					</p>
 				</div>
+				<div ng-show="vm.totalReview > vm.loadedReview" class="detail-box">
+					<p ng-click="vm.loadMoreReviews()" class="clickable red-text center-text nomargin line-height-40">
+						<strong>Load more reviews</strong>
+					</p>
+				</div>
 			</div>
 			<div class="col-md-4 mobile-invisible" ng-controller="RecommandRestaurantController as vm" id="recommand-restaurants">
 				<div ng-include="'static/html/right-side.html'"></div>

@@ -49,12 +49,6 @@
 				</div>
 			</div>
 		</script>
-		<script type="text/ng-template" id="login-button">
-			<button ng-click="vm.onClickLogin()" class="btn whiteborder btn-default">
-				<i class="fa fa-spinner fa-pulse fa-fw" ng-show="vm.isLogingOut"></i>
-				<span ng-show="!vm.isLogingOut">{{vm.user.isAuthed ? "Log out" : "Log in"}}</span>
-			</button>
-		</script>
 		<div ng-view></div>
 		<script src="${resourceUrl}/js/src/app/restaurant/RestaurantDetailsController.js"></script>
 		<script src="${resourceUrl}/js/src/app/header/HeaderController.js"></script>
@@ -69,6 +63,7 @@
 		<script src="${resourceUrl}/js/src/app/global/UtilService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/UserService.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/ReviewService.js"></script>
 		<script src="${resourceUrl}/js/src/app/app.js"></script>
 	</body>
 </html>

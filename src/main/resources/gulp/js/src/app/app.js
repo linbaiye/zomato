@@ -5,12 +5,14 @@
 		OPCODE: {LOGIN: "login"},
 		CONTROLLOR_NAMES: {
 			HEADER: "header"
-		}
+		},
+		BASE_URL: window.location.origin + window.location.pathname
 	})
 	.service("broker", BrokerService)
 	.service("util", UtilService)
 	.service("userService", ["$http", "$q", "baseUrl", "$cookies", UserService])
 	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
+	.service("reviewService", ["$http", "$q", "baseUrl", ReviewService])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
 			templateUrl: "static/html/index.html"
@@ -33,7 +35,7 @@
 	.controller("HeaderController", ["ModalService", "userService", "CONFIG", "$q", "broker", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
 	.controller("RecommandRestaurantController", ["restaurantService", "util", RecommandRestaurantController])
-	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", "broker", "CONFIG", RestaurantDetailsController])
+	.controller("RestaurantDetailsController", ["restaurantService", "userService", "$routeParams", "broker", "CONFIG", "reviewService", RestaurantDetailsController])
 	.controller("LoginModalController", ["$scope", "$element", "userService", "close", loginModalController])
 	.filter("joinDistrictAndCity", function() {
 		return function(address) {

@@ -65,7 +65,7 @@ public class SearchServiceImpl implements SearchService {
 		return new Response(ErrorCode.EOK, result);
 	}
 	
-	public String compoundSearch(Map<String, Object> searchBody) {
+	public String compoundSearch(String type, Map<String, Object> searchBody) {
 		Integer from = (Integer) searchBody.get("from");
 		Integer size = (Integer) searchBody.get("size");
 		if (size > 10 || from < 0) {
@@ -73,7 +73,7 @@ public class SearchServiceImpl implements SearchService {
 		}
 		try {
 			String tmp = mapper.writeValueAsString(searchBody);
-			return searchDao.proxyToES(tmp);
+			return searchDao.proxyToES(type,tmp);
 		} catch (JsonProcessingException e) {
 			LOGGER.error("Got exception:", e);
 			throw new InternalErrorExpection("Failed to search documents.");
