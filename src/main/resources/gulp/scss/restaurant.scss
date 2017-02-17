@@ -71,6 +71,11 @@
       border-color: #099E44;
     }
   }
+  #review-rate {
+    span:hover, span, span:active, span:hover {
+      outline: none;
+    }
+  }
 
   .user-icon {
     height: 60px;

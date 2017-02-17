@@ -146,6 +146,9 @@ html, body {
 .nomargin {
   margin: 0;
 }
+.no-outline, .no-outline:focus, .no-outline:hover, .no-outline:active{
+  outline: none;
+}
 .lfloat {
   float: left;
 }

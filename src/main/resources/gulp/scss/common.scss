@@ -34,7 +34,7 @@
     }
   }
 }
-.nolevel {
+.nolevel, .level0 {
   background-color: #CDCDCD;
 }
 .level1 {
@@ -54,6 +54,28 @@
 }
 .level6 {
   background-color: #3F7E00;
+}
+
+.rate-nolevel, .level0 {
+  color: #CDCDCD;
+}
+.rate-level1 {
+  color: #FF7800;
+}
+.rate-level2 {
+  color: #FFBA00;
+}
+.rate-level3 {
+  color: #CDD614;
+}
+.rate-level4 {
+  color: #9ACD32;
+}
+.rate-level5 {
+  color: #5BA829;
+}
+.rate-level6 {
+  color: #3F7E00;
 }
 
 .container-style {

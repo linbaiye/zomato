@@ -7,6 +7,47 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 	vm.loadedReview = 0;
 	var REVIEW_NUMBER_PER_LOAD = 5;
 	vm.reviews = [];
+	vm.rate = {
+		max: 9,
+		current: 0,
+		transformedRate: 0,
+		class: "",
+		labelClass: "",
+		overStar: 0
+	};
+
+	function calculateRateClass(rate) {
+		if (rate == 0) {
+			return 0;
+		}
+		for (var i = 1; i <= 6; i++) {
+			if (rate.toFixed(2) < (2 + (i * 0.5))) {
+				return  i;
+			}
+		}
+		return 6;
+	}
+
+	function transformRate(value) {
+		return (value > 1) ? (value - 1) / 2 + 1 : value;
+	}
+
+	vm.onRateLeave = function() {
+		vm.rate.transformedRate = transformRate(vm.rate.current);
+		vm.rate.class = "rate-level" + calculateRateClass(vm.rate.transformedRate);
+		vm.rate.labelClass = "level" + calculateRateClass(vm.rate.transformedRate);
+		vm.rate.overStar = vm.rate.transformedRate;
+	}
+
+	vm.rate.class = "rate-level" + calculateRateClass(transformRate(vm.rate.current));
+	vm.rate.labelClass = "level" + calculateRateClass(transformRate(vm.rate.overStar));
+
+	vm.onRateHover = function(value) {
+		vm.rate.overStar = transformRate(value);
+		vm.rate.class = "rate-level" + calculateRateClass(vm.rate.overStar);
+		vm.rate.labelClass = "level" + calculateRateClass(vm.rate.overStar);
+	};
+
 	restaurantService.loadRestaurantById($routeParams['id'])
 	.then(function(data) {
 		if (!data.found) {
