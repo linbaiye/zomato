@@ -33,6 +33,7 @@
 				<value>org.nalby.zomato.entity.Category</value>
 				<value>org.nalby.zomato.entity.Cuisine</value>
 				<value>org.nalby.zomato.entity.BasicReview</value>
+				<value>org.nalby.zomato.entity.ReviewToSave</value>
 				<value>org.nalby.zomato.entity.OpeningHour</value>
 				<value>org.nalby.zomato.entity.RecommandRestaurant</value>
 				<value>org.nalby.zomato.entity.CategoriedRestaurant</value>

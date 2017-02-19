@@ -66,12 +66,12 @@
 					<div>
 						<p ng-show="vm.isWritingReview" class="no-outline" id="review-rate">
 							<span class="no-outline {{vm.rate.class}}" aria-labelledby="default-rating" uib-rating ng-model="vm.rate.current" on-leave="vm.onRateLeave()" max="vm.rate.max" on-hover="vm.onRateHover(value)"></span>
-							<span ng-show="vm.rate.overStar > 0" class="label {{vm.rate.labelClass}}" id="default-rating" ng-bind="vm.rate.overStar"></span>
+							<span ng-show="vm.rate.overStar > 0" class="label {{vm.rate.labelClass}}" id="default-rating">{{vm.rate.overStar | number:1}}</span>
 						</p>
-						<textarea ng-model="vm.newReview" ng-focus="vm.onWritingReviewFocus()" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
+						<textarea ng-model="vm.newReview" ng-class="{'input-error': vm.reviewInvalid}" ng-focus="vm.onWritingReviewFocus()" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
 					</div>
 					<div>
-						<button ng-show='vm.isWritingReview' type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
+						<button ng-show='vm.isWritingReview' ng-click="vm.onPublishReview()" type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
 					</div>
 				</div>
 				<div class="detail-box review-box" ng-repeat="item in vm.reviews">

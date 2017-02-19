@@ -1,22 +1,25 @@
 package org.nalby.zomato.controller;
 
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.nalby.zomato.entity.ReviewToSave;
 import org.nalby.zomato.exception.BadParameterException;
+import org.nalby.zomato.form.PublishReviewForm;
+import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
+import org.nalby.zomato.service.ReviewService;
 import org.nalby.zomato.service.SearchService;
 import org.nalby.zomato.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +38,12 @@ public class ZomatoController {
 	
 	@Autowired
 	private SearchService searchService;
-	
+
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ReviewService reviewService;
 	
 	@SuppressWarnings("unused")
 	private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -104,6 +110,19 @@ public class ZomatoController {
 	public Response getUsers(@RequestBody @NotNull List<Long> ids) {
 		logger.info("trying to list users.");
 		return userService.getUsersByIds(ids);
+	}
+	
+	@RequestMapping(value = "/api/v1/review/{restaurantId}", method = RequestMethod.POST)
+	public Response publisReview(@PathVariable("restaurantId") Integer restaurantId, @RequestBody @Valid PublishReviewForm form) {
+		logger.info("Got review from {}.", userService.getThisUserId());
+		Long userid = userService.getThisUserId();
+		if (userid == null) {
+			throw new AccessDeniedException("Not authed.");
+		}
+		ReviewToSave reviewToSave = new ReviewToSave(form, userid, restaurantId);
+		reviewService.saveReview(reviewToSave);
+		logger.info("new review is saved at {}, id:{}.", reviewToSave.getReviewTime().toString(), reviewToSave.getId());
+		return searchService.indexReview(reviewToSave);
 	}
 	
 	@RequestMapping(value = "/api/v1/test", method = RequestMethod.GET)

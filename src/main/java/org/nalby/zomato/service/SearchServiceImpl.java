@@ -9,6 +9,7 @@ import java.util.Set;
 import org.nalby.zomato.dao.RestaurantDao;
 import org.nalby.zomato.dao.SearchDao;
 import org.nalby.zomato.entity.CategoriedRestaurant;
+import org.nalby.zomato.entity.ReviewToSave;
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.exception.InternalErrorExpection;
 import org.nalby.zomato.response.ErrorCode;
@@ -16,6 +17,7 @@ import org.nalby.zomato.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.interceptor.CacheOperationInvoker.ThrowableWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,6 +88,21 @@ public class SearchServiceImpl implements SearchService {
 		/* Cafe */
 		List<Integer> ids = restaurantDao.getRestaurantIdsByKeywordId(1, 6);
 		return new Response(ErrorCode.EOK, restaurantDao.getRecommandRestaurants(ids));
+	}
+
+
+	public Response indexReview(ReviewToSave reviewToSave) {
+		if (!searchDao.indexReview(reviewToSave)) {
+			throw new InternalErrorExpection("Failed to index review.");
+		}
+		Float newRate = searchDao.getReviewAverageRate(reviewToSave.getRestaurantId());
+		if (newRate == null) {
+			throw new InternalErrorExpection("Failed to get average rate.");
+		}
+		if (!searchDao.updateAverageRate(reviewToSave.getRestaurantId(), newRate)) {
+			throw new InternalErrorExpection("Failed to update averate rate.");
+		}
+		return new Response(ErrorCode.EOK);
 	}
 
 }

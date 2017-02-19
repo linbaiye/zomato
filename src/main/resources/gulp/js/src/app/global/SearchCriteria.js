@@ -85,6 +85,18 @@ function SearchCriteriaBuilder() {
     }
   }
 
+  this.setOrder = function(field, o) {
+    if (!field ) {
+      throw "Invalid sort key.";
+    }
+    var order = o || "desc";
+    var tmp = {};
+    tmp[field] = {
+      "order": order
+    }
+    criteria['sort'] = [tmp];
+  }
+
   this.setFromAndSize = function(from, size) {
     if (typeof from != "number" || from < 0
      || typeof size != "number" || size < 1 || size > 10) {

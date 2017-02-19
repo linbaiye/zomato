@@ -5,6 +5,7 @@ function ReviewService($http, $q, baseUrl) {
 		var builder = new SearchCriteriaBuilder();
     builder.setParent(restaurantId, 'restaurant');
     builder.setFromAndSize(from, size);
+		builder.setOrder("review_time");
 		return this.commitPromiseV2(baseUrl + "api/v1/search/compound/review", builder.build(), function(data) {
       if (!data.hits || !data.hits.hits || data.hits.hits.length <= 0) {
         return null;
@@ -19,5 +20,9 @@ function ReviewService($http, $q, baseUrl) {
         total: data.hits.total
       }
     });
+  }
+
+  this.publishReview = function(restaurantId, rate, text) {
+    return this.commitPromiseV2(baseUrl + "api/v1/review/" + restaurantId, {"rate": rate, "text": text});
   }
 }

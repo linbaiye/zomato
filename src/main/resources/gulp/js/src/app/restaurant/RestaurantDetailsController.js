@@ -48,6 +48,20 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 		vm.rate.labelClass = "level" + calculateRateClass(vm.rate.overStar);
 	};
 
+	vm.onPublishReview = function() {
+		if (!vm.newReview || vm.newReview.length < 40) {
+			vm.reviewInvalid = true;
+			return;
+		}
+		reviewService.publishReview($routeParams['id'], vm.rate.transformedRate, vm.newReview)
+		.then(function(data) {
+				console.log(data);
+			},
+			function(data) {
+				console.log(data);
+		 });
+	}
+
 	restaurantService.loadRestaurantById($routeParams['id'])
 	.then(function(data) {
 		if (!data.found) {
@@ -85,6 +99,7 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 
 	vm.onWritingReviewPending = false;
 	vm.onWritingReviewFocus = function() {
+		vm.reviewInvalid = false;
 		if (vm.onWritingReviewPending) {
 			return;
 		}
