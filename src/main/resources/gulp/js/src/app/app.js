@@ -1,5 +1,5 @@
 (function() {
-	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize", "ngCookies"])
+	angular.module("app", [ "ui.bootstrap", "ngRoute", "angularModalService", "ngSanitize", "ngCookies", "ngMap"])
 	.constant("baseUrl", window.location.origin + window.location.pathname)
 	.constant("CONFIG", {
 		OPCODE: {LOGIN: "login"},

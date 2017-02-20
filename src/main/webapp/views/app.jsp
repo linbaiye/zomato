@@ -21,6 +21,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
 		<link href="${resourceUrl}/css/zomato.css" rel="stylesheet" />
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
+		<script src="${resourceUrl}/js/src/ng-map.min.js"></script>
 	</head>
 	<body ng-app="app">
 		<script type="text/ng-template" id="login.html">

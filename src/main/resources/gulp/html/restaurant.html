@@ -61,17 +61,20 @@
 				</div>
 				<div id="write-comment-section" class="detail-box">
 					<p>
-						<span>Write a Review</span><span ng-click="vm.isWritingReview = false" ng-show='vm.isWritingReview' class="clickable rfloat">Cancel</span>
+						<span>Write a Review</span><span ng-click="vm.onCancelWritingReview()" ng-show='vm.isWritingReview' class="clickable rfloat">Cancel</span>
 					</p>
 					<div>
 						<p ng-show="vm.isWritingReview" class="no-outline" id="review-rate">
 							<span class="no-outline {{vm.rate.class}}" aria-labelledby="default-rating" uib-rating ng-model="vm.rate.current" on-leave="vm.onRateLeave()" max="vm.rate.max" on-hover="vm.onRateHover(value)"></span>
-							<span ng-show="vm.rate.overStar > 0" class="label {{vm.rate.labelClass}}" id="default-rating">{{vm.rate.overStar | number:1}}</span>
+							<span class="label {{vm.rate.labelClass}}" id="default-rating">{{vm.rate.overStar | number:1}}</span>
 						</p>
 						<textarea ng-model="vm.newReview" ng-class="{'input-error': vm.reviewInvalid}" ng-focus="vm.onWritingReviewFocus()" rows='{{vm.isWritingReview ? "5" : "1"}}' placehoder="Share your review" class="noshadow form-control"/>
 					</div>
 					<div>
-						<button ng-show='vm.isWritingReview' ng-click="vm.onPublishReview()" type="button" class="rfloat review-btn btn btn-default">Publish Review</button>
+						<p class="nomargin {{vm.publishReviewResult.class}}" ng-show="vm.publishReviewResult">
+							{{vm.publishReviewResult.text}}
+						</p>
+						<button ng-show='vm.isWritingReview' ng-click="vm.onPublishReview()" ng-bind-html="vm.reviewButtonLabel" type="button" class="rfloat review-btn btn btn-default"></button>
 					</div>
 				</div>
 				<div class="detail-box review-box" ng-repeat="item in vm.reviews">
@@ -86,7 +89,7 @@
 						{{item.epoch | date:'dd-MMM-yyyy'}}
 					</p>
 					<p>
-						<strong>RATED</strong> <span class="user-rate {{item.rate | rateClass}}">{{item.rate | number:1}}</span><span ng-bind-html="item.review_text">{{item.review_text}}</span>
+						<strong>RATED </strong><span class="user-rate {{item.rate | rateClass}}">{{item.rate | number:1}}</span><span ng-bind-html="item.review_text">{{item.review_text}}</span>
 					</p>
 				</div>
 				<div ng-show="vm.totalReview > vm.loadedReview" class="detail-box">

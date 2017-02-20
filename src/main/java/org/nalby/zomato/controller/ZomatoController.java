@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import org.nalby.zomato.entity.ReviewToSave;
 import org.nalby.zomato.exception.BadParameterException;
 import org.nalby.zomato.form.PublishReviewForm;
-import org.nalby.zomato.response.ErrorCode;
 import org.nalby.zomato.response.Response;
 import org.nalby.zomato.service.RestaurantService;
 import org.nalby.zomato.service.ReviewService;
@@ -118,6 +117,11 @@ public class ZomatoController {
 		Long userid = userService.getThisUserId();
 		if (userid == null) {
 			throw new AccessDeniedException("Not authed.");
+		}
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		ReviewToSave reviewToSave = new ReviewToSave(form, userid, restaurantId);
 		reviewService.saveReview(reviewToSave);

@@ -7,6 +7,7 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 	vm.loadedReview = 0;
 	var REVIEW_NUMBER_PER_LOAD = 5;
 	vm.reviews = [];
+	vm.reviewButtonLabel = "Publish Review";
 	vm.rate = {
 		max: 9,
 		current: 0,
@@ -48,18 +49,42 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 		vm.rate.labelClass = "level" + calculateRateClass(vm.rate.overStar);
 	};
 
+	function showPublishReviewTip(cls, text) {
+		vm.publishReviewResult = {
+			class: cls,
+			text: text
+		};
+	}
+
+	vm.onCancelWritingReview = function() {
+		vm.isWritingReview = false;
+		vm.publishReviewResult = null;
+	}
+
 	vm.onPublishReview = function() {
-		if (!vm.newReview || vm.newReview.length < 40) {
+		if (!vm.newReview || vm.newReview.length < 140) {
 			vm.reviewInvalid = true;
+			showPublishReviewTip("error-message", "Review's length must be longer than 140 characters.");
 			return;
 		}
+		if (!userService.isAuthed()) {
+			showPublishReviewTip("error-message", "Please login to publish your review.");
+			return;
+		}
+		vm.reviewButtonLabel = '<i class="fa mobile-icon fa-spinner fa-pulse fa-fw"></i>';
 		reviewService.publishReview($routeParams['id'], vm.rate.transformedRate, vm.newReview)
 		.then(function(data) {
-				console.log(data);
-			},
-			function(data) {
-				console.log(data);
-		 });
+			vm.reviewButtonLabel = "Publish Review";
+			if (data.error == "EOK") {
+				showPublishReviewTip("success-message", "You review has been published successfully, please refresh to see your comment.");
+			} else {
+				showPublishReviewTip("error-message", "Oops, something went wrong, please retry later.");
+			}
+		},
+		function(data) {
+			vm.reviewButtonLabel = "Publish Review";
+			showPublishReviewTip("error-message", "Oops, something went wrong, please retry later.");
+		});
 	}
 
 	restaurantService.loadRestaurantById($routeParams['id'])
@@ -67,6 +92,7 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 		if (!data.found) {
 			return;
 		}
+		console.log(data);
 		var source = data['_source'];
 		source['img_url'] = source['img_url'] || "data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAAyADIDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAECAwQFBgf/xAAkEAACAQMEAgIDAAAAAAAAAAAAAQIDBBEFEiFREyIUUhUxQv/EABgBAQADAQAAAAAAAAAAAAAAAAABAgQF/8QAHREBAAICAgMAAAAAAAAAAAAAAAERAgMSIRMxQf/aAAwDAQACEQMRAD8A+kgjIyuwJBG5dkbo9gWBGV2Ny7AkFdy7AHH/ACD25ya9TUZN8SNWvaV3xFMrCwr8ZTOLGW323xjh9Zq+p1VHEHyaC1e4p1fdvB0vgyUOY8nJvrCvOfrF4Lxs2TK0eNvvWpuOUy1lq87mo4N4Zx6llcQp4jB5KWlpd0qymoM065zvtTOMOPT1m2t9waCq3eF6sG1jel8cekTsj0iwFQi1dkeirpQf7ijIBUItidCm/wCUPBT+qMoJotj8UPqgZAAAAAAAAAAAAH//2Q=="
 		vm.restaurant = source;
