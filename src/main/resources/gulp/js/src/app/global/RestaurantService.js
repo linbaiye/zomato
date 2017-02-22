@@ -80,7 +80,8 @@ function RestaurantService($http, $q, baseUrl) {
 					costForTwo: source['cost_for_2'],
 					name: source['name'],
 					thumbImageUrl: source['thumb_img_url'],
-					rate: source['avg_rate']
+					rate: source['avg_rate'],
+					phone: source['phone']
 				}
 				tmp['cuisineSet'] = [];
 				for (var j = 0 ; j < source['cuisines'].length; j++) {
@@ -101,6 +102,7 @@ function RestaurantService($http, $q, baseUrl) {
 				tmp['todayHours'] = getTodayOpeningHours(open_hour_list);
 				list.push(tmp);
 			}
+			console.log(list);
 			return {
 				total: data.hits.total,
 				restaurantList: list,

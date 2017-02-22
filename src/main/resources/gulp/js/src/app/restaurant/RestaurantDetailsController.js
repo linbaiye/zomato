@@ -61,14 +61,21 @@ function RestaurantDetailsController(restaurantService, userService, $routeParam
 		vm.publishReviewResult = null;
 	}
 
-	vm.onPublishReview = function() {
+	function isReviewValid() {
 		if (!vm.newReview || vm.newReview.length < 140) {
 			vm.reviewInvalid = true;
 			showPublishReviewTip("error-message", "Review's length must be longer than 140 characters.");
-			return;
+			return false;
 		}
 		if (!userService.isAuthed()) {
 			showPublishReviewTip("error-message", "Please login to publish your review.");
+			return false;
+		}
+		return true;
+	}
+
+	vm.onPublishReview = function() {
+		if (!isReviewValid()) {
 			return;
 		}
 		vm.reviewButtonLabel = '<i class="fa mobile-icon fa-spinner fa-pulse fa-fw"></i>';
