@@ -75,7 +75,6 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 	}
 
 	vm.clickLocation = function(item) {
-		//vm.search.first10Places = util.moveItemToHead(item, vm.search.first10Places, 'district');
 		vm.checkedLocation = (vm.checkedLocation == item.district) ? null : item.district;
 		reorderSearchCriterionItems();
 		searchBriefRestaurants(0);

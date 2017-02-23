@@ -28,7 +28,6 @@ function BodyController($http, $location, baseUrl, broker, utilService) {
 		if (data.error != "EOK") {
 			return;
 		}
-		console.log(data.data);
 		vm.stats = data.data;
 	}
 
