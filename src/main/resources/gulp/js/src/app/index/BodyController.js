@@ -1,4 +1,4 @@
-function BodyController($location, broker, utilService, searchcriteriaService) {
+function BodyController($location, utilService, searchcriteriaService) {
 	var vm = this;
 
 	vm.gotoLocation = function(location) {

@@ -31,7 +31,7 @@
 			templateUrl: "static/html/search.html"
 		});
 	}])
-	.controller("BodyController", ["$location", "broker", "util", "searchcriteriaService", BodyController])
+	.controller("BodyController", ["$location", "util", "searchcriteriaService", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", ["ModalService", "userService", "CONFIG", "$q", "broker", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
