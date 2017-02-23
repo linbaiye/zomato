@@ -65,6 +65,7 @@
 		<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/UserService.js"></script>
 		<script src="${resourceUrl}/js/src/app/global/ReviewService.js"></script>
+		<script src="${resourceUrl}/js/src/app/global/SearchCriteriaService.js"></script>
 		<script src="${resourceUrl}/js/src/app/app.js"></script>
 	</body>
 </html>

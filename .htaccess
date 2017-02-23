@@ -1,5 +1,0 @@
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home3/maggie/python"
-PassengerBaseURI "/"
-PassengerPython "/home3/maggie/virtualenv/python/3.3/bin/python3.3"
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

@@ -13,6 +13,7 @@
 	.service("userService", ["$http", "$q", "baseUrl", "$cookies", UserService])
 	.service("restaurantService", ["$http", "$q", "baseUrl", RestaurantService])
 	.service("reviewService", ["$http", "$q", "baseUrl", ReviewService])
+	.service("searchcriteriaService", ["$http", "$q", "CONFIG", SearchCriteriaService])
 	.config(["$routeProvider", function($routeProvider) {
 		$routeProvider.when("/", {
 			templateUrl: "static/html/index.html"
@@ -30,7 +31,7 @@
 			templateUrl: "static/html/search.html"
 		});
 	}])
-	.controller("BodyController", ["$http", "$location", "baseUrl", "broker", "util", BodyController])
+	.controller("BodyController", ["$location", "broker", "util", "searchcriteriaService", BodyController])
 	.controller("CollectionController", ["$location", "$http", "$routeParams", "broker", "baseUrl", CollectionController])
 	.controller("HeaderController", ["ModalService", "userService", "CONFIG", "$q", "broker", HeaderController])
 	.controller("SearchCriteriaController", ["restaurantService", "$routeParams", "util", "ModalService", "$location", SearchCriteriaController])
