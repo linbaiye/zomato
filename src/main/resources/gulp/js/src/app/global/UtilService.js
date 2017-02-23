@@ -37,4 +37,16 @@ function UtilService() {
     }
     return newArray;
   }
+
+  this.findItem = function(list, indexKey, value) {
+    if (!(list instanceof Array) || !indexKey || !value) {
+      return ;
+    }
+    for (var i = 0; i < list.length; i++) {
+      if (list[i][indexKey] == value) {
+        return list[i];
+      }
+    }
+    return null;
+  }
 }

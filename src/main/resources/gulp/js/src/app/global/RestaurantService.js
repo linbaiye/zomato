@@ -102,7 +102,6 @@ function RestaurantService($http, $q, baseUrl) {
 				tmp['todayHours'] = getTodayOpeningHours(open_hour_list);
 				list.push(tmp);
 			}
-			console.log(list);
 			return {
 				total: data.hits.total,
 				restaurantList: list,

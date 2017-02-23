@@ -36,6 +36,19 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 		});
 	}
 
+
+
+	function reorderSearchCriterionItems() {
+		var tmp = util.findItem(vm.search.cuisineList, 'name', vm.checkedCuisine);
+		if (tmp != null) {
+			vm.search.first10Cuisines = util.moveItemToHead(tmp, vm.search.first10Cuisines, 'name');
+		}
+		tmp = util.findItem(vm.search.placeList, 'district', vm.checkedLocation);
+		if (tmp != null) {
+			vm.search.first10Places = util.moveItemToHead(tmp, vm.search.first10Places, 'district');
+		}
+	}
+
 	function searchBriefRestaurants(pageToGo) {
 		var criteria = buildSearchCriteria(pageToGo);
 		vm.spinner = true;
@@ -56,20 +69,22 @@ function SearchCriteriaController(restaurantService, $routeParams, util, modalSe
 	}
 
 	vm.clickCuisine = function(item) {
-		vm.search.first10Cuisines = util.moveItemToHead(item, vm.search.first10Cuisines, 'name');
 		vm.checkedCuisine = (vm.checkedCuisine == item.name) ? null : item.name;
+		reorderSearchCriterionItems();
 		searchBriefRestaurants(0);
 	}
 
 	vm.clickLocation = function(item) {
-		vm.search.first10Places = util.moveItemToHead(item, vm.search.first10Places, 'district');
+		//vm.search.first10Places = util.moveItemToHead(item, vm.search.first10Places, 'district');
 		vm.checkedLocation = (vm.checkedLocation == item.district) ? null : item.district;
+		reorderSearchCriterionItems();
 		searchBriefRestaurants(0);
 	}
 
 	restaurantService.loadSearchCompoments()
 	.then(function(data) {
 		vm.search = data;
+		reorderSearchCriterionItems();
 	}, function(data) {
 			showError();
 	});
