@@ -118,11 +118,6 @@ public class ZomatoController {
 		if (userid == null) {
 			throw new AccessDeniedException("Not authed.");
 		}
-		try {
-			Thread.sleep(1000);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		ReviewToSave reviewToSave = new ReviewToSave(form, userid, restaurantId);
 		reviewService.saveReview(reviewToSave);
 		logger.info("new review is saved at {}, id:{}.", reviewToSave.getReviewTime().toString(), reviewToSave.getId());

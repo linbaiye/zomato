@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <file>/var/log/tomcat/zomato.log</file>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/var/log/tomcat/zomato.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+	    <append>false</append>
+        <encoder>
+			<pattern> %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{0}:%L - %msg%n </pattern>
+		</encoder>
+	</appender>
+	<logger name="org.springframework" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.nalby.zomato" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	<root level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
