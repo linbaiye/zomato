@@ -46,11 +46,11 @@ function RestaurantService($http, $q, baseUrl) {
 
 
 	this.loadSearchCompoments = function() {
-		return this.commitPromise(baseUrl + "/api/v1/search/components", shortList);
+		return this.commitPromise(baseUrl + "api/v1/search/components", shortList);
 	}
 
 	this.getRecommandRestaurants = function() {
-		return this.commitPromise(baseUrl + "/api/v1/search/recommend");
+		return this.commitPromise(baseUrl + "api/v1/search/recommend");
 	}
 
 	/* Copyied from stackoverflow. */
@@ -65,11 +65,25 @@ function RestaurantService($http, $q, baseUrl) {
 	}
 
 	this.loadRestaurantById = function(id) {
-		return this.commitPromiseV2(baseUrl + "/api/v1/restaurant/" + id);
+		return this.commitPromiseV2(baseUrl + "api/v1/restaurant/" + id);
+	}
+
+	this.loadFeaturedBriefRestaurants = function(featureId) {
+		return this.commitPromiseV2(baseUrl + "api/v1/restaurant/feature/" + featureId, null, function(response) {
+			if (response.error !== "EOK") {
+				return data;
+			}
+			var fn = shortenFunction(40);
+			var rl = response.data["restaurantSet"];
+			for (var i = 0; i < rl.length; i++) {
+				rl[i]["shortName"] = fn(rl[i]["name"]);
+			}
+			return response;
+		});
 	}
 
 	this.search = function(searchCriteria, currentPage) {
-		return this.commitPromiseV2(baseUrl + "/api/v1/search/compound/restaurant", searchCriteria, function(data) {
+		return this.commitPromiseV2(baseUrl + "api/v1/search/compound/restaurant", searchCriteria, function(data) {
 			var list = [];
 			for (var i = 0; i < data.hits.hits.length; i++) {
 				var hit = data.hits.hits[i];

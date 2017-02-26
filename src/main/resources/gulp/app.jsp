@@ -21,7 +21,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
 		<script src="${resourceUrl}/js/src/ui-bootstrap-tpls-2.2.0.min.js"></script>
-		<script src="${resourceUrl}/js/src/ng-map.min.js"></script>
 	</head>
 	<body ng-app="app">
 		<script type="text/ng-template" id="login.html">
@@ -51,21 +50,6 @@
 			</div>
 		</script>
 		<div ng-view></div>
-		<script src="${resourceUrl}/js/src/app/restaurant/RestaurantDetailsController.js"></script>
-		<script src="${resourceUrl}/js/src/app/header/HeaderController.js"></script>
-		<script src="${resourceUrl}/js/src/app/header/LoginModalController.js"></script>
-		<script src="${resourceUrl}/js/src/app/collection/CollectionController.js"></script>
-		<script src="${resourceUrl}/js/src/app/index/BodyController.js"></script>
-		<script src="${resourceUrl}/js/src/app/search/SearchCriteriaController.js"></script>
-		<script src="${resourceUrl}/js/src/app/search/RecommandRestaurantController.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/BrokerService.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/HttpPromiseSerivce.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/RestaurantService.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/UtilService.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/SearchCriteria.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/UserService.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/ReviewService.js"></script>
-		<script src="${resourceUrl}/js/src/app/global/SearchCriteriaService.js"></script>
-		<script src="${resourceUrl}/js/src/app/app.js"></script>
+        <!--javascript dependencies injection-->
 	</body>
 </html>
