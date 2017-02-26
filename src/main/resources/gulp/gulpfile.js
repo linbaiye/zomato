@@ -69,7 +69,7 @@ gulp.task("watch", ["clean", "copyJsFiles", "scss", "html", "inject-dev"], funct
 });
 
 gulp.task("clean", function() {
-	del.sync([JS_DIR] , {force: true});
+	del.sync([JS_DIR, CSS_DIR, HTML_DIR] , {force: true});
 });
 
 gulp.task("release", ["clean", "scss", "html", "inject-release"], function() {
