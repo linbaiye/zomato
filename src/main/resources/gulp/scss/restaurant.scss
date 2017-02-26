@@ -1,6 +1,13 @@
 #restaurant-details-container {
   @media (max-width: $small - 1) {
     padding: 0;
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    #restaurant-details {
+      padding: 0;
+    }
   }
   #restaurant-details {
     #bg-img {
