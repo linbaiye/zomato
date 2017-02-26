@@ -185,6 +185,11 @@ html, body {
   left: 50%;
   font-size: 50px;
 }
+.mobile-invisible {
+  @media (max-width: $small - 1) {
+    display: none;
+  }
+}
 
 * {
   font-family: 'Source Sans Pro', Arial, sans-serif;
